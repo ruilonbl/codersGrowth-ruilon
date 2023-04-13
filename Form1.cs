@@ -30,28 +30,48 @@ namespace trabalho01
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
             }
-            int teste;
-            Boolean verifica = txt_cpf.Text.All(char.IsDigit);
-            if (txt_cpf.Text.Length !=11 || !verifica)
-            {
-                MessageBox.Show("CPF INVALIDO",
-                                "ALERTA",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-            }
             else
             {
-            Pessoa pessoa = new Pessoa();
-            pessoa.Id = i;
-            pessoa.Nome = txt_nome.Text;
-            pessoa.Cpf = txt_cpf.Text;
-            list.Add(pessoa);
-            i++;
-            DialogResult retorno = MessageBox.Show("Voce foi registrado :" + txt_nome.Text + " " + txt_cpf.Text+
-                                                    "\n deseja reistrar outra pessoa"+verifica,
-                                                    "REGISTRADO",
-                                                    MessageBoxButtons.YesNo,
-                                                    MessageBoxIcon.Information);
+                Boolean verifica = txt_cpf.Text.All(char.IsDigit);
+                if (txt_cpf.Text.Length != 11 || !verifica)
+                {
+                    MessageBox.Show("CPF INVALIDO",
+                                    "ALERTA",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    int cont = 0;
+                    foreach (Pessoa i in list)
+                    {
+                        if(i.Cpf.Equals(txt_cpf.Text))
+                        {
+                            cont++;
+                        }
+                    }
+                    if(cont!=0)
+                    {
+                        MessageBox.Show("CPF JA EXISTE",
+                                    "ALERTA",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        Pessoa pessoa = new Pessoa();
+                        pessoa.Id = i;
+                        pessoa.Nome = txt_nome.Text;
+                        pessoa.Cpf = txt_cpf.Text;
+                        list.Add(pessoa);
+                        i++;
+                        DialogResult retorno = MessageBox.Show("Voce foi registrado :" + txt_nome.Text + " " + txt_cpf.Text +
+                                                                "\n deseja reistrar outra pessoa" + verifica,
+                                                                "REGISTRADO",
+                                                                MessageBoxButtons.YesNo,
+                                                                MessageBoxIcon.Information);
+                    }
+                }
             }
         }
 
