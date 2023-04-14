@@ -36,7 +36,7 @@
             this.btn_registrar = new System.Windows.Forms.Button();
             this.rb_Feminino = new System.Windows.Forms.RadioButton();
             this.rb_Masculino = new System.Windows.Forms.RadioButton();
-            this.btn_voltar = new System.Windows.Forms.Button();
+            this.BotaoAtualizar = new System.Windows.Forms.Button();
             this.txt_dtn = new System.Windows.Forms.TextBox();
             this.txt_cpf = new System.Windows.Forms.TextBox();
             this.txt_altura = new System.Windows.Forms.TextBox();
@@ -120,15 +120,15 @@
             this.rb_Masculino.Text = "Masculino";
             this.rb_Masculino.UseVisualStyleBackColor = true;
             // 
-            // btn_voltar
+            // BotaoAtualizar
             // 
-            this.btn_voltar.Location = new System.Drawing.Point(302, 308);
-            this.btn_voltar.Name = "btn_voltar";
-            this.btn_voltar.Size = new System.Drawing.Size(75, 23);
-            this.btn_voltar.TabIndex = 8;
-            this.btn_voltar.Text = "VOLTAR";
-            this.btn_voltar.UseVisualStyleBackColor = true;
-            this.btn_voltar.Click += new System.EventHandler(this.AoClicarVoltar);
+            this.BotaoAtualizar.Location = new System.Drawing.Point(302, 308);
+            this.BotaoAtualizar.Name = "BotaoAtualizar";
+            this.BotaoAtualizar.Size = new System.Drawing.Size(75, 23);
+            this.BotaoAtualizar.TabIndex = 8;
+            this.BotaoAtualizar.Text = "ATUALIZAR";
+            this.BotaoAtualizar.UseVisualStyleBackColor = true;
+            this.BotaoAtualizar.Click += new System.EventHandler(this.AoClicarEmAtualizar);
             // 
             // txt_dtn
             // 
@@ -158,7 +158,7 @@
             this.txt_nome.Size = new System.Drawing.Size(186, 20);
             this.txt_nome.TabIndex = 13;
             // 
-            // Cadastrar
+            // TelaDeCadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -167,7 +167,7 @@
             this.Controls.Add(this.txt_altura);
             this.Controls.Add(this.txt_cpf);
             this.Controls.Add(this.txt_dtn);
-            this.Controls.Add(this.btn_voltar);
+            this.Controls.Add(this.BotaoAtualizar);
             this.Controls.Add(this.rb_Masculino);
             this.Controls.Add(this.rb_Feminino);
             this.Controls.Add(this.btn_registrar);
@@ -176,7 +176,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Cadastrar";
+            this.Name = "TelaDeCadastro";
             this.Text = "Cadastrar";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -193,7 +193,7 @@
         private System.Windows.Forms.Button btn_registrar;
         private System.Windows.Forms.RadioButton rb_Feminino;
         private System.Windows.Forms.RadioButton rb_Masculino;
-        private System.Windows.Forms.Button btn_voltar;
+        private System.Windows.Forms.Button BotaoAtualizar;
         private System.Windows.Forms.TextBox txt_dtn;
         private System.Windows.Forms.TextBox txt_cpf;
         private System.Windows.Forms.TextBox txt_altura;

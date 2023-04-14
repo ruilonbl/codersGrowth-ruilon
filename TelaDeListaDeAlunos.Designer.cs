@@ -63,16 +63,19 @@
             this.btn_deletar.TabIndex = 6;
             this.btn_deletar.Text = "DELETAR";
             this.btn_deletar.UseVisualStyleBackColor = true;
+            this.btn_deletar.Click += new System.EventHandler(this.AoClicarEmDeletar);
             // 
             // DT_mostra
             // 
+            this.DT_mostra.AllowUserToAddRows = false;
             this.DT_mostra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DT_mostra.Location = new System.Drawing.Point(12, 12);
             this.DT_mostra.Name = "DT_mostra";
+            this.DT_mostra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DT_mostra.Size = new System.Drawing.Size(614, 282);
             this.DT_mostra.TabIndex = 7;
             // 
-            // Form1
+            // TelaDeListaDeAlunos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -81,9 +84,8 @@
             this.Controls.Add(this.btn_deletar);
             this.Controls.Add(this.bnt_atualizar);
             this.Controls.Add(this.botaoCadastrar);
-            this.Name = "Form1";
+            this.Name = "TelaDeListaDeAlunos";
             this.Text = "Tela de lista de alunos";
-            //this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DT_mostra)).EndInit();
             this.ResumeLayout(false);
 
