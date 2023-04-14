@@ -46,19 +46,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="crud\IPessoasDAO.cs" />
-    <Compile Include="crud\PessoasDAO.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="TelaDeCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="TelaDeCadastro.Designer.cs">
+      <DependentUpon>TelaDeCadastro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="crud\IPessoasDAO.cs" />
+    <Compile Include="crud\PessoasDAO.cs" />
+    <Compile Include="TelaDeListaDeAlunos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaDeListaDeAlunos.Designer.cs">
+      <DependentUpon>TelaDeListaDeAlunos.cs</DependentUpon>
     </Compile>
     <Compile Include="model\Pessoa.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="TelaDeCadastro.resx">
+      <DependentUpon>TelaDeCadastro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaDeListaDeAlunos.resx">
+      <DependentUpon>TelaDeListaDeAlunos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

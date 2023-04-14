@@ -8,20 +8,12 @@ namespace trabalho01.model
 {
     internal class Pessoa
     {
-        private string nome;
-        private string cpf;
-        private int id;
-        public string Cpf { 
-            get { return cpf; } 
-            set { cpf = value; }
-        }
-        public string Nome {
-            get {  return nome; }
-            set {  nome = value; } 
-        }
-        public int Id { 
-            get { return id;}
-            set { id = value; }
-        }
+
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public string Altura { get; set;}
+        public DateTime Dat { get; set; }
+        public string Sexo { get; set; }
     }
 }
