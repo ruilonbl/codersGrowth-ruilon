@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using trabalho01.model;
 
@@ -22,7 +17,8 @@ namespace trabalho01
             InitializeComponent();
             dataGridView1 = dataGridView;
         }
-        public TelaDeCadastro(DataGridView dataGridView,int ind)
+
+        public TelaDeCadastro(DataGridView dataGridView, int ind)
         {
             InitializeComponent();
             dataGridView1 = dataGridView;
@@ -32,6 +28,7 @@ namespace trabalho01
             txt_dtn.Text = list[ind].Dat.ToString();
             aux = ind;
         }
+
         private void AoclicarRegistrar(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txt_nome.Text) || string.IsNullOrEmpty(txt_cpf.Text))
@@ -71,7 +68,7 @@ namespace trabalho01
                     else
                     {
                         Pessoa pessoa = new Pessoa();
-                        pessoa.Id = telaDeListaDeAlunos.cont();
+                        pessoa.Id = telaDeListaDeAlunos.Cont();
                         pessoa.Nome = txt_nome.Text;
                         pessoa.Cpf = txt_cpf.Text;
                         list.Add(pessoa);

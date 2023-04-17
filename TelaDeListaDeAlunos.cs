@@ -1,15 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using trabalho01.crud;
-using trabalho01.model;
 
 namespace trabalho01
 {  
@@ -37,10 +27,10 @@ namespace trabalho01
         {
             DT_mostra.Rows.RemoveAt(DT_mostra.CurrentRow.Index);
         }
-        public int cont()
+
+        public int Cont()
         {
-            i++;
-            return i;
+            return ++i;
         }
     }
 }

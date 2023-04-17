@@ -10,3 +10,15 @@ C:\Users\Usuario\source\repos\trabalho01\bin\Debug\trabalho01.exe
 C:\Users\Usuario\source\repos\trabalho01\bin\Debug\trabalho01.pdb
 C:\Users\Usuario\source\repos\trabalho01\obj\Debug\trabalho01.exe
 C:\Users\Usuario\source\repos\trabalho01\obj\Debug\trabalho01.pdb
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\bin\Debug\trabalho01.exe.config
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\bin\Debug\trabalho01.exe
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\bin\Debug\trabalho01.pdb
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.csproj.SuggestedBindingRedirects.cache
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.TelaDeCadastro.resources
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.TelaDeListaDeAlunos.resources
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.Properties.Resources.resources
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.csproj.GenerateResource.cache
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.exe
+C:\Users\Usuario\Documents\GitHub\codersGrowth-ruilon\obj\Debug\trabalho01.pdb
