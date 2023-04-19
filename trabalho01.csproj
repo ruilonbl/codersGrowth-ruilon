@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="model\ListSingleton.cs" />
     <Compile Include="TelaDeCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
