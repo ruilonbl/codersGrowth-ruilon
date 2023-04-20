@@ -9,26 +9,29 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
+        Repository repository = new Repository();
         Validacao Validacao = new Validacao();
         Pessoa p;
         public TelaDeCadastro(Pessoa pessoa)
         {
             InitializeComponent();
             p = pessoa;
-            if (pessoa == null)
-            {
-                p = RecebePessoas(pessoa);
-            }
+            
         }
         private void AoclicarRegistrar(object sender, EventArgs e)
         {
+            if (p == null)
+            {
+                p = RecebePessoas(p);
+            }
             try
             {
                 Validacao.ValidacaoCamposTexto(p);
+                repository.Criar(p);
+                Close();
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Close();
             }
             
         }

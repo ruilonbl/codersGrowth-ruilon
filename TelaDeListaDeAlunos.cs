@@ -15,12 +15,13 @@ namespace trabalho01
 {  
     public partial class TelaDeListaDeAlunos : Form
     {
+        private static BindingList<Pessoa> list = ListSingleton.Lista();
         Pessoa pessoa = new Pessoa();
         bool liberaCadastro;
         public TelaDeListaDeAlunos()
         {
             InitializeComponent();
-            //DT_mostra.DataSource= list;
+            DT_mostra.DataSource= list;
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {          
