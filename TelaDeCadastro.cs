@@ -8,8 +8,7 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
-        BindingList<Pessoa> lista;
-        TelaDeListaDeAlunos telaDeListaDeAlunos = new TelaDeListaDeAlunos();
+        BindingList<Pessoa> lista = ListSingleton.Lista();
         bool liberacadastro;
         int aux,auxatualizando;
         public TelaDeCadastro(BindingList<Pessoa> list,int ind,bool libera)
@@ -19,27 +18,28 @@ namespace trabalho01
             lista = list;
             if(!libera)
             {
-                auxatualizando = list[ind].Id;
-                txt_nome.Text = lista[ind].Nome;
-                txt_cpf.Text = lista[ind].Cpf;
-                txt_altura.Text = lista[ind].Altura;
-                if (lista[ind].Sexo.Equals("Feminino"))
+                foreach (Pessoa p in lista)
                 {
-                    rb_Feminino.Checked = true;
-                }
-                else
-                {
-                    rb_Masculino.Checked = true;
+                    if (ind == p.Id)
+                    {
+                        auxatualizando = p.Id;
+                        txt_nome.Text = p.Nome;
+                        txt_cpf.Text = p.Cpf;
+                        txt_altura.Text = p.Altura;
+                        if (p.Sexo.Equals("Feminino"))
+                        {
+                            rb_Feminino.Checked = true;
+                        }
+                        else
+                        {
+                            rb_Masculino.Checked = true;
+                        }
+                    }
                 }
                 txt_cpf.Enabled = false;
             
             }
             aux = ind;
-        }
-        public TelaDeCadastro(DataGridView dataGridView,int ind)
-        {
-            InitializeComponent();
-            
         }
         private void AoclicarRegistrar(object sender, EventArgs e)
         {
@@ -74,51 +74,62 @@ namespace trabalho01
                         cont++;
                     }
                 }
-                if (cont != 0 && liberacadastro)
+                if(txt_cpf.TextLength<11)
                 {
-                    MessageBox.Show("CPF JA EXISTE", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("CPF INVALIDO", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    if(!liberacadastro)
+                    if (cont != 0 && liberacadastro)
                     {
-                        Pessoa pessoa = new Pessoa();
-                        pessoa.Id = auxatualizando;
-                        pessoa.Nome = txt_nome.Text;
-                        pessoa.Cpf = txt_cpf.Text;
-                        pessoa.Altura = txt_altura.Text;
-                        pessoa.Dat = dateTime.Text.ToString();
-                        if(rb_Feminino.Checked)
-                        {
-                            pessoa.Sexo = "Feminino";
-                        }
-                        else
-                        {
-                            pessoa.Sexo = "Masculino";
-                        }
-                        lista[aux] = pessoa;
-                        Close();
+                        MessageBox.Show("CPF JA EXISTE", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
                     {
                         Pessoa pessoa = new Pessoa();
-                        pessoa.Id = telaDeListaDeAlunos.cont();
-                        pessoa.Nome = txt_nome.Text;
-                        pessoa.Cpf = txt_cpf.Text;
-                        pessoa.Altura = txt_altura.Text;
-                        pessoa.Dat = dateTime.Text.ToString();
-                        if (rb_Feminino.Checked)
+                        if (!liberacadastro)
                         {
-                            pessoa.Sexo = "Feminino";
+                            foreach (Pessoa p in lista)
+                            {
+                                if (aux == p.Id)
+                                {
+                                    pessoa.Nome = txt_nome.Text;
+                                    p.Nome = pessoa.Nome;
+                                    p.Cpf = txt_cpf.Text;
+                                    p.Altura = txt_altura.Text;
+                                    if (rb_Feminino.Checked)
+                                    {
+                                        p.Sexo = "Feminino";
+                                    }
+                                    else
+                                    {
+                                        p.Sexo = "Masculino";
+                                    }
+                                }
+                            }
+                            Close();
                         }
                         else
                         {
-                            pessoa.Sexo = "Masculino";
+                            liberacadastro = false;
+                            pessoa.Id = ListSingleton.cont(liberacadastro);
+                            pessoa.Nome = txt_nome.Text;
+                            pessoa.Cpf = txt_cpf.Text;
+                            pessoa.Altura = txt_altura.Text;
+                            pessoa.Dat = dateTime.Text.ToString();
+                            if (rb_Feminino.Checked)
+                            {
+                                pessoa.Sexo = "Feminino";
+                            }
+                            else
+                            {
+                                pessoa.Sexo = "Masculino";
+                            }
+                            lista.Add(pessoa);
+                            Close();
                         }
-                        lista.Add(pessoa);
-                        Close();
-                    }  
-                }
+                    }
+                }              
             }
         }
 

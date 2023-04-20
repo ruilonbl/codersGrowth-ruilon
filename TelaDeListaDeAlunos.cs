@@ -16,7 +16,6 @@ namespace trabalho01
     public partial class TelaDeListaDeAlunos : Form
     {
         private static BindingList<Pessoa> list = new BindingList<Pessoa>();
-        static int i = 1;
         bool liberaCadastro;
         public TelaDeListaDeAlunos()
         {
@@ -24,33 +23,36 @@ namespace trabalho01
             DT_mostra.DataSource= list;
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
-        {
+        {          
             liberaCadastro = true;
-            TelaDeCadastro cadastrar = new TelaDeCadastro(list,i,liberaCadastro);
+            TelaDeCadastro cadastrar = new TelaDeCadastro(list,ListSingleton.cont(liberaCadastro),liberaCadastro);
             cadastrar.Show();         
         }
 
         private void AoClicarEmAtualizar(object sender, EventArgs e)
         {
-            int aux = DT_mostra.GetCellCount(DataGridViewElementStates.Selected);
-            if (aux > 6)
+            int aux = DT_mostra.SelectedRows.Count;
+            if (aux > 1)
             {
                 MessageBox.Show("VOCÊ NÃO PODE EDITAR MAIS DE UMA ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 liberaCadastro = false;
-                int ind = DT_mostra.CurrentRow.Index;
-                TelaDeCadastro cadastrar = new TelaDeCadastro(list, ind, liberaCadastro);
-                cadastrar.Show();
+                var clienteSelecionado = (Pessoa)DT_mostra.SelectedRows[0].DataBoundItem;
+                TelaDeCadastro cadastrar = new TelaDeCadastro(list,clienteSelecionado.Id, liberaCadastro);
+                
+                cadastrar.ShowDialog();
             }
-            
+            DT_mostra.DataSource = null;
+            DT_mostra.DataSource = list;
+
         }
 
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
-            int aux = DT_mostra.GetCellCount(DataGridViewElementStates.Selected);
-            if(aux > 6) 
+            int aux = DT_mostra.SelectedRows.Count;
+            if(aux > 1) 
             {
                 MessageBox.Show("VOCÊ NÃO PODE EXCLUIR MAIS DE UMA ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -59,7 +61,15 @@ namespace trabalho01
                 var excluir = MessageBox.Show("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR ESSE ALUNO?\n", "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (excluir == DialogResult.Yes)
                 {
-                    DT_mostra.Rows.RemoveAt(DT_mostra.CurrentRow.Index);
+                        var clienteSelecionado = (Pessoa)DT_mostra.SelectedRows[0].DataBoundItem;
+
+                        foreach (Pessoa p in list.ToList())
+                        {
+                            if (clienteSelecionado.Id == p.Id)
+                            {
+                                list.Remove(p);
+                            }
+                        }
                 }
                 else
                 {
@@ -67,9 +77,6 @@ namespace trabalho01
                 }
             }           
         }
-        public int cont()
-        {
-            return i++;
-        }
+        
     }
 }
