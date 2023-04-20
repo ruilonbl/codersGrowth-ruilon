@@ -9,9 +9,9 @@ namespace trabalho01.model
 {
     public sealed class ListSingleton
     {
-        //private ListSingleton() { }
         private static BindingList<Pessoa> lista;
         static int i = 1;
+
         public static BindingList<Pessoa> Lista()
         {
             if(lista == null)
@@ -19,8 +19,8 @@ namespace trabalho01.model
                 lista = new BindingList<Pessoa>();
             }
             return lista;
-           // set { lista = value; }
         }
+
         public static int cont(bool atualiza)
         {
             if(atualiza)
