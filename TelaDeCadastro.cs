@@ -2,135 +2,54 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using trabalho01.crud;
 using trabalho01.model;
 
 namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
-        BindingList<Pessoa> lista = ListSingleton.Lista();
-        bool liberacadastro;
-        int aux,auxatualizando;
-        public TelaDeCadastro(BindingList<Pessoa> list,int ind,bool libera)
+        Validacao Validacao = new Validacao();
+        Pessoa p;
+        public TelaDeCadastro(Pessoa pessoa)
         {
             InitializeComponent();
-            liberacadastro = libera;
-            lista = list;
-            if(!libera)
+            p = pessoa;
+            if (pessoa == null)
             {
-                foreach (Pessoa p in lista)
-                {
-                    if (ind == p.Id)
-                    {
-                        auxatualizando = p.Id;
-                        txt_nome.Text = p.Nome;
-                        txt_cpf.Text = p.Cpf;
-                        txt_altura.Text = p.Altura;
-                        if (p.Sexo.Equals("Feminino"))
-                        {
-                            rb_Feminino.Checked = true;
-                        }
-                        else
-                        {
-                            rb_Masculino.Checked = true;
-                        }
-                    }
-                }
-                txt_cpf.Enabled = false;
-            
+                p = RecebePessoas(pessoa);
             }
-            aux = ind;
         }
         private void AoclicarRegistrar(object sender, EventArgs e)
         {
-            string validacampos = string.Empty;
-            if (string.IsNullOrEmpty(txt_nome.Text))
+            try
             {
-                validacampos += "VOCÊ NÃO PREENCHEU O CAMPO DO NOME";
+                Validacao.ValidacaoCamposTexto(p);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
             }
-            if(string.IsNullOrEmpty(txt_cpf.Text))
+            
+        }
+
+        public Pessoa RecebePessoas(Pessoa pessoacadastro)
+        {
+            Pessoa pessoa = new Pessoa();
+            pessoa.Id = ListSingleton.cont(pessoa);
+            pessoa.Nome = txt_nome.Text;
+            pessoa.Cpf = txt_cpf.Text;
+            pessoa.Altura = txt_altura.Text;
+            pessoa.Dat = dateTime.Text.ToString();
+            if (rb_Feminino.Checked)
             {
-                validacampos += "\nVOCÊ NÃO PREENCHEU O CAMPO DO CPF";
-            }
-            if(string.IsNullOrEmpty(txt_altura.Text))
-            {
-                validacampos += "\nVOCÊ NÃO PREENCHEU O CAMPO DA ALTURA";
-            }
-            if(!rb_Feminino.Checked && !rb_Masculino.Checked)
-            {
-                validacampos += "\nVOCÊ NÃO SELECIONOU UM SEXO";
-            }
-            if(!validacampos.Equals(""))
-            {
-                MessageBox.Show(validacampos, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                pessoa.Sexo = "Feminino";
             }
             else
             {
-                int cont = 0;
-                foreach (Pessoa p in lista)
-                {
-                    if (p.Cpf.Equals(txt_cpf.Text))
-                    {
-                        cont++;
-                    }
-                }
-                if(txt_cpf.TextLength<11)
-                {
-                    MessageBox.Show("CPF INVALIDO", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    if (cont != 0 && liberacadastro)
-                    {
-                        MessageBox.Show("CPF JA EXISTE", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                    else
-                    {
-                        Pessoa pessoa = new Pessoa();
-                        if (!liberacadastro)
-                        {
-                            foreach (Pessoa p in lista)
-                            {
-                                if (aux == p.Id)
-                                {
-                                    pessoa.Nome = txt_nome.Text;
-                                    p.Nome = pessoa.Nome;
-                                    p.Cpf = txt_cpf.Text;
-                                    p.Altura = txt_altura.Text;
-                                    if (rb_Feminino.Checked)
-                                    {
-                                        p.Sexo = "Feminino";
-                                    }
-                                    else
-                                    {
-                                        p.Sexo = "Masculino";
-                                    }
-                                }
-                            }
-                            Close();
-                        }
-                        else
-                        {
-                            liberacadastro = false;
-                            pessoa.Id = ListSingleton.cont(liberacadastro);
-                            pessoa.Nome = txt_nome.Text;
-                            pessoa.Cpf = txt_cpf.Text;
-                            pessoa.Altura = txt_altura.Text;
-                            pessoa.Dat = dateTime.Text.ToString();
-                            if (rb_Feminino.Checked)
-                            {
-                                pessoa.Sexo = "Feminino";
-                            }
-                            else
-                            {
-                                pessoa.Sexo = "Masculino";
-                            }
-                            lista.Add(pessoa);
-                            Close();
-                        }
-                    }
-                }              
+                pessoa.Sexo = "Masculino";
             }
+            return pessoa;
         }
 
         private void SAIR(object sender, EventArgs e)

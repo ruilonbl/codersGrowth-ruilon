@@ -46,15 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crud\IRepository.cs" />
+    <Compile Include="crud\Repository.cs" />
     <Compile Include="model\ListSingleton.cs" />
+    <Compile Include="model\Validacao.cs" />
     <Compile Include="TelaDeCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TelaDeCadastro.Designer.cs">
       <DependentUpon>TelaDeCadastro.cs</DependentUpon>
     </Compile>
-    <Compile Include="crud\IPessoasDAO.cs" />
-    <Compile Include="crud\PessoasDAO.cs" />
     <Compile Include="TelaDeListaDeAlunos.cs">
       <SubType>Form</SubType>
     </Compile>
