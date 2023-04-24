@@ -9,29 +9,75 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
+        private static BindingList<Pessoa> list = ListSingleton.Lista();
         Repository repository = new Repository();
-        Validacao Validacao = new Validacao();
-        Pessoa p;
+        Validacao validacao = new Validacao();
+        Pessoa p = new Pessoa();
+        int idAtualizar;
+        bool atualizar,erro;
         public TelaDeCadastro(Pessoa pessoa)
         {
             InitializeComponent();
             p = pessoa;
+            if(pessoa != null)
+            {
+                idAtualizar = pessoa.Id;
+                txt_nome.Text = pessoa.Nome;
+                txt_cpf.Text = pessoa.Cpf;
+                txt_altura.Text = pessoa.Altura;
+                if(pessoa.Sexo.Equals("Feminino"))
+                {
+                    rb_Feminino.Checked = true;
+                }
+                else
+                {
+                    rb_Masculino.Checked = true;
+                }
+                txt_cpf.Enabled = false;
+            }
             
         }
         private void AoclicarRegistrar(object sender, EventArgs e)
         {
-            if (p == null)
-            {
-                p = RecebePessoas(p);
-            }
             try
             {
-                Validacao.ValidacaoCamposTexto(p);
-                repository.Criar(p);
-                Close();
-            } catch (Exception ex)
+                if (p == null)
+                {
+                    p = RecebePessoas(p);
+                    atualizar = false;
+                }
+                else
+                {
+                    if (p.Id != 0)
+                    {
+                        p = AtualizaPessoas(p);
+                        atualizar = true;
+                    }                    
+                }
+                validacao.ValidacaoCamposTexto(p, atualizar);
+                if (!atualizar && validacao.erros.Count == 0)
+                {
+                    atualizar = false;
+                    p.Id = ListSingleton.cont(atualizar);
+                    repository.Criar(p);
+                    Close();
+                }
+                else
+                {
+                    if(validacao.erros.Count == 0)
+                    {
+                        repository.atualizar(p, idAtualizar);
+                        Close();
+                    }   
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (p.Id == 0)
+                {
+                    p = null;
+                }
             }
             
         }
@@ -39,7 +85,6 @@ namespace trabalho01
         public Pessoa RecebePessoas(Pessoa pessoacadastro)
         {
             Pessoa pessoa = new Pessoa();
-            pessoa.Id = ListSingleton.cont(pessoa);
             pessoa.Nome = txt_nome.Text;
             pessoa.Cpf = txt_cpf.Text;
             pessoa.Altura = txt_altura.Text;
@@ -52,6 +97,28 @@ namespace trabalho01
             {
                 pessoa.Sexo = "Masculino";
             }
+            return pessoa;
+        }
+        public Pessoa AtualizaPessoas(Pessoa pessoa)
+        {
+            foreach (Pessoa p in list)
+            {
+                if (idAtualizar == p.Id)
+                {
+                    p.Nome = txt_nome.Text;
+                    p.Cpf = txt_cpf.Text;
+                    p.Altura = txt_altura.Text;
+                    if (rb_Feminino.Checked)
+                    {
+                        p.Sexo = "Feminino";
+                    }
+                    else
+                    {
+                        p.Sexo = "Masculino";
+                    }
+                    pessoa = p;
+                }
+            } 
             return pessoa;
         }
 

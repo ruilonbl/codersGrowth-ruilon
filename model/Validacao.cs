@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -10,37 +11,46 @@ namespace trabalho01.model
     public class Validacao
     {
         private static BindingList<Pessoa> list = ListSingleton.Lista();
-        public void ValidacaoCamposTexto(Pessoa p)
+        public List<String> erros = new List<String>();
+        public void ValidacaoCamposTexto(Pessoa p,bool atualiza)
         {
-            string excecoes = "";
             if (p.Nome.Equals(""))
             {
-                excecoes += "O USUARIO NAO DIGITOU O NOME";
+                erros.Add("O USUARIO NAO DIGITOU O NOME");
             }
             if (p.Altura == "")
             {
-                excecoes += "\nO USUARIO NAO DIGITOU A ALTURA";
+                erros.Add("O USUARIO NAO DIGITOU A ALTURA");
             }
             if (p.Dat == "")
             {
-                excecoes += "\nO USUARIO NAO SELECIONOU A DATA";
+                erros.Add("O USUARIO NAO SELECIONOU A DATA");
             }
             if (p.Cpf == "")
             {
-                excecoes += "\nO USUARIO NAO DIGITOU O CPF";
+                erros.Add("O USUARIO NAO DIGITOU O CPF");
             }
             if (p.Sexo == "")
             {
-                excecoes += "\nO USUARIO NAO DIGITOU A ALTURA";
+                erros.Add("O USUARIO NAO SELECIONOU UM SEXO");
             }
-            if(!ValidaCPF(p) || p.Cpf.Length !=11)
+            if(!atualiza)
             {
-                excecoes += "\nCPF INVALIDO";
+                if (!ValidaCPF(p))
+                {
+                    erros.Add("CPF JA EXISTE");
+                }
             }
-            if((!excecoes.Equals("")))
+            if (p.Cpf.Length != 11)
             {
-                throw new Exception(excecoes);
-            }            
+                erros.Add("CPF INVALIDO");
+            }
+            if(erros.Count !=0)
+            {
+                var erro = string.Join(Environment.NewLine,erros);
+                erros.Clear();
+                throw new Exception(erro);
+            }
         }
         public bool ValidaCPF(Pessoa p)
         {

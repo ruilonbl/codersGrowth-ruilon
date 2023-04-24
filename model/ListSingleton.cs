@@ -21,9 +21,9 @@ namespace trabalho01.model
             return lista;
         }
 
-        public static int cont(Pessoa pessoa)
+        public static int cont(bool atualiza)
         {
-            if(pessoa!=null)
+            if(atualiza)
             {
                 return i;
             }
