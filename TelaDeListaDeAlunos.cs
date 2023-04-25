@@ -23,54 +23,73 @@ namespace trabalho01
         public TelaDeListaDeAlunos()
         {
             InitializeComponent();
-            DT_mostra.DataSource= list;
+            Datagrid_Lista.DataSource= list;
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {          
-            TelaDeCadastro cadastrar = new TelaDeCadastro(null);
+            TelaDeCadastro cadastrar = new TelaDeCadastro(0);
             cadastrar.Show();         
         }
 
         private void AoClicarEmAtualizar(object sender, EventArgs e)
         {
-            int aux = DT_mostra.SelectedRows.Count;
-            if (aux > 1)
+            int aux = Datagrid_Lista.SelectedRows.Count;
+            if(aux<1)
             {
-                MessageBox.Show("VOCÊ NÃO PODE EDITAR MAIS DE UMA ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("VOCÊ NÃO SELECIONOU NENHUM CAMPO", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                liberaCadastro = false;
-                var clienteSelecionado = (Pessoa)DT_mostra.SelectedRows[0].DataBoundItem;
-                TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado);
-                
-                cadastrar.ShowDialog();
-            }
-            DT_mostra.DataSource = null;
-            DT_mostra.DataSource = list;
+                if (aux > 1)
+                {
+                    string erro = "ATUALIZAR";
+                    ErrosDeSelecao(erro);
+                }
+                else
+                {
+                    liberaCadastro = false;
+                    var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
+                    TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id);
 
+                    cadastrar.ShowDialog();
+                }
+                Datagrid_Lista.DataSource = null;
+                Datagrid_Lista.DataSource = list;
+            }
         }
 
         private void AoClicarEmDeletar(object sender, EventArgs e)
         {
-            int aux = DT_mostra.SelectedRows.Count;
-            if(aux > 1) 
+            int aux = Datagrid_Lista.SelectedRows.Count;
+            if (aux < 1)
             {
-                MessageBox.Show("VOCÊ NÃO PODE EXCLUIR MAIS DE UM ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("VOCÊ NÃO SELECIONOU NENHUM CAMPO", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
-                var excluir = MessageBox.Show("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR ESSE ALUNO?\n", "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (excluir == DialogResult.Yes)
+                if (aux > 1)
                 {
-                    var clienteSelecionado = (Pessoa)DT_mostra.SelectedRows[0].DataBoundItem;
-                    repository.Deletar(clienteSelecionado.Id);
+                    string erro = "DELETAR";
+                    ErrosDeSelecao(erro);
                 }
                 else
                 {
-                    MessageBox.Show("Aluno não excluido", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    var excluir = MessageBox.Show("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR ESSE ALUNO?\n", "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (excluir == DialogResult.Yes)
+                    {
+                        var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
+                        repository.Deletar(clienteSelecionado.Id);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Aluno não excluido", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
-            }           
+            }          
+        }
+        public void ErrosDeSelecao(string erros)
+        {
+            MessageBox.Show($"VOCÊ NÃO PODE {erros} MAIS DE UM ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
         
     }

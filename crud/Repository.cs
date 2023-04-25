@@ -14,17 +14,12 @@ namespace trabalho01.crud
         BindingList<Pessoa> lista = ListSingleton.Lista();
         public BindingList<Pessoa> atualizar(Pessoa pessoa, int id)
         {
-            foreach (Pessoa p in lista)
-            {
-                if (id == p.Id)
-                {
-                    p.Nome = pessoa.Nome;
-                    p.Cpf = pessoa.Cpf;
-                    p.Altura = pessoa.Altura;
-                    p.Sexo = pessoa.Sexo;
-                    pessoa = p;
-                }
-            }
+            var pessoaAtualizada = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            pessoaAtualizada.Nome = pessoa.Nome;
+            pessoaAtualizada.Cpf = pessoa.Cpf;
+            pessoaAtualizada.Altura = pessoa.Altura;
+            pessoaAtualizada.Dat = pessoa.Dat;
+            pessoaAtualizada.Sexo = pessoa.Sexo;
             return lista;
         }
 
@@ -35,20 +30,23 @@ namespace trabalho01.crud
 
         public void Deletar(int id)
         {
-            var e = lista.Select(x => x.Id == id).FirstOrDefault();
-            foreach (Pessoa p in lista)
-            {
-                if (id == p.Id)
-                {
-                    lista.Remove(p);
-                    break;
-                }
-            }
+            var pessoa = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
+
+            lista.Remove(pessoa);
         }
 
-        public BindingList<Pessoa> retorno()
+        public BindingList<Pessoa> ListaId(int id)
         {
-            throw new NotImplementedException();
+            var pessoa = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            if (pessoa == null) return null; 
+            return lista;
+        }
+
+        public bool ProcuraCPF(string cpf)
+        {
+            var pessoa = lista.Where(p => p.Cpf.Equals(cpf)).FirstOrDefault();
+            if (pessoa == null) return false;
+            return true;
         }
     }
 }

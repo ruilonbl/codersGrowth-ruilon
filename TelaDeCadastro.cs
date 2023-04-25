@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,143 +10,177 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
-        private static BindingList<Pessoa> list = ListSingleton.Lista();
-        Repository repository = new Repository();
-        Validacao validacao = new Validacao();
-        Pessoa p = new Pessoa();
-        int idAtualizar;
-        bool atualizar,erro;
-        public TelaDeCadastro(Pessoa pessoa)
+        private static BindingList<Pessoa> _list = ListSingleton.Lista();
+        private readonly Repository _repository = new Repository();
+        private List<string> _erros = new List<string>();
+        Pessoa pessoa = new Pessoa();      
+        int auxCadastra;
+        bool atualizar;
+
+        public TelaDeCadastro(int id)
         {
+            auxCadastra = id;
             InitializeComponent();
-            p = pessoa;
-            if(pessoa != null)
-            {
-                idAtualizar = pessoa.Id;
-                txt_nome.Text = pessoa.Nome;
-                txt_cpf.Text = pessoa.Cpf;
-                txt_altura.Text = pessoa.Altura;
-                if(pessoa.Sexo.Equals("Feminino"))
-                {
-                    rb_Feminino.Checked = true;
-                }
-                else
-                {
-                    rb_Masculino.Checked = true;
-                }
-                txt_cpf.Enabled = false;
-            }
-            
+            pessoa = _list.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            PreencheDadosAoAtualizar();
         }
-        private void AoclicarRegistrar(object sender, EventArgs e)
+
+        private void AoClicarEmRegistrar(object sender, EventArgs e)
         {
             try
             {
-                if (p == null)
-                {
-                    p = RecebePessoas(p);
-                    atualizar = false;
-                }
-                else
-                {
-                    if (p.Id != 0)
-                    {
-                        p = AtualizaPessoas(p);
-                        atualizar = true;
-                    }                    
-                }
-                validacao.ValidacaoCamposTexto(p, atualizar);
-                if (!atualizar && validacao.erros.Count == 0)
-                {
-                    atualizar = false;
-                    p.Id = ListSingleton.cont(atualizar);
-                    repository.Criar(p);
-                    Close();
-                }
-                else
-                {
-                    if(validacao.erros.Count == 0)
-                    {
-                        repository.atualizar(p, idAtualizar);
-                        Close();
-                    }   
-                }
+                ValidacaoCamposTexto();
+                PreencheDados(auxCadastra);
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                if (p.Id == 0)
-                {
-                    p = null;
-                }
             }
             
         }
 
-        public Pessoa RecebePessoas(Pessoa pessoacadastro)
+        public void PreencheDadosAoAtualizar()
+        {
+            if (pessoa != null)
+            { 
+                CampoTextoNome.Text = pessoa.Nome;
+                CampoTextoCPF.Text = pessoa.Cpf;
+                CampoTextoAltura.Text = pessoa.Altura;
+                if (pessoa.Sexo.Equals("Feminino"))
+                {
+                    BotaoFeminino.Checked = true;
+                }
+                else
+                {
+                    BotaoMasculino.Checked = true;
+                }
+                CampoTextoCPF.Enabled = false;
+            }
+        }
+
+        public Pessoa PreencheDados(int id)
         {
             Pessoa pessoa = new Pessoa();
-            pessoa.Nome = txt_nome.Text;
-            pessoa.Cpf = txt_cpf.Text;
-            pessoa.Altura = txt_altura.Text;
-            pessoa.Dat = dateTime.Text.ToString();
-            if (rb_Feminino.Checked)
+            if(auxCadastra == 0)
             {
-                pessoa.Sexo = "Feminino";
+                pessoa = ConverterDadosDaTelaEmPessoa();
             }
             else
             {
-                pessoa.Sexo = "Masculino";
+                pessoa = AtualizaPessoa(id);
             }
             return pessoa;
         }
-        public Pessoa AtualizaPessoas(Pessoa pessoa)
+
+        public Pessoa ConverterDadosDaTelaEmPessoa()
         {
-            foreach (Pessoa p in list)
+            Pessoa pessoa = new Pessoa();
+            atualizar = false;
+            pessoa.Id = ListSingleton.cont(atualizar);
+            pessoa.Nome = CampoTextoNome.Text;
+            pessoa.Cpf = CampoTextoCPF.Text;
+            pessoa.Altura = CampoTextoAltura.Text;
+            pessoa.Dat = dateTime.Text.ToString();
+            if (BotaoFeminino.Checked)
             {
-                if (idAtualizar == p.Id)
-                {
-                    p.Nome = txt_nome.Text;
-                    p.Cpf = txt_cpf.Text;
-                    p.Altura = txt_altura.Text;
-                    if (rb_Feminino.Checked)
-                    {
-                        p.Sexo = "Feminino";
-                    }
-                    else
-                    {
-                        p.Sexo = "Masculino";
-                    }
-                    pessoa = p;
-                }
-            } 
+                pessoa.Sexo = Sexo.Feminino.ToString();
+            }
+            else
+            {
+                pessoa.Sexo = Sexo.Masculino.ToString();
+            }
+            _repository.Criar(pessoa);
             return pessoa;
+        }
+
+        public Pessoa AtualizaPessoa(int id)
+        {
+            var pessoaAtualizada = _list.Where(p => p.Id.Equals(id)).FirstOrDefault();
+            pessoaAtualizada.Nome = CampoTextoNome.Text;
+            pessoaAtualizada.Cpf = CampoTextoCPF.Text;
+            pessoaAtualizada.Altura = CampoTextoAltura.Text;
+            pessoaAtualizada.Dat = dateTime.Text.ToString();
+            if (BotaoFeminino.Checked)
+            {
+                pessoaAtualizada.Sexo = Sexo.Feminino.ToString();
+            }
+            else
+            {
+                pessoaAtualizada.Sexo = Sexo.Masculino.ToString();
+            }
+            _repository.atualizar(pessoaAtualizada, auxCadastra);
+            return pessoaAtualizada;
         }
 
         private void SAIR(object sender, EventArgs e)
         {
             Close();
         }
+
+        public void ValidacaoCamposTexto()
+        {
+            _erros.Clear();
+            if (string.IsNullOrWhiteSpace(CampoTextoNome.Text))
+            {
+                _erros.Add("O USUARIO NAO DIGITOU O NOME");
+            }
+            if (string.IsNullOrWhiteSpace(CampoTextoAltura.Text))
+            {
+                _erros.Add("O USUARIO NAO DIGITOU A ALTURA");
+            }
+            if (string.IsNullOrWhiteSpace(dateTime.Text.ToString()))
+            {
+                _erros.Add("O USUARIO NAO SELECIONOU A DATA");
+            }
+            if (string.IsNullOrWhiteSpace(CampoTextoCPF.Text))
+            {
+                _erros.Add("O USUARIO NAO DIGITOU O CPF");
+            }
+            if (!BotaoFeminino.Checked && !BotaoMasculino.Checked)
+            {
+                _erros.Add("O USUARIO NAO SELECIONOU UM SEXO");
+            }
+            if (auxCadastra == 0)
+            {
+                if (_repository.ProcuraCPF(CampoTextoCPF.Text) == true)
+                {
+                    _erros.Add("CPF JA EXISTE");
+                }
+            }
+            if (CampoTextoCPF.Text.Length != 11)
+            {
+                _erros.Add("CPF INVALIDO");
+            }
+            if (_erros.Count != 0)
+            {
+                var erro = string.Join(Environment.NewLine, _erros);
+                _erros.Clear();
+                throw new Exception(erro);
+            }
+        }
+
         public static void validaCampoNumero(KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !(e.KeyChar == (char)Keys.Back) && !(e.KeyChar == (char)Keys.Space)) e.Handled = true;
         }
+
         public static void validaCampoLetra(KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && !(e.KeyChar == (char)Keys.Space)) e.Handled = true;
         }
 
-        private void txt_nome_KeyPress(object sender, KeyPressEventArgs e)
+        private void NaoDeixaDigitarNumeroNoCampoNome(object sender, KeyPressEventArgs e)
         {
             validaCampoNumero(e);
         }
 
-        private void txt_cpf_KeyPress(object sender, KeyPressEventArgs e)
+        private void NaoDeixaDigitarLetraNoCampoCPF(object sender, KeyPressEventArgs e)
         {
             validaCampoLetra(e);
         }
 
-        private void txt_altura_KeyPress(object sender, KeyPressEventArgs e)
+        private void NaoDeixaDigitarLetraNoCampoAltura(object sender, KeyPressEventArgs e)
         {
             validaCampoLetra(e);
         }

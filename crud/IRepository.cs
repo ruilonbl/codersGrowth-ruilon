@@ -13,6 +13,7 @@ namespace trabalho01.crud
         BindingList<Pessoa> atualizar(Pessoa pessoa,int id);
         void Criar(Pessoa pessoa);
         void Deletar(int id);
-        BindingList<Pessoa> retorno();
+        BindingList<Pessoa> ListaId(int id);
+        bool ProcuraCPF(string cpf);
     }
 }

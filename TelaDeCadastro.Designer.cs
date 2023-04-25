@@ -34,12 +34,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_registrar = new System.Windows.Forms.Button();
-            this.rb_Feminino = new System.Windows.Forms.RadioButton();
-            this.rb_Masculino = new System.Windows.Forms.RadioButton();
+            this.BotaoFeminino = new System.Windows.Forms.RadioButton();
+            this.BotaoMasculino = new System.Windows.Forms.RadioButton();
             this.BotaoAtualizar = new System.Windows.Forms.Button();
-            this.txt_cpf = new System.Windows.Forms.TextBox();
-            this.txt_altura = new System.Windows.Forms.TextBox();
-            this.txt_nome = new System.Windows.Forms.TextBox();
+            this.CampoTextoCPF = new System.Windows.Forms.TextBox();
+            this.CampoTextoAltura = new System.Windows.Forms.TextBox();
+            this.CampoTextoNome = new System.Windows.Forms.TextBox();
             this.dateTime = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
@@ -96,29 +96,29 @@
             this.btn_registrar.TabIndex = 5;
             this.btn_registrar.Text = "REGISTRAR";
             this.btn_registrar.UseVisualStyleBackColor = true;
-            this.btn_registrar.Click += new System.EventHandler(this.AoclicarRegistrar);
+            this.btn_registrar.Click += new System.EventHandler(this.AoClicarEmRegistrar);
             // 
-            // rb_Feminino
+            // BotaoFeminino
             // 
-            this.rb_Feminino.AutoSize = true;
-            this.rb_Feminino.Location = new System.Drawing.Point(15, 181);
-            this.rb_Feminino.Name = "rb_Feminino";
-            this.rb_Feminino.Size = new System.Drawing.Size(67, 17);
-            this.rb_Feminino.TabIndex = 6;
-            this.rb_Feminino.TabStop = true;
-            this.rb_Feminino.Text = "Feminino";
-            this.rb_Feminino.UseVisualStyleBackColor = true;
+            this.BotaoFeminino.AutoSize = true;
+            this.BotaoFeminino.Location = new System.Drawing.Point(15, 181);
+            this.BotaoFeminino.Name = "BotaoFeminino";
+            this.BotaoFeminino.Size = new System.Drawing.Size(67, 17);
+            this.BotaoFeminino.TabIndex = 6;
+            this.BotaoFeminino.TabStop = true;
+            this.BotaoFeminino.Text = "Feminino";
+            this.BotaoFeminino.UseVisualStyleBackColor = true;
             // 
-            // rb_Masculino
+            // BotaoMasculino
             // 
-            this.rb_Masculino.AutoSize = true;
-            this.rb_Masculino.Location = new System.Drawing.Point(125, 181);
-            this.rb_Masculino.Name = "rb_Masculino";
-            this.rb_Masculino.Size = new System.Drawing.Size(73, 17);
-            this.rb_Masculino.TabIndex = 7;
-            this.rb_Masculino.TabStop = true;
-            this.rb_Masculino.Text = "Masculino";
-            this.rb_Masculino.UseVisualStyleBackColor = true;
+            this.BotaoMasculino.AutoSize = true;
+            this.BotaoMasculino.Location = new System.Drawing.Point(125, 181);
+            this.BotaoMasculino.Name = "BotaoMasculino";
+            this.BotaoMasculino.Size = new System.Drawing.Size(73, 17);
+            this.BotaoMasculino.TabIndex = 7;
+            this.BotaoMasculino.TabStop = true;
+            this.BotaoMasculino.Text = "Masculino";
+            this.BotaoMasculino.UseVisualStyleBackColor = true;
             // 
             // BotaoAtualizar
             // 
@@ -130,31 +130,31 @@
             this.BotaoAtualizar.UseVisualStyleBackColor = true;
             this.BotaoAtualizar.Click += new System.EventHandler(this.SAIR);
             // 
-            // txt_cpf
+            // CampoTextoCPF
             // 
-            this.txt_cpf.Location = new System.Drawing.Point(12, 64);
-            this.txt_cpf.MaxLength = 11;
-            this.txt_cpf.Name = "txt_cpf";
-            this.txt_cpf.Size = new System.Drawing.Size(186, 20);
-            this.txt_cpf.TabIndex = 11;
-            this.txt_cpf.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cpf_KeyPress);
+            this.CampoTextoCPF.Location = new System.Drawing.Point(12, 64);
+            this.CampoTextoCPF.MaxLength = 11;
+            this.CampoTextoCPF.Name = "CampoTextoCPF";
+            this.CampoTextoCPF.Size = new System.Drawing.Size(186, 20);
+            this.CampoTextoCPF.TabIndex = 11;
+            this.CampoTextoCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarLetraNoCampoCPF);
             // 
-            // txt_altura
+            // CampoTextoAltura
             // 
-            this.txt_altura.Location = new System.Drawing.Point(12, 103);
-            this.txt_altura.MaxLength = 3;
-            this.txt_altura.Name = "txt_altura";
-            this.txt_altura.Size = new System.Drawing.Size(186, 20);
-            this.txt_altura.TabIndex = 12;
-            this.txt_altura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_altura_KeyPress);
+            this.CampoTextoAltura.Location = new System.Drawing.Point(12, 103);
+            this.CampoTextoAltura.MaxLength = 3;
+            this.CampoTextoAltura.Name = "CampoTextoAltura";
+            this.CampoTextoAltura.Size = new System.Drawing.Size(186, 20);
+            this.CampoTextoAltura.TabIndex = 12;
+            this.CampoTextoAltura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarLetraNoCampoAltura);
             // 
-            // txt_nome
+            // CampoTextoNome
             // 
-            this.txt_nome.Location = new System.Drawing.Point(12, 25);
-            this.txt_nome.Name = "txt_nome";
-            this.txt_nome.Size = new System.Drawing.Size(186, 20);
-            this.txt_nome.TabIndex = 13;
-            this.txt_nome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nome_KeyPress);
+            this.CampoTextoNome.Location = new System.Drawing.Point(12, 25);
+            this.CampoTextoNome.Name = "CampoTextoNome";
+            this.CampoTextoNome.Size = new System.Drawing.Size(186, 20);
+            this.CampoTextoNome.TabIndex = 13;
+            this.CampoTextoNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarNumeroNoCampoNome);
             // 
             // dateTime
             // 
@@ -173,12 +173,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(209, 262);
             this.Controls.Add(this.dateTime);
-            this.Controls.Add(this.txt_nome);
-            this.Controls.Add(this.txt_altura);
-            this.Controls.Add(this.txt_cpf);
+            this.Controls.Add(this.CampoTextoNome);
+            this.Controls.Add(this.CampoTextoAltura);
+            this.Controls.Add(this.CampoTextoCPF);
             this.Controls.Add(this.BotaoAtualizar);
-            this.Controls.Add(this.rb_Masculino);
-            this.Controls.Add(this.rb_Feminino);
+            this.Controls.Add(this.BotaoMasculino);
+            this.Controls.Add(this.BotaoFeminino);
             this.Controls.Add(this.btn_registrar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -200,12 +200,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_registrar;
-        private System.Windows.Forms.RadioButton rb_Feminino;
-        private System.Windows.Forms.RadioButton rb_Masculino;
+        private System.Windows.Forms.RadioButton BotaoFeminino;
+        private System.Windows.Forms.RadioButton BotaoMasculino;
         private System.Windows.Forms.Button BotaoAtualizar;
-        private System.Windows.Forms.TextBox txt_cpf;
-        private System.Windows.Forms.TextBox txt_altura;
-        private System.Windows.Forms.TextBox txt_nome;
+        private System.Windows.Forms.TextBox CampoTextoCPF;
+        private System.Windows.Forms.TextBox CampoTextoAltura;
+        private System.Windows.Forms.TextBox CampoTextoNome;
         private System.Windows.Forms.DateTimePicker dateTime;
     }
 }

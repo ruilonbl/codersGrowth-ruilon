@@ -48,8 +48,8 @@
   <ItemGroup>
     <Compile Include="crud\IRepository.cs" />
     <Compile Include="crud\Repository.cs" />
+    <Compile Include="crud\Sexo.cs" />
     <Compile Include="model\ListSingleton.cs" />
-    <Compile Include="model\Validacao.cs" />
     <Compile Include="TelaDeCadastro.cs">
       <SubType>Form</SubType>
     </Compile>

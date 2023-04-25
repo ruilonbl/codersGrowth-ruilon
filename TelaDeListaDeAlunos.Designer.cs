@@ -31,8 +31,8 @@
             this.botaoCadastrar = new System.Windows.Forms.Button();
             this.bnt_atualizar = new System.Windows.Forms.Button();
             this.btn_deletar = new System.Windows.Forms.Button();
-            this.DT_mostra = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.DT_mostra)).BeginInit();
+            this.Datagrid_Lista = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.Datagrid_Lista)).BeginInit();
             this.SuspendLayout();
             // 
             // botaoCadastrar
@@ -65,28 +65,28 @@
             this.btn_deletar.UseVisualStyleBackColor = true;
             this.btn_deletar.Click += new System.EventHandler(this.AoClicarEmDeletar);
             // 
-            // DT_mostra
+            // Datagrid_Lista
             // 
-            this.DT_mostra.AllowUserToAddRows = false;
-            this.DT_mostra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DT_mostra.Location = new System.Drawing.Point(12, 12);
-            this.DT_mostra.Name = "DT_mostra";
-            this.DT_mostra.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DT_mostra.Size = new System.Drawing.Size(614, 282);
-            this.DT_mostra.TabIndex = 7;
+            this.Datagrid_Lista.AllowUserToAddRows = false;
+            this.Datagrid_Lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Datagrid_Lista.Location = new System.Drawing.Point(12, 12);
+            this.Datagrid_Lista.Name = "Datagrid_Lista";
+            this.Datagrid_Lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Datagrid_Lista.Size = new System.Drawing.Size(614, 282);
+            this.Datagrid_Lista.TabIndex = 7;
             // 
             // TelaDeListaDeAlunos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 335);
-            this.Controls.Add(this.DT_mostra);
+            this.Controls.Add(this.Datagrid_Lista);
             this.Controls.Add(this.btn_deletar);
             this.Controls.Add(this.bnt_atualizar);
             this.Controls.Add(this.botaoCadastrar);
             this.Name = "TelaDeListaDeAlunos";
             this.Text = "Tela de lista de alunos";
-            ((System.ComponentModel.ISupportInitialize)(this.DT_mostra)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Datagrid_Lista)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,7 +96,7 @@
         private System.Windows.Forms.Button botaoCadastrar;
         private System.Windows.Forms.Button bnt_atualizar;
         private System.Windows.Forms.Button btn_deletar;
-        private System.Windows.Forms.DataGridView DT_mostra;
+        private System.Windows.Forms.DataGridView Datagrid_Lista;
     }
 }
 
