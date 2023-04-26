@@ -12,7 +12,7 @@ namespace trabalho01.crud
     internal class Repository : IRepository
     {
         BindingList<Pessoa> lista = ListSingleton.Lista();
-        public BindingList<Pessoa> atualizar(Pessoa pessoa, int id)
+        public BindingList<Pessoa> Atualizar(Pessoa pessoa, int id)
         {
             var pessoaAtualizada = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
             pessoaAtualizada.Nome = pessoa.Nome;
@@ -39,6 +39,11 @@ namespace trabalho01.crud
         {
             var pessoa = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
             if (pessoa == null) return null; 
+            return lista;
+        }
+
+        public BindingList<Pessoa> ObterTodos()
+        {
             return lista;
         }
 

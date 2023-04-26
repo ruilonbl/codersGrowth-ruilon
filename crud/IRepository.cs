@@ -10,10 +10,11 @@ namespace trabalho01.crud
 {
     public interface IRepository
     {
-        BindingList<Pessoa> atualizar(Pessoa pessoa,int id);
+        BindingList<Pessoa> Atualizar(Pessoa pessoa,int id);
         void Criar(Pessoa pessoa);
         void Deletar(int id);
         BindingList<Pessoa> ListaId(int id);
         bool ProcuraCPF(string cpf);
+        BindingList<Pessoa> ObterTodos();
     }
 }

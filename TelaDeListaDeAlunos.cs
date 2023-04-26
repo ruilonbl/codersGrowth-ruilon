@@ -17,13 +17,13 @@ namespace trabalho01
     {
         private static BindingList<Pessoa> list = ListSingleton.Lista();
 
-        Repository repository = new Repository();
+        RepositorioComBanco repository = new RepositorioComBanco();
         Pessoa pessoa = new Pessoa();
         bool liberaCadastro;
         public TelaDeListaDeAlunos()
         {
             InitializeComponent();
-            Datagrid_Lista.DataSource= list;
+            Datagrid_Lista.DataSource = repository.ObterTodos();
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {          

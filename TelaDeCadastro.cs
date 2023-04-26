@@ -109,7 +109,7 @@ namespace trabalho01
             {
                 pessoaAtualizada.Sexo = Sexo.Masculino.ToString();
             }
-            _repository.atualizar(pessoaAtualizada, auxCadastra);
+            _repository.Atualizar(pessoaAtualizada, auxCadastra);
             return pessoaAtualizada;
         }
 
