@@ -12,7 +12,7 @@ namespace trabalho01.crud
                 .WithColumn("Nome").AsString()
                 .WithColumn("CPF").AsString()
                 .WithColumn("Altura").AsString()
-                .WithColumn("Data de nscimento").AsString()
+                .WithColumn("Data_de_nascimento").AsString()
                 .WithColumn("Sexo").AsString();            
         }
 

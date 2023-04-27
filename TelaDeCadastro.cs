@@ -11,8 +11,9 @@ namespace trabalho01
     public partial class TelaDeCadastro : Form
     {
         private static BindingList<Pessoa> _list = ListSingleton.Lista();
-        private readonly Repository _repository = new Repository();
+        private readonly RepositorioComBanco _repository = new RepositorioComBanco();
         private List<string> _erros = new List<string>();
+        private TelaDeListaDeAlunos _telalista = new TelaDeListaDeAlunos();
         Pessoa pessoa = new Pessoa();      
         int auxCadastra;
         bool atualizar;
@@ -62,7 +63,7 @@ namespace trabalho01
         public Pessoa PreencheDados(int id)
         {
             Pessoa pessoa = new Pessoa();
-            if(auxCadastra == 0)
+            if(id == 0)
             {
                 pessoa = ConverterDadosDaTelaEmPessoa();
             }
@@ -77,7 +78,6 @@ namespace trabalho01
         {
             Pessoa pessoa = new Pessoa();
             atualizar = false;
-            pessoa.Id = ListSingleton.cont(atualizar);
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;
             pessoa.Altura = CampoTextoAltura.Text;
@@ -91,6 +91,7 @@ namespace trabalho01
                 pessoa.Sexo = Sexo.Masculino.ToString();
             }
             _repository.Criar(pessoa);
+            _repository.ObterTodos();
             return pessoa;
         }
 
@@ -145,7 +146,7 @@ namespace trabalho01
             {
                 if (_repository.ProcuraCPF(CampoTextoCPF.Text) == true)
                 {
-                    _erros.Add("CPF JA EXISTE");
+                    _erros.Add("cpf ja existe");
                 }
             }
             if (CampoTextoCPF.Text.Length != 11)

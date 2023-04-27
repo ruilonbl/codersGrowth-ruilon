@@ -79,6 +79,7 @@ namespace trabalho01
                     {
                         var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
                         repository.Deletar(clienteSelecionado.Id);
+                        repository.ObterTodos();
                     }
                     else
                     {

@@ -10,9 +10,6 @@ namespace trabalho01
 {
     class Program
     {
-        /// <summary>
-        /// Ponto de entrada principal para o aplicativo.
-        /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
@@ -28,6 +25,7 @@ namespace trabalho01
         }
 
         static string teste = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
+        SqlConnection Connection = new SqlConnection(teste);
 
         private static ServiceProvider CreateServices()
         {
