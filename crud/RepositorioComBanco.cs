@@ -14,19 +14,12 @@ namespace trabalho01.crud
 
         public BindingList<Pessoa> Atualizar(Pessoa pessoa, int id)
         {
-            String query = "update Pessoas set " +
-                    "Nome = @Nome, CPF = @CPF, Altura = @Altura, Data_de_nascimento = @Data_de_nascimento, Sexo = @Sexo" +
-                    $" where Id = {id}";
+            String query = $"update Pessoas set Nome='{pessoa.Nome}', CPF='{pessoa.Cpf}', Altura='{pessoa.Altura}', Data_de_nascimento='{pessoa.Dat}', Sexo='{pessoa.Sexo}'" +
+                    $" where Id='{id}'";
             using (SqlConnection connection = new SqlConnection(teste))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader dr = command.ExecuteReader();
-                command.Parameters.AddWithValue("@Nome", pessoa.Nome);
-                command.Parameters.AddWithValue("@CPF", pessoa.Cpf);
-                command.Parameters.AddWithValue("@Altura", pessoa.Altura);
-                command.Parameters.AddWithValue("@Data_de_nascimento", pessoa.Dat);
-                command.Parameters.AddWithValue("@Sexo", pessoa.Sexo);
                 command.ExecuteNonQuery();
 
             }
@@ -70,7 +63,30 @@ namespace trabalho01.crud
 
         public BindingList<Pessoa> ListaId(int id)
         {
-            throw new NotImplementedException();
+            String query = $"select * from Pessoas where Id={id}";
+            using (SqlConnection connection = new SqlConnection(teste))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader dr = command.ExecuteReader();
+                lista.Clear();
+                while (dr.Read())
+                {
+                    Pessoa pessoa = new Pessoa()
+                    {
+                        Id = (int)dr.GetInt64(0),
+                        Nome = (string)dr.GetString(1),
+                        Cpf = (string)dr.GetString(2),
+                        Altura = (string)dr.GetString(3),
+                        Dat = (string)dr.GetString(4),
+                        Sexo = (string)dr.GetString(5),
+                    };
+
+                    lista.Add(pessoa);
+                }
+
+            }
+            return lista;
         }
 
         public BindingList<Pessoa> ObterTodos()
