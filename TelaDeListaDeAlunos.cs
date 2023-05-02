@@ -1,29 +1,23 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using trabalho01.crud;
 using trabalho01.model;
 
 namespace trabalho01
-{  
+{
     public partial class TelaDeListaDeAlunos : Form
     {
         private static BindingList<Pessoa> list = ListSingleton.Lista();
 
-        Repository repository = new Repository();
+        RepositorioComBanco repository = new RepositorioComBanco();
         Pessoa pessoa = new Pessoa();
         bool liberaCadastro;
+
         public TelaDeListaDeAlunos()
         {
             InitializeComponent();
-            Datagrid_Lista.DataSource= list;
+            Datagrid_Lista.DataSource = repository.ObterTodos();
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {          
@@ -79,6 +73,7 @@ namespace trabalho01
                     {
                         var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
                         repository.Deletar(clienteSelecionado.Id);
+                        repository.ObterTodos();
                     }
                     else
                     {
@@ -87,6 +82,7 @@ namespace trabalho01
                 }
             }          
         }
+
         public void ErrosDeSelecao(string erros)
         {
             MessageBox.Show($"VOCÊ NÃO PODE {erros} MAIS DE UM ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO.Packaging;
 using System.Linq;
 using System.Windows.Forms;
 using trabalho01.crud;
@@ -11,16 +12,17 @@ namespace trabalho01
     public partial class TelaDeCadastro : Form
     {
         private static BindingList<Pessoa> _list = ListSingleton.Lista();
-        private readonly Repository _repository = new Repository();
+        private readonly RepositorioComBanco _repository = new RepositorioComBanco();
         private List<string> _erros = new List<string>();
+        private TelaDeListaDeAlunos _telalista = new TelaDeListaDeAlunos();
         Pessoa pessoa = new Pessoa();      
-        int auxCadastra;
+        int ID;
         bool atualizar;
 
         public TelaDeCadastro(int id)
         {
-            auxCadastra = id;
             InitializeComponent();
+            ID = id;
             pessoa = _list.Where(p => p.Id.Equals(id)).FirstOrDefault();
             PreencheDadosAoAtualizar();
         }
@@ -30,7 +32,7 @@ namespace trabalho01
             try
             {
                 ValidacaoCamposTexto();
-                PreencheDados(auxCadastra);
+                PreencheDados(ID);
                 Close();
             }
             catch (Exception ex)
@@ -56,13 +58,14 @@ namespace trabalho01
                     BotaoMasculino.Checked = true;
                 }
                 CampoTextoCPF.Enabled = false;
+                this.Text = "Atualizar";
             }
         }
 
         public Pessoa PreencheDados(int id)
         {
             Pessoa pessoa = new Pessoa();
-            if(auxCadastra == 0)
+            if(id == 0)
             {
                 pessoa = ConverterDadosDaTelaEmPessoa();
             }
@@ -77,7 +80,6 @@ namespace trabalho01
         {
             Pessoa pessoa = new Pessoa();
             atualizar = false;
-            pessoa.Id = ListSingleton.cont(atualizar);
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;
             pessoa.Altura = CampoTextoAltura.Text;
@@ -91,6 +93,8 @@ namespace trabalho01
                 pessoa.Sexo = Sexo.Masculino.ToString();
             }
             _repository.Criar(pessoa);
+            _repository.ObterTodos();
+            MessageBox.Show($"O aluno {pessoa.Nome} foi cadastrada", "Cadastrada", MessageBoxButtons.OK);
             return pessoa;
         }
 
@@ -109,7 +113,8 @@ namespace trabalho01
             {
                 pessoaAtualizada.Sexo = Sexo.Masculino.ToString();
             }
-            _repository.atualizar(pessoaAtualizada, auxCadastra);
+            _repository.Atualizar(pessoaAtualizada, ID);
+            MessageBox.Show($"O aluno {pessoa.Nome} foi atualizada", "Atualizada", MessageBoxButtons.OK);
             return pessoaAtualizada;
         }
 
@@ -141,11 +146,11 @@ namespace trabalho01
             {
                 _erros.Add("O USUARIO NAO SELECIONOU UM SEXO");
             }
-            if (auxCadastra == 0)
+            if (ID == 0)
             {
-                if (_repository.ProcuraCPF(CampoTextoCPF.Text) == true)
+                if (_repository.VerificaSeExisteCPFNoBanco(CampoTextoCPF.Text))
                 {
-                    _erros.Add("CPF JA EXISTE");
+                    _erros.Add($"O cpf {CampoTextoCPF.Text} ja existe");
                 }
             }
             if (CampoTextoCPF.Text.Length != 11)
@@ -160,29 +165,38 @@ namespace trabalho01
             }
         }
 
-        public static void validaCampoNumero(KeyPressEventArgs e)
+        public static void ValidaSeTemNumerosNosCampos(KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !(e.KeyChar == (char)Keys.Back) && !(e.KeyChar == (char)Keys.Space)) e.Handled = true;
         }
 
-        public static void validaCampoLetra(KeyPressEventArgs e)
+        public static void ValidaSeTemLetrasNosCampos(KeyPressEventArgs e)
         {
             if (!char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && !(e.KeyChar == (char)Keys.Space)) e.Handled = true;
         }
 
         private void NaoDeixaDigitarNumeroNoCampoNome(object sender, KeyPressEventArgs e)
         {
-            validaCampoNumero(e);
+            ValidaSeTemNumerosNosCampos(e);
         }
 
         private void NaoDeixaDigitarLetraNoCampoCPF(object sender, KeyPressEventArgs e)
         {
-            validaCampoLetra(e);
+            ValidaSeTemLetrasNosCampos(e);
         }
 
         private void NaoDeixaDigitarLetraNoCampoAltura(object sender, KeyPressEventArgs e)
         {
-            validaCampoLetra(e);
+            ValidaSeTemLetrasNosCampos(e);
+        }
+
+        private void TelaDeCadastro_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void CampoTextoNome_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

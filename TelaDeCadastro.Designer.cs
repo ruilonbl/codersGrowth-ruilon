@@ -154,6 +154,7 @@
             this.CampoTextoNome.Name = "CampoTextoNome";
             this.CampoTextoNome.Size = new System.Drawing.Size(186, 20);
             this.CampoTextoNome.TabIndex = 13;
+            this.CampoTextoNome.TextChanged += new System.EventHandler(this.CampoTextoNome_TextChanged);
             this.CampoTextoNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarNumeroNoCampoNome);
             // 
             // dateTime
@@ -171,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(209, 262);
+            this.ClientSize = new System.Drawing.Size(236, 262);
             this.Controls.Add(this.dateTime);
             this.Controls.Add(this.CampoTextoNome);
             this.Controls.Add(this.CampoTextoAltura);
@@ -187,6 +188,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaDeCadastro";
             this.Text = "Cadastrar";
+            this.Load += new System.EventHandler(this.TelaDeCadastro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
