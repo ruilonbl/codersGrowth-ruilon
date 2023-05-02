@@ -10,18 +10,19 @@ namespace trabalho01
     {
         private static BindingList<Pessoa> list = ListSingleton.Lista();
 
-        RepositorioComBanco repository = new RepositorioComBanco();
+        private readonly IRepositorio repository;
         Pessoa pessoa = new Pessoa();
         bool liberaCadastro;
 
-        public TelaDeListaDeAlunos()
+        public TelaDeListaDeAlunos(IRepositorio repositorio)
         {
             InitializeComponent();
+            repository = repositorio;
             Datagrid_Lista.DataSource = repository.ObterTodos();
         }
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {          
-            TelaDeCadastro cadastrar = new TelaDeCadastro(0);
+            TelaDeCadastro cadastrar = new TelaDeCadastro(0,repository);
             cadastrar.Show();         
         }
 
@@ -43,7 +44,7 @@ namespace trabalho01
                 {
                     liberaCadastro = false;
                     var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
-                    TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id);
+                    TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id,repository);
 
                     cadastrar.ShowDialog();
                 }

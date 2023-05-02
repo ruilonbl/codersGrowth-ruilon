@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using trabalho01.crud;
+using Microsoft.Extensions.Hosting;
 
 namespace trabalho01
 {
@@ -20,9 +21,11 @@ namespace trabalho01
                 UpdateDatabase(scope.ServiceProvider);
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TelaDeListaDeAlunos());
+            var builderBanco = CriaHostBuilder();
+            var servicesProvider = builderBanco.Build().Services;
+            var repositorio = servicesProvider.GetService<IRepositorio>();
+
+            Application.Run(new TelaDeListaDeAlunos(repositorio));
         }
 
         static string teste = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
@@ -46,12 +49,13 @@ namespace trabalho01
 
             runner.MigrateUp();
         }
-        //static IHostBuilder CriaHostBuilder()
-        //{
-        //    return Host.CreateDefaultBuilder()
-        //        .ConfigureServices((context, services) => {
-        //            services.AddScoped<IRepositorio, RepositorioComBanco>();
-        //        });
-        //}
+        static IHostBuilder CriaHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+             .ConfigureServices((context, services) =>
+             {
+                 services.AddScoped<IRepositorio, RepositorioComBanco>();
+             });
+        }
     }
 }

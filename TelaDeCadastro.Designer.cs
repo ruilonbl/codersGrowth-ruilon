@@ -137,7 +137,7 @@
             this.CampoTextoCPF.Name = "CampoTextoCPF";
             this.CampoTextoCPF.Size = new System.Drawing.Size(186, 20);
             this.CampoTextoCPF.TabIndex = 11;
-            this.CampoTextoCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarLetraNoCampoCPF);
+            this.CampoTextoCPF.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampoCPF);
             // 
             // CampoTextoAltura
             // 
@@ -146,7 +146,7 @@
             this.CampoTextoAltura.Name = "CampoTextoAltura";
             this.CampoTextoAltura.Size = new System.Drawing.Size(186, 20);
             this.CampoTextoAltura.TabIndex = 12;
-            this.CampoTextoAltura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarLetraNoCampoAltura);
+            this.CampoTextoAltura.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampoAltura);
             // 
             // CampoTextoNome
             // 
@@ -154,8 +154,7 @@
             this.CampoTextoNome.Name = "CampoTextoNome";
             this.CampoTextoNome.Size = new System.Drawing.Size(186, 20);
             this.CampoTextoNome.TabIndex = 13;
-            this.CampoTextoNome.TextChanged += new System.EventHandler(this.CampoTextoNome_TextChanged);
-            this.CampoTextoNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NaoDeixaDigitarNumeroNoCampoNome);
+            this.CampoTextoNome.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ValidaCampoNome);
             // 
             // dateTime
             // 
@@ -188,7 +187,6 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaDeCadastro";
             this.Text = "Cadastrar";
-            this.Load += new System.EventHandler(this.TelaDeCadastro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

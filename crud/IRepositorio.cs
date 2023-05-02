@@ -15,7 +15,6 @@ namespace trabalho01.crud
         void Deletar(int id);
         BindingList<Pessoa> ListaId(int id);
         bool VerificaSeExisteCPFNoBanco(string cpf);
-
         BindingList<Pessoa> ObterTodos();
     }
 }

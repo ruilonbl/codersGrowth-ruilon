@@ -12,17 +12,17 @@ namespace trabalho01
     public partial class TelaDeCadastro : Form
     {
         private static BindingList<Pessoa> _list = ListSingleton.Lista();
-        private readonly RepositorioComBanco _repository = new RepositorioComBanco();
+        private readonly IRepositorio _repository;
         private List<string> _erros = new List<string>();
-        private TelaDeListaDeAlunos _telalista = new TelaDeListaDeAlunos();
-        Pessoa pessoa = new Pessoa();      
-        int ID;
+        private readonly int _id;
+        Pessoa pessoa = new Pessoa();           
         bool atualizar;
 
-        public TelaDeCadastro(int id)
+        public TelaDeCadastro(int id, IRepositorio repositorio)
         {
             InitializeComponent();
-            ID = id;
+            _id = id;
+            _repository = repositorio;
             pessoa = _list.Where(p => p.Id.Equals(id)).FirstOrDefault();
             PreencheDadosAoAtualizar();
         }
@@ -32,7 +32,7 @@ namespace trabalho01
             try
             {
                 ValidacaoCamposTexto();
-                PreencheDados(ID);
+                PreencheDados(_id);
                 Close();
             }
             catch (Exception ex)
@@ -58,7 +58,7 @@ namespace trabalho01
                     BotaoMasculino.Checked = true;
                 }
                 CampoTextoCPF.Enabled = false;
-                this.Text = "Atualizar";
+                Text = "Atualizar";
             }
         }
 
@@ -113,7 +113,7 @@ namespace trabalho01
             {
                 pessoaAtualizada.Sexo = Sexo.Masculino.ToString();
             }
-            _repository.Atualizar(pessoaAtualizada, ID);
+            _repository.Atualizar(pessoaAtualizada, _id);
             MessageBox.Show($"O aluno {pessoa.Nome} foi atualizada", "Atualizada", MessageBoxButtons.OK);
             return pessoaAtualizada;
         }
@@ -146,7 +146,7 @@ namespace trabalho01
             {
                 _erros.Add("O USUARIO NAO SELECIONOU UM SEXO");
             }
-            if (ID == 0)
+            if (_id == 0)
             {
                 if (_repository.VerificaSeExisteCPFNoBanco(CampoTextoCPF.Text))
                 {
@@ -175,28 +175,19 @@ namespace trabalho01
             if (!char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && !(e.KeyChar == (char)Keys.Space)) e.Handled = true;
         }
 
-        private void NaoDeixaDigitarNumeroNoCampoNome(object sender, KeyPressEventArgs e)
+        private void ValidaCampoNome(object sender, KeyPressEventArgs e)
         {
             ValidaSeTemNumerosNosCampos(e);
         }
 
-        private void NaoDeixaDigitarLetraNoCampoCPF(object sender, KeyPressEventArgs e)
+        private void ValidaCampoCPF(object sender, KeyPressEventArgs e)
         {
             ValidaSeTemLetrasNosCampos(e);
         }
 
-        private void NaoDeixaDigitarLetraNoCampoAltura(object sender, KeyPressEventArgs e)
+        private void ValidaCampoAltura(object sender, KeyPressEventArgs e)
         {
             ValidaSeTemLetrasNosCampos(e);
-        }
-
-        private void TelaDeCadastro_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void CampoTextoNome_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
