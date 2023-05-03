@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO.Packaging;
 using System.Linq;
 using System.Windows.Forms;
-using trabalho01.crud;
-using trabalho01.model;
 
 namespace trabalho01
 {
@@ -16,7 +13,6 @@ namespace trabalho01
         private List<string> _erros = new List<string>();
         private readonly int _id;
         Pessoa pessoa = new Pessoa();           
-        bool atualizar;
 
         public TelaDeCadastro(int id, IRepositorio repositorio)
         {
@@ -79,7 +75,6 @@ namespace trabalho01
         public Pessoa ConverterDadosDaTelaEmPessoa()
         {
             Pessoa pessoa = new Pessoa();
-            atualizar = false;
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;
             pessoa.Altura = CampoTextoAltura.Text;
@@ -114,7 +109,7 @@ namespace trabalho01
                 pessoaAtualizada.Sexo = Sexo.Masculino.ToString();
             }
             _repository.Atualizar(pessoaAtualizada, _id);
-            MessageBox.Show($"O aluno {pessoa.Nome} foi atualizada", "Atualizada", MessageBoxButtons.OK);
+            MessageBox.Show($"O aluno {pessoaAtualizada.Nome} foi atualizada", "Atualizada", MessageBoxButtons.OK);
             return pessoaAtualizada;
         }
 

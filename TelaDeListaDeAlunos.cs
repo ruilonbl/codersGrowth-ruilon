@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using trabalho01.crud;
-using trabalho01.model;
+using trabalho01;
 
 namespace trabalho01
 {
@@ -11,8 +10,6 @@ namespace trabalho01
         private static BindingList<Pessoa> list = ListSingleton.Lista();
 
         private readonly IRepositorio repository;
-        Pessoa pessoa = new Pessoa();
-        bool liberaCadastro;
 
         public TelaDeListaDeAlunos(IRepositorio repositorio)
         {
@@ -42,10 +39,8 @@ namespace trabalho01
                 }
                 else
                 {
-                    liberaCadastro = false;
                     var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[0].DataBoundItem;
                     TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id,repository);
-
                     cadastrar.ShowDialog();
                 }
                 Datagrid_Lista.DataSource = null;

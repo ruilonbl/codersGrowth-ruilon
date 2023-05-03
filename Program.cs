@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using trabalho01.crud;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +28,6 @@ namespace trabalho01
         }
 
         static string teste = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
-        SqlConnection Connection = new SqlConnection(teste);
 
         private static ServiceProvider CreateServices()
         {
@@ -49,6 +47,7 @@ namespace trabalho01
 
             runner.MigrateUp();
         }
+
         static IHostBuilder CriaHostBuilder()
         {
             return Host.CreateDefaultBuilder()
