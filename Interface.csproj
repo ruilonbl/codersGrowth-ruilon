@@ -39,8 +39,8 @@
       <HintPath>packages\Azure.Core.1.31.0\lib\net461\Azure.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Azure.Identity, Version=1.7.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
-      <HintPath>packages\Azure.Identity.1.7.0\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    <Reference Include="Azure.Identity, Version=1.8.2.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.Identity.1.8.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
     <Reference Include="FluentMigrator, Version=3.3.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
       <HintPath>packages\FluentMigrator.3.3.2\lib\net461\FluentMigrator.dll</HintPath>
@@ -117,8 +117,8 @@
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=7.0.0.3, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Extensions.Configuration.Binder.7.0.3\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=7.0.0.4, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Configuration.Binder.7.0.4\lib\net462\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.CommandLine, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Extensions.Configuration.CommandLine.7.0.0\lib\net462\Microsoft.Extensions.Configuration.CommandLine.dll</HintPath>
@@ -189,26 +189,26 @@
     <Reference Include="Microsoft.Identity.Client, Version=4.53.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Identity.Client.4.53.0\lib\net461\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=2.19.3.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.Identity.Client.Extensions.Msal.2.19.3\lib\net45\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal, Version=2.29.0.0, Culture=neutral, PublicKeyToken=0a613f4dd989e8ae, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Identity.Client.Extensions.Msal.2.29.0\lib\net45\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Abstractions.6.29.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Abstractions.6.30.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.6.29.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.6.30.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Logging.6.29.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.6.30.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Protocols.6.29.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.6.30.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.29.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.30.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.IdentityModel.Tokens.6.29.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.6.30.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.1.4.1835, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
       <HintPath>packages\SQLitePCLRaw.bundle_e_sqlite3.2.1.4\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
@@ -235,12 +235,12 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.29.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\System.IdentityModel.Tokens.Jwt.6.29.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.30.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.6.30.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
@@ -250,8 +250,8 @@
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    <Reference Include="System.Memory.Data, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.Data.7.0.0\lib\net462\System.Memory.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -263,8 +263,8 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
@@ -295,11 +295,11 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Security.Cryptography.ProtectedData, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.ProtectedData.4.7.0\lib\net461\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.ProtectedData, Version=7.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.ProtectedData.7.0.1\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
     </Reference>
-    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
@@ -314,8 +314,8 @@
     <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
-    <Reference Include="System.Text.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Json.7.0.0\lib\net462\System.Text.Json.dll</HintPath>
+    <Reference Include="System.Text.Json, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.7.0.2\lib\net462\System.Text.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -375,16 +375,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BancoDeDados\BancoDeDados.csproj">
-      <Project>{feb791d3-c833-4ace-bfb8-bb5910d9d18a}</Project>
-      <Name>BancoDeDados</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{5930e4fb-d85c-48b2-87f1-76a8c70ac098}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
