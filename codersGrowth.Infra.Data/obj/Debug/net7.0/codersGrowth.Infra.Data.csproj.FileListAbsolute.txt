@@ -1,0 +1,15 @@
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\bin\Debug\net7.0\codersGrowth.Infra.Data.deps.json
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\bin\Debug\net7.0\codersGrowth.Infra.Data.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\bin\Debug\net7.0\codersGrowth.Infra.Data.pdb
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\bin\Debug\net7.0\codersGrowth.Dominio.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\bin\Debug\net7.0\codersGrowth.Dominio.pdb
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.csproj.CopyComplete
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\refint\codersGrowth.Infra.Data.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\codersGrowth.Infra.Data.pdb
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.Infra.Data\obj\Debug\net7.0\ref\codersGrowth.Infra.Data.dll
