@@ -13,7 +13,6 @@ namespace trabalho01
         [STAThread]
         static void Main(string[] args)
         {
-
             using (var serviceProvider = CreateServices())
             using (var scope = serviceProvider.CreateScope())
             {
