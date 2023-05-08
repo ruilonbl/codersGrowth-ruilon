@@ -7,7 +7,7 @@ namespace BancoDeDados
     {
         private List<string> _erros = new List<string>();
 
-        public void ValidarPessoa(Pessoa pessoa, IRepositorio repositorio)
+        public void ValidarPessoa(Pessoas pessoa, IRepositorio repositorio)
         {
             const int idinvalido = 0;
             const int listavalida = 0;

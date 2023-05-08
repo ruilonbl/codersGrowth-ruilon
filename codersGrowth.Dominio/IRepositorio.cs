@@ -5,11 +5,11 @@ namespace trabalho01.crud
 {
     public interface IRepositorio
     {
-        BindingList<Pessoa> Atualizar(Pessoa pessoa,int id);
-        void Criar(Pessoa pessoa);
+        BindingList<Pessoas> Atualizar(Pessoas pessoa,int id);
+        void Criar(Pessoas pessoa);
         void Deletar(int id);
-        BindingList<Pessoa> ObiterNaListaPorId(int id);
+        BindingList<Pessoas> ObiterNaListaPorId(int id);
         bool VerificaSeExisteCpfNoBanco(string cpf);
-        BindingList<Pessoa> ObterTodos();
+        BindingList<Pessoas> ObterTodos();
     }
 }
