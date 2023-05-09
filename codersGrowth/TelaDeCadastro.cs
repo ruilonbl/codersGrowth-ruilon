@@ -28,7 +28,7 @@ namespace trabalho01
             {
                 pessoa = PreencherDadosParaValidacao();
                 validacao.ValidarPessoa(pessoa, _repository);
-                PreencherDados(_id);
+                PreencherDados();
                 Close();
             }
             catch (Exception ex)
@@ -57,16 +57,16 @@ namespace trabalho01
             }
         }
 
-        private void PreencherDados(int id)
+        private void PreencherDados()
         {
             const int idinvalido = 0;
-            if(id == idinvalido)
+            if(_id == idinvalido)
             {
                 Registrar();
             }
             else
             {
-                Atualizar(id);
+                Atualizar();
             }
         }
 
@@ -78,7 +78,7 @@ namespace trabalho01
             MensagemDeConfirmacao(cadastrado);
         }
 
-        private void Atualizar(int id)
+        private void Atualizar()
         {
             _repository.Atualizar(pessoa, _id);
             _repository.ObterTodos();
@@ -103,7 +103,7 @@ namespace trabalho01
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;
             pessoa.Altura = CampoTextoAltura.Text;
-            pessoa.Dat = dateTime.Text.ToString();
+            pessoa.Dat = dateTime.Value;
             if (BotaoFeminino.Checked)
             {
                 pessoa.Sexo = Sexo.Feminino.ToString();

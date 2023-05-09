@@ -76,7 +76,7 @@ namespace trabalho01.crud
                         Nome = (string)dr.GetString(1),
                         Cpf = (string)dr.GetString(2),
                         Altura = (string)dr.GetString(3),
-                        Dat = (string)dr.GetString(4),
+                        Dat = dr.GetDateTime(4),
                         Sexo = (string)dr.GetString(5),
                     };
 
@@ -104,7 +104,7 @@ namespace trabalho01.crud
                         Nome = (string)dr.GetString(1),
                         Cpf = (string)dr.GetString(2),
                         Altura = (string)dr.GetString(3),
-                        Dat = (string)dr.GetString(4),
+                        Dat = dr.GetDateTime(4),
                         Sexo = (string)dr.GetString(5),
                     };
 
@@ -151,7 +151,7 @@ namespace trabalho01.crud
                         Nome = (string)dr.GetString(1),
                         Cpf = (string)dr.GetString(2),
                         Altura = (string)dr.GetString(3),
-                        Dat = (string)dr.GetString(4),
+                        Dat = dr.GetDateTime(4),
                         Sexo = (string)dr.GetString(5),
                     };
 

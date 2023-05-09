@@ -7,7 +7,6 @@ namespace trabalho01
     public partial class TelaDeListaDeAlunos : Form
     {
         private static BindingList<Pessoas> list = ListSingleton.Lista();
-
         private readonly IRepositorio repository;
         const int linhasInvalidas = 1;
         const int celulaSelecionada = 0;
@@ -22,16 +21,15 @@ namespace trabalho01
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             const int _id = 0;
-            TelaDeCadastro cadastrar = new TelaDeCadastro(_id,repository);
+            TelaDeCadastro cadastrar = new TelaDeCadastro(_id, repository);
             cadastrar.ShowDialog();
-            Datagrid_Lista.DataSource = null;
-            Datagrid_Lista.DataSource = repository.ObterTodos();
+            PreencherDataGrid();
         }
 
         private void AoClicarEmAtualizar(object sender, EventArgs e)
         {
             int quardaNumeroDeLinhasSelecionadas = Datagrid_Lista.SelectedRows.Count;
-            if(quardaNumeroDeLinhasSelecionadas<linhasInvalidas)
+            if (quardaNumeroDeLinhasSelecionadas < linhasInvalidas)
             {
                 MessageBox.Show("VOCÊ NÃO SELECIONOU NENHUM CAMPO", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -45,11 +43,10 @@ namespace trabalho01
                 else
                 {
                     var clienteSelecionado = (Pessoas)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
-                    TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id,repository);
+                    TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id, repository);
                     cadastrar.ShowDialog();
                 }
-                Datagrid_Lista.DataSource = null;
-                Datagrid_Lista.DataSource = repository.ObterTodos();
+                PreencherDataGrid();
             }
         }
 
@@ -74,21 +71,26 @@ namespace trabalho01
                     {
                         var clienteSelecionado = (Pessoas)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
                         repository.Deletar(clienteSelecionado.Id);
-                        Datagrid_Lista.DataSource = null;
-                        Datagrid_Lista.DataSource = repository.ObterTodos();
+                        PreencherDataGrid();
                     }
                     else
                     {
                         MessageBox.Show("Aluno não excluido", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
-            }          
+            }
         }
 
         public void ErrosDeSelecao(string erros)
         {
             MessageBox.Show($"VOCÊ NÃO PODE {erros} MAIS DE UM ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
-        
+
+        public void PreencherDataGrid()
+        {
+            Datagrid_Lista.DataSource = null;
+            Datagrid_Lista.DataSource = repository.ObterTodos();
+        }
+
     }
 }

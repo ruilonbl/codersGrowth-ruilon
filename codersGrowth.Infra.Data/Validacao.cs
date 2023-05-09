@@ -21,7 +21,7 @@ namespace BancoDeDados
             {
                 _erros.Add("O USUARIO NAO DIGITOU A ALTURA");
             }
-            if (string.IsNullOrWhiteSpace(pessoa.Dat))
+            if (string.IsNullOrWhiteSpace(pessoa.Dat.ToString()))
             {
                 _erros.Add("O USUARIO NAO SELECIONOU A DATA");
             }

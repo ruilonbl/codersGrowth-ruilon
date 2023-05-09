@@ -18,7 +18,7 @@ namespace trabalho01.model
         public string Altura { get; set;}
 
         [Column(Name = "Data_de_nascimento")]
-        public string Dat { get; set; }
+        public DateTime Dat { get; set; }
 
         [Column(Name = "Sexo")]
         public string Sexo { get; set; }
