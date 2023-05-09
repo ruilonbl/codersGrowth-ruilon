@@ -53,7 +53,8 @@ namespace codersGrowth.Infra.Data
         {
             using var conexaoLinq2db = Conexao();
             var pessoa = new Pessoas();
-            return conexaoLinq2db.GetTable<Pessoas>().(Pessoas => Pessoas.Cpf.Equals(cpf)).ToString().Any();
+            return conexaoLinq2db.GetTable<Pessoas>().Any(Pessoas => Pessoas.Cpf.Equals(cpf));
+
         }
         public DataConnection Conexao()
         {
