@@ -10,12 +10,14 @@ namespace codersGrowth.Infra.Data
 {
     public class RepositorioLinq2DB : IRepositorio
     {
-        BindingList<Pessoas> lista = ListSingleton.Lista();
+        List<Pessoas> lista = new List<Pessoas>();
+        BindingList<Pessoas> list = ListSingleton.Lista();
+
         public BindingList<Pessoas> Atualizar(Pessoas pessoa, int id)
         {
             using var conexaoLinq2db = Conexao();
             conexaoLinq2db.Update(pessoa);
-            return lista;
+            return list;
         }
 
         public void Criar(Pessoas pessoa)
@@ -27,22 +29,39 @@ namespace codersGrowth.Infra.Data
         public void Deletar(int id)
         {
             using var conexaoLinq2db = Conexao();
-            conexaoLinq2db.Delete(id);
+            conexaoLinq2db.GetTable<Pessoas>().Delete(Pessoas => Pessoas.Id.Equals(id));
         }
 
-        public BindingList<Pessoas> ObiterNaListaPorId(int id)
+        Pessoas IRepositorio.ObiterNaListaPorId(int id)
         {
-            throw new NotImplementedException();
+            using var conexaoLinq2db = Conexao();
+            var pessoa = new Pessoas();
+            pessoa = conexaoLinq2db.GetTable<Pessoas>().FirstOrDefault(Pessoas => Pessoas.Id.Equals(id));
+            return pessoa;
         }
 
         public BindingList<Pessoas> ObterTodos()
         {
-            throw new NotImplementedException();
+            using var conexaoLinq2db = Conexao();
+            lista.Clear();
+            lista = conexaoLinq2db.GetTable<Pessoas>().ToList();
+            var bind = new BindingList<Pessoas>(lista);
+            return bind;
         }
 
         public bool VerificaSeExisteCpfNoBanco(string cpf)
         {
-            throw new NotImplementedException();
+            using var conexaoLinq2db = Conexao();
+            var pessoa = new Pessoas();
+            pessoa = conexaoLinq2db.GetTable<Pessoas>().FirstOrDefault(Pessoas => Pessoas.Cpf.Equals(cpf));
+            if(pessoa == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public DataConnection Conexao()
         {
@@ -51,5 +70,7 @@ namespace codersGrowth.Infra.Data
             return conexao;
 
         }
+
+        
     }
 }

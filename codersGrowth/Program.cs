@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Windows.Forms;
 using trabalho01.crud;
 using Microsoft.Extensions.Hosting;
+using codersGrowth.Infra.Data;
 
 namespace trabalho01
 {
@@ -52,7 +53,7 @@ namespace trabalho01
             return Host.CreateDefaultBuilder()
              .ConfigureServices((context, services) =>
              {
-                 services.AddScoped<IRepositorio, RepositorioComBanco>();
+                 services.AddScoped<IRepositorio, RepositorioLinq2DB>();
              });
         }
     }

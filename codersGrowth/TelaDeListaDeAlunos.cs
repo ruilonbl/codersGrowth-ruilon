@@ -6,7 +6,7 @@ namespace trabalho01
 {
     public partial class TelaDeListaDeAlunos : Form
     {
-        private static BindingList<Pessoa> list = ListSingleton.Lista();
+        private static BindingList<Pessoas> list = ListSingleton.Lista();
 
         private readonly IRepositorio repository;
         const int linhasInvalidas = 1;
@@ -23,7 +23,9 @@ namespace trabalho01
         {
             const int _id = 0;
             TelaDeCadastro cadastrar = new TelaDeCadastro(_id,repository);
-            cadastrar.Show();         
+            cadastrar.ShowDialog();
+            Datagrid_Lista.DataSource = null;
+            Datagrid_Lista.DataSource = repository.ObterTodos();
         }
 
         private void AoClicarEmAtualizar(object sender, EventArgs e)
@@ -42,12 +44,12 @@ namespace trabalho01
                 }
                 else
                 {
-                    var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
+                    var clienteSelecionado = (Pessoas)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
                     TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id,repository);
                     cadastrar.ShowDialog();
                 }
                 Datagrid_Lista.DataSource = null;
-                Datagrid_Lista.DataSource = list;
+                Datagrid_Lista.DataSource = repository.ObterTodos();
             }
         }
 
@@ -70,9 +72,10 @@ namespace trabalho01
                     var excluir = MessageBox.Show("VOCÊ TEM CERTEZA QUE DESEJA EXCLUIR ESSE ALUNO?\n", "ALERTA", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (excluir == DialogResult.Yes)
                     {
-                        var clienteSelecionado = (Pessoa)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
+                        var clienteSelecionado = (Pessoas)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
                         repository.Deletar(clienteSelecionado.Id);
-                        repository.ObterTodos();
+                        Datagrid_Lista.DataSource = null;
+                        Datagrid_Lista.DataSource = repository.ObterTodos();
                     }
                     else
                     {

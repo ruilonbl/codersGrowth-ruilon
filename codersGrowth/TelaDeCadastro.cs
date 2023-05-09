@@ -7,18 +7,18 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
-        private static BindingList<Pessoa> _list = ListSingleton.Lista();
+        private static BindingList<Pessoas> _list = ListSingleton.Lista();
         private readonly IRepositorio _repository;
         private readonly int _id;
         Validacao validacao = new Validacao();
-        Pessoa pessoa = new Pessoa();           
+        Pessoas pessoa = new Pessoas();           
 
         public TelaDeCadastro(int id, IRepositorio repositorio)
         {
             InitializeComponent();
             _id = id;
             _repository = repositorio;
-            pessoa = ObiterPorId();
+            pessoa = _repository.ObiterNaListaPorId(id);
             PreencherDadosAoAtualizar();
         }
 
@@ -28,7 +28,7 @@ namespace trabalho01
             {
                 pessoa = PreencherDadosParaValidacao();
                 validacao.ValidarPessoa(pessoa, _repository);
-                PreencherDados(_id );
+                PreencherDados(_id);
                 Close();
             }
             catch (Exception ex)
@@ -55,11 +55,6 @@ namespace trabalho01
                 CampoTextoCPF.Enabled = false;
                 Text = "Atualizar";
             }
-        }
-
-        private Pessoa ObiterPorId()
-        {
-            return _list.Where(p => p.Id.Equals(_id)).FirstOrDefault();
         }
 
         private void PreencherDados(int id)
@@ -101,9 +96,9 @@ namespace trabalho01
             Close();
         }
 
-        private Pessoa PreencherDadosParaValidacao()
+        private Pessoas PreencherDadosParaValidacao()
         {
-            Pessoa pessoa = new Pessoa();
+            Pessoas pessoa = new Pessoas();
             pessoa.Id = _id;
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;

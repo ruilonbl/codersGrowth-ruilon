@@ -8,7 +8,7 @@ namespace trabalho01.crud
         BindingList<Pessoas> Atualizar(Pessoas pessoa,int id);
         void Criar(Pessoas pessoa);
         void Deletar(int id);
-        BindingList<Pessoas> ObiterNaListaPorId(int id);
+        Pessoas ObiterNaListaPorId(int id);
         bool VerificaSeExisteCpfNoBanco(string cpf);
         BindingList<Pessoas> ObterTodos();
     }

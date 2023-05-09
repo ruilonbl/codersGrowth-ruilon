@@ -47,5 +47,10 @@ namespace trabalho01.crud
             if (pessoa == null) return false;
             return true;
         }
+
+        Pessoas IRepositorio.ObiterNaListaPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
