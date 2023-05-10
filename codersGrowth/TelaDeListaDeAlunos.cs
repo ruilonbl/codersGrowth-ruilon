@@ -6,7 +6,6 @@ namespace trabalho01
 {
     public partial class TelaDeListaDeAlunos : Form
     {
-        private static BindingList<Pessoas> list = ListSingleton.Lista();
         private readonly IRepositorio repository;
         const int linhasInvalidas = 1;
         const int celulaSelecionada = 0;
@@ -91,6 +90,5 @@ namespace trabalho01
             Datagrid_Lista.DataSource = null;
             Datagrid_Lista.DataSource = repository.ObterTodos();
         }
-
     }
 }
