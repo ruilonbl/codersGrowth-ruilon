@@ -28,67 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.botaoCadastrar = new System.Windows.Forms.Button();
-            this.bnt_atualizar = new System.Windows.Forms.Button();
-            this.btn_deletar = new System.Windows.Forms.Button();
-            this.Datagrid_Lista = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.Datagrid_Lista)).BeginInit();
-            this.SuspendLayout();
+            botaoCadastrar = new Button();
+            bnt_atualizar = new Button();
+            btn_deletar = new Button();
+            Datagrid_Lista = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)Datagrid_Lista).BeginInit();
+            SuspendLayout();
             // 
             // botaoCadastrar
             // 
-            this.botaoCadastrar.Location = new System.Drawing.Point(335, 300);
-            this.botaoCadastrar.Name = "botaoCadastrar";
-            this.botaoCadastrar.Size = new System.Drawing.Size(93, 23);
-            this.botaoCadastrar.TabIndex = 0;
-            this.botaoCadastrar.Text = "CADASTRAR";
-            this.botaoCadastrar.UseVisualStyleBackColor = true;
-            this.botaoCadastrar.Click += new System.EventHandler(this.AoClicarEmCadastrar);
+            botaoCadastrar.Location = new Point(391, 346);
+            botaoCadastrar.Margin = new Padding(4, 3, 4, 3);
+            botaoCadastrar.Name = "botaoCadastrar";
+            botaoCadastrar.Size = new Size(108, 27);
+            botaoCadastrar.TabIndex = 0;
+            botaoCadastrar.Text = "CADASTRAR";
+            botaoCadastrar.UseVisualStyleBackColor = true;
+            botaoCadastrar.Click += AoClicarEmCadastrar;
             // 
             // bnt_atualizar
             // 
-            this.bnt_atualizar.Location = new System.Drawing.Point(434, 300);
-            this.bnt_atualizar.Name = "bnt_atualizar";
-            this.bnt_atualizar.Size = new System.Drawing.Size(93, 23);
-            this.bnt_atualizar.TabIndex = 5;
-            this.bnt_atualizar.Text = "ATUALIZAR";
-            this.bnt_atualizar.UseVisualStyleBackColor = true;
-            this.bnt_atualizar.Click += new System.EventHandler(this.AoClicarEmAtualizar);
+            bnt_atualizar.Location = new Point(506, 346);
+            bnt_atualizar.Margin = new Padding(4, 3, 4, 3);
+            bnt_atualizar.Name = "bnt_atualizar";
+            bnt_atualizar.Size = new Size(108, 27);
+            bnt_atualizar.TabIndex = 5;
+            bnt_atualizar.Text = "ATUALIZAR";
+            bnt_atualizar.UseVisualStyleBackColor = true;
+            bnt_atualizar.Click += AoClicarEmAtualizar;
             // 
             // btn_deletar
             // 
-            this.btn_deletar.Location = new System.Drawing.Point(533, 300);
-            this.btn_deletar.Name = "btn_deletar";
-            this.btn_deletar.Size = new System.Drawing.Size(93, 23);
-            this.btn_deletar.TabIndex = 6;
-            this.btn_deletar.Text = "DELETAR";
-            this.btn_deletar.UseVisualStyleBackColor = true;
-            this.btn_deletar.Click += new System.EventHandler(this.AoClicarEmDeletar);
+            btn_deletar.Location = new Point(622, 346);
+            btn_deletar.Margin = new Padding(4, 3, 4, 3);
+            btn_deletar.Name = "btn_deletar";
+            btn_deletar.Size = new Size(108, 27);
+            btn_deletar.TabIndex = 6;
+            btn_deletar.Text = "DELETAR";
+            btn_deletar.UseVisualStyleBackColor = true;
+            btn_deletar.Click += AoClicarEmDeletar;
             // 
             // Datagrid_Lista
             // 
-            this.Datagrid_Lista.AllowUserToAddRows = false;
-            this.Datagrid_Lista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Datagrid_Lista.Location = new System.Drawing.Point(12, 12);
-            this.Datagrid_Lista.Name = "Datagrid_Lista";
-            this.Datagrid_Lista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Datagrid_Lista.Size = new System.Drawing.Size(614, 282);
-            this.Datagrid_Lista.TabIndex = 7;
+            Datagrid_Lista.AllowUserToAddRows = false;
+            Datagrid_Lista.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Datagrid_Lista.Location = new Point(14, 14);
+            Datagrid_Lista.Margin = new Padding(4, 3, 4, 3);
+            Datagrid_Lista.Name = "Datagrid_Lista";
+            Datagrid_Lista.Size = new Size(716, 325);
+            Datagrid_Lista.TabIndex = 7;
             // 
             // TelaDeListaDeAlunos
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(643, 335);
-            this.Controls.Add(this.Datagrid_Lista);
-            this.Controls.Add(this.btn_deletar);
-            this.Controls.Add(this.bnt_atualizar);
-            this.Controls.Add(this.botaoCadastrar);
-            this.Name = "TelaDeListaDeAlunos";
-            this.Text = "Tela de lista de alunos";
-            ((System.ComponentModel.ISupportInitialize)(this.Datagrid_Lista)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(750, 387);
+            Controls.Add(Datagrid_Lista);
+            Controls.Add(btn_deletar);
+            Controls.Add(bnt_atualizar);
+            Controls.Add(botaoCadastrar);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "TelaDeListaDeAlunos";
+            Text = "Tela de lista de alunos";
+            ((System.ComponentModel.ISupportInitialize)Datagrid_Lista).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

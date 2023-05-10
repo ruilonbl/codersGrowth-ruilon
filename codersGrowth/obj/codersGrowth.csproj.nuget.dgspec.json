@@ -63,6 +63,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
+            },
+            "linq2db": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [
@@ -156,6 +160,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
+            },
+            "linq2db": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [
@@ -244,6 +252,10 @@
             "System.Data.SqlClient": {
               "target": "Package",
               "version": "[4.8.5, )"
+            },
+            "linq2db": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [

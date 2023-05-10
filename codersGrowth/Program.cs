@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Windows.Forms;
 using trabalho01.crud;
 using Microsoft.Extensions.Hosting;
+using codersGrowth.Infra.Data;
 
 namespace trabalho01
 {
@@ -26,7 +27,7 @@ namespace trabalho01
             Application.Run(new TelaDeListaDeAlunos(repositorio));
         }
 
-        static string teste = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
+        static string CadastroPessoas = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
 
         private static ServiceProvider CreateServices()
         {
@@ -34,7 +35,7 @@ namespace trabalho01
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                 .AddSqlServer2016()
-                .WithGlobalConnectionString(teste)
+                .WithGlobalConnectionString(CadastroPessoas)
                 .ScanIn(typeof(AdicionarTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
@@ -52,7 +53,7 @@ namespace trabalho01
             return Host.CreateDefaultBuilder()
              .ConfigureServices((context, services) =>
              {
-                 services.AddScoped<IRepositorio, RepositorioComBanco>();
+                 services.AddScoped<IRepositorio, RepositorioLinq2DB>();
              });
         }
     }
