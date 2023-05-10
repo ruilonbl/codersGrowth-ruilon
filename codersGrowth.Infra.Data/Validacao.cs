@@ -7,7 +7,7 @@ namespace BancoDeDados
     {
         private List<string> _erros = new List<string>();
 
-        public void ValidarPessoa(Pessoa pessoa, IRepositorio repositorio)
+        public void ValidarPessoa(Pessoas pessoa, IRepositorio repositorio)
         {
             const int idinvalido = 0;
             const int listavalida = 0;
@@ -21,7 +21,7 @@ namespace BancoDeDados
             {
                 _erros.Add("O USUARIO NAO DIGITOU A ALTURA");
             }
-            if (string.IsNullOrWhiteSpace(pessoa.Dat))
+            if (string.IsNullOrWhiteSpace(pessoa.Dat.ToString()))
             {
                 _erros.Add("O USUARIO NAO SELECIONOU A DATA");
             }

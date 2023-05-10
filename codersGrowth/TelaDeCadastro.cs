@@ -7,18 +7,18 @@ namespace trabalho01
 {
     public partial class TelaDeCadastro : Form
     {
-        private static BindingList<Pessoa> _list = ListSingleton.Lista();
+        private static BindingList<Pessoas> _list = ListSingleton.Lista();
         private readonly IRepositorio _repository;
         private readonly int _id;
         Validacao validacao = new Validacao();
-        Pessoa pessoa = new Pessoa();           
+        Pessoas pessoa = new Pessoas();           
 
         public TelaDeCadastro(int id, IRepositorio repositorio)
         {
             InitializeComponent();
             _id = id;
             _repository = repositorio;
-            pessoa = ObiterPorId();
+            pessoa = _repository.ObiterNaListaPorId(id);
             PreencherDadosAoAtualizar();
         }
 
@@ -28,7 +28,7 @@ namespace trabalho01
             {
                 pessoa = PreencherDadosParaValidacao();
                 validacao.ValidarPessoa(pessoa, _repository);
-                PreencherDados(_id );
+                PreencherDados();
                 Close();
             }
             catch (Exception ex)
@@ -57,21 +57,16 @@ namespace trabalho01
             }
         }
 
-        private Pessoa ObiterPorId()
-        {
-            return _list.Where(p => p.Id.Equals(_id)).FirstOrDefault();
-        }
-
-        private void PreencherDados(int id)
+        private void PreencherDados()
         {
             const int idinvalido = 0;
-            if(id == idinvalido)
+            if(_id == idinvalido)
             {
                 Registrar();
             }
             else
             {
-                Atualizar(id);
+                Atualizar();
             }
         }
 
@@ -83,7 +78,7 @@ namespace trabalho01
             MensagemDeConfirmacao(cadastrado);
         }
 
-        private void Atualizar(int id)
+        private void Atualizar()
         {
             _repository.Atualizar(pessoa, _id);
             _repository.ObterTodos();
@@ -101,14 +96,14 @@ namespace trabalho01
             Close();
         }
 
-        private Pessoa PreencherDadosParaValidacao()
+        private Pessoas PreencherDadosParaValidacao()
         {
-            Pessoa pessoa = new Pessoa();
+            Pessoas pessoa = new Pessoas();
             pessoa.Id = _id;
             pessoa.Nome = CampoTextoNome.Text;
             pessoa.Cpf = CampoTextoCPF.Text;
             pessoa.Altura = CampoTextoAltura.Text;
-            pessoa.Dat = dateTime.Text.ToString();
+            pessoa.Dat = dateTime.Value;
             if (BotaoFeminino.Checked)
             {
                 pessoa.Sexo = Sexo.Feminino.ToString();

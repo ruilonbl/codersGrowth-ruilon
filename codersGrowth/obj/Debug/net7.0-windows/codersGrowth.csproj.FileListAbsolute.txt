@@ -104,3 +104,4 @@ C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth\obj\Debug\
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth\obj\Debug\net7.0-windows\codersGrowth.pdb
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth\obj\Debug\net7.0-windows\codersGrowth.genruntimeconfig.cache
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth\obj\Debug\net7.0-windows\ref\codersGrowth.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth\bin\Debug\net7.0-windows\linq2db.dll

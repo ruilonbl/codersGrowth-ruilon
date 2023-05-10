@@ -5,8 +5,8 @@ namespace trabalho01.crud
 {
     internal class Repository : IRepositorio
     {
-        BindingList<Pessoa> lista = ListSingleton.Lista();
-        public BindingList<Pessoa> Atualizar(Pessoa pessoa, int id)
+        BindingList<Pessoas> lista = ListSingleton.Lista();
+        public BindingList<Pessoas> Atualizar(Pessoas pessoa, int id)
         {
             var pessoaAtualizada = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
             pessoaAtualizada.Nome = pessoa.Nome;
@@ -17,7 +17,7 @@ namespace trabalho01.crud
             return lista;
         }
 
-        public void Criar(Pessoa pessoa)
+        public void Criar(Pessoas pessoa)
         {
             lista.Add(pessoa);
         }
@@ -29,14 +29,14 @@ namespace trabalho01.crud
             lista.Remove(pessoa);
         }
 
-        public BindingList<Pessoa> ObiterNaListaPorId(int id)
+        public BindingList<Pessoas> ObiterNaListaPorId(int id)
         {
             var pessoa = lista.Where(p => p.Id.Equals(id)).FirstOrDefault();
             if (pessoa == null) return null; 
             return lista;
         }
 
-        public BindingList<Pessoa> ObterTodos()
+        public BindingList<Pessoas> ObterTodos()
         {
             return lista;
         }
@@ -46,6 +46,11 @@ namespace trabalho01.crud
             var pessoa = lista.Where(p => p.Cpf.Equals(cpf)).FirstOrDefault();
             if (pessoa == null) return false;
             return true;
+        }
+
+        Pessoas IRepositorio.ObiterNaListaPorId(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

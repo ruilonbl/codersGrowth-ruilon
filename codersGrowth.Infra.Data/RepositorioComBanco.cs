@@ -8,15 +8,15 @@ namespace trabalho01.crud
 {
     public class RepositorioComBanco : IRepositorio
     {
-        static string teste = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
-        BindingList<Pessoa> lista = ListSingleton.Lista();
+        static string CadastroPessoas = ConfigurationManager.ConnectionStrings["CadastroPessoas"].ConnectionString;
+        BindingList<Pessoas> lista = ListSingleton.Lista();
 
-        public BindingList<Pessoa> Atualizar(Pessoa pessoa, int id)
+        public BindingList<Pessoas> Atualizar(Pessoas pessoa, int id)
         {
             string query = $"update Pessoas set Nome='{pessoa.Nome}', CPF='{pessoa.Cpf}', Altura='{pessoa.Altura}', " +
                            $"Data_de_nascimento='{pessoa.Dat}', Sexo='{pessoa.Sexo}' where Id='{id}'";
 
-            using (SqlConnection connection = new SqlConnection(teste))
+            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
@@ -25,7 +25,7 @@ namespace trabalho01.crud
             return lista;
         }
 
-        public void Criar(Pessoa pessoa)
+        public void Criar(Pessoas pessoa)
         {
             string query = "insert into Pessoas" +
                     "(Nome,CPF,Altura,Data_de_nascimento,Sexo)" +
@@ -33,7 +33,7 @@ namespace trabalho01.crud
                     "(@Nome,@CPF,@Altura,@Data_de_nascimento,@Sexo)";
 
             using (SqlConnection connection = new SqlConnection(
-               teste))
+               CadastroPessoas))
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -51,7 +51,7 @@ namespace trabalho01.crud
         public void Deletar(int id)
         {
             string query = $"delete from Pessoas where Id = {id}";
-            using (SqlConnection connection = new SqlConnection(teste))
+            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
@@ -59,10 +59,10 @@ namespace trabalho01.crud
             }
         }
 
-        public BindingList<Pessoa> ObiterNaListaPorId(int id)
+        public BindingList<Pessoas> ObiterNaListaPorId(int id)
         {
             string query = $"select * from Pessoas where Id={id}";
-            using (SqlConnection connection = new SqlConnection(teste))
+            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
@@ -70,13 +70,13 @@ namespace trabalho01.crud
                 lista.Clear();
                 while (dr.Read())
                 {
-                    Pessoa pessoa = new Pessoa()
+                    Pessoas pessoa = new Pessoas()
                     {
                         Id = (int)dr.GetInt64(0),
                         Nome = (string)dr.GetString(1),
                         Cpf = (string)dr.GetString(2),
                         Altura = (string)dr.GetString(3),
-                        Dat = (string)dr.GetString(4),
+                        Dat = dr.GetDateTime(4),
                         Sexo = (string)dr.GetString(5),
                     };
 
@@ -87,10 +87,10 @@ namespace trabalho01.crud
             return lista;
         }
 
-        public BindingList<Pessoa> ObterTodos()
+        public BindingList<Pessoas> ObterTodos()
         {
             string query = "select * from Pessoas";
-            using (SqlConnection connection = new SqlConnection(teste))
+            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
             {
                 connection.Open();
                 SqlCommand command = new SqlCommand(query, connection);
@@ -98,13 +98,13 @@ namespace trabalho01.crud
                 lista.Clear();
                 while (dr.Read())
                 {
-                    Pessoa pessoa = new Pessoa()
+                    Pessoas pessoa = new Pessoas()
                     {
                         Id = (int)dr.GetInt64(0),
                         Nome = (string)dr.GetString(1),
                         Cpf = (string)dr.GetString(2),
                         Altura = (string)dr.GetString(3),
-                        Dat = (string)dr.GetString(4),
+                        Dat = dr.GetDateTime(4),
                         Sexo = (string)dr.GetString(5),
                     };
 
@@ -118,7 +118,7 @@ namespace trabalho01.crud
         public bool VerificaSeExisteCpfNoBanco(string cpf)
         {
             string query = $"select * from Pessoas where CPF = @cpf";
-            using (var connection = new SqlConnection(teste))
+            using (var connection = new SqlConnection(CadastroPessoas))
             {
                 using (var command = new SqlCommand(query, connection))
                 {
@@ -131,6 +131,35 @@ namespace trabalho01.crud
                 }
             }
 
+        }
+
+        Pessoas IRepositorio.ObiterNaListaPorId(int id)
+        {
+            string query = $"select * from Pessoas where Id={id}";
+            var p = new Pessoas();
+            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlDataReader dr = command.ExecuteReader();
+                lista.Clear();
+                while (dr.Read())
+                {
+                    Pessoas pessoa = new Pessoas()
+                    {
+                        Id = (int)dr.GetInt64(0),
+                        Nome = (string)dr.GetString(1),
+                        Cpf = (string)dr.GetString(2),
+                        Altura = (string)dr.GetString(3),
+                        Dat = dr.GetDateTime(4),
+                        Sexo = (string)dr.GetString(5),
+                    };
+
+                    p = pessoa;
+                }
+
+            }
+            return p;
         }
     }
 }

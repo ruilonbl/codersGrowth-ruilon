@@ -15,7 +15,8 @@
           "System.Configuration.ConfigurationManager": "7.0.0",
           "System.Data.SqlClient": "4.8.5",
           "codersGrowth.Dominio": "1.0.0",
-          "codersGrowth.Infra.Data": "1.0.0"
+          "codersGrowth.Infra.Data": "1.0.0",
+          "linq2db": "5.2.0"
         },
         "runtime": {
           "codersGrowth.dll": {}
@@ -329,6 +330,14 @@
           "lib/netstandard2.0/System.Data.SqlServerCe.dll": {
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.0.8876.1"
+          }
+        }
+      },
+      "linq2db/5.2.0": {
+        "runtime": {
+          "lib/net6.0/linq2db.dll": {
+            "assemblyVersion": "5.2.0.0",
+            "fileVersion": "5.2.0.0"
           }
         }
       },
@@ -1802,7 +1811,8 @@
           "Microsoft.Data.SqlClient": "5.1.1",
           "Microsoft.Extensions.Hosting": "7.0.1",
           "System.Configuration.ConfigurationManager": "7.0.0",
-          "System.Data.SqlClient": "4.8.5"
+          "System.Data.SqlClient": "4.8.5",
+          "linq2db": "5.2.0"
         },
         "runtime": {
           "codersGrowth.Dominio.dll": {}
@@ -1818,7 +1828,8 @@
           "Microsoft.Extensions.Hosting": "7.0.1",
           "System.Configuration.ConfigurationManager": "7.0.0",
           "System.Data.SqlClient": "4.8.5",
-          "codersGrowth.Dominio": "1.0.0"
+          "codersGrowth.Dominio": "1.0.0",
+          "linq2db": "5.2.0"
         },
         "runtime": {
           "codersGrowth.Infra.Data.dll": {}
@@ -1992,6 +2003,13 @@
       "sha512": "sha512-IOYYVsgsTPdRUx6ZZ74Xuu6ZCTJuj268CG4hYciMsznuAGSZvADHFQrHC0EdXn+kNOdZfYeKyJ+kuR+igm6utg==",
       "path": "fluentmigrator.runner.sqlserverce/3.3.2",
       "hashPath": "fluentmigrator.runner.sqlserverce.3.3.2.nupkg.sha512"
+    },
+    "linq2db/5.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bWyh+321Fag7IYuvuiwTJuW4iV17YCXr2jUuZD7BiPAHPCiQ4cg0qoE9g4xupd8GG3X/z514QQMyZ8Dz81VNWQ==",
+      "path": "linq2db/5.2.0",
+      "hashPath": "linq2db.5.2.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",
