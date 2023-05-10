@@ -22,7 +22,7 @@ namespace trabalho01
             const int _id = 0;
             TelaDeCadastro cadastrar = new TelaDeCadastro(_id, repository);
             cadastrar.ShowDialog();
-            PreencherDataGrid();
+            AtualizarDataGrid();
         }
 
         private void AoClicarEmAtualizar(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace trabalho01
                     TelaDeCadastro cadastrar = new TelaDeCadastro(clienteSelecionado.Id, repository);
                     cadastrar.ShowDialog();
                 }
-                PreencherDataGrid();
+                AtualizarDataGrid();
             }
         }
 
@@ -70,7 +70,7 @@ namespace trabalho01
                     {
                         var clienteSelecionado = (Pessoas)Datagrid_Lista.SelectedRows[celulaSelecionada].DataBoundItem;
                         repository.Deletar(clienteSelecionado.Id);
-                        PreencherDataGrid();
+                        AtualizarDataGrid();
                     }
                     else
                     {
@@ -85,7 +85,7 @@ namespace trabalho01
             MessageBox.Show($"VOCÊ NÃO PODE {erros} MAIS DE UM ALUNO POR VEZ", "ALERTA", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        public void PreencherDataGrid()
+        public void AtualizarDataGrid()
         {
             Datagrid_Lista.DataSource = null;
             Datagrid_Lista.DataSource = repository.ObterTodos();
