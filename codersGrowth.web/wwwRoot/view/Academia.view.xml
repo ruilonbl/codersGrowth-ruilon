@@ -1,0 +1,6 @@
+<mvc:View
+   controllerName="sap.ui.demo.academia.controller.academia"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+   <Text text = "bem vindo"/>
+</mvc:View>
