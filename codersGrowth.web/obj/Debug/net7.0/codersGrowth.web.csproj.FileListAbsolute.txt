@@ -104,3 +104,6 @@ C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\obj\De
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\obj\Debug\net7.0\codersGrowth.web.pdb
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\obj\Debug\net7.0\codersGrowth.web.genruntimeconfig.cache
 C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\obj\Debug\net7.0\ref\codersGrowth.web.dll
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\bin\Debug\net7.0\codersGrowth.web.staticwebassets.runtime.json
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\bin\Debug\net7.0\app.config
+C:\Users\Usuario\source\repos\coders\treinamento_estagio\codersGrowth.web\bin\Debug\net7.0\codersGrowth.web.dll.config
