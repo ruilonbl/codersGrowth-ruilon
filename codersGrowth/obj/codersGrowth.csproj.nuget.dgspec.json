@@ -93,30 +93,26 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj",
-        "projectName": "codersGrowth.Infra.Data",
+        "projectName": "codersGrowth.Dominion",
         "projectPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Infra.Data\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Dominion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net7.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
-            "projectReferences": {
-              "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj"
-              }
-            }
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -126,8 +122,8 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "dependencies": {
             "FakeItEasy": {
               "target": "Package",

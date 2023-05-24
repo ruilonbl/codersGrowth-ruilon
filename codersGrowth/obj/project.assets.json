@@ -3244,7 +3244,7 @@
           "bin/placeholder/codersGrowth.Dominio.dll": {}
         }
       },
-      "codersGrowth.Infra.Data/1.0.0": {
+      "codersGrowth.Dominion/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -3256,14 +3256,13 @@
           "Microsoft.Extensions.Hosting": "7.0.1",
           "System.Configuration.ConfigurationManager": "7.0.0",
           "System.Data.SqlClient": "4.8.5",
-          "codersGrowth.Dominio": "1.0.0",
           "linq2db": "5.2.0"
         },
         "compile": {
-          "bin/placeholder/codersGrowth.Infra.Data.dll": {}
+          "bin/placeholder/codersGrowth.Dominion.dll": {}
         },
         "runtime": {
-          "bin/placeholder/codersGrowth.Infra.Data.dll": {}
+          "bin/placeholder/codersGrowth.Dominion.dll": {}
         }
       }
     }
@@ -9650,7 +9649,7 @@
       "path": "../codersGrowth.Dominio/codersGrowth.Dominio.csproj",
       "msbuildProject": "../codersGrowth.Dominio/codersGrowth.Dominio.csproj"
     },
-    "codersGrowth.Infra.Data/1.0.0": {
+    "codersGrowth.Dominion/1.0.0": {
       "type": "project",
       "path": "../codersGrowth.Infra.Data/codersGrowth.Infra.Data.csproj",
       "msbuildProject": "../codersGrowth.Infra.Data/codersGrowth.Infra.Data.csproj"
@@ -9665,7 +9664,7 @@
       "System.Configuration.ConfigurationManager >= 7.0.0",
       "System.Data.SqlClient >= 4.8.5",
       "codersGrowth.Dominio >= 1.0.0",
-      "codersGrowth.Infra.Data >= 1.0.0",
+      "codersGrowth.Dominion >= 1.0.0",
       "linq2db >= 5.2.0"
     ]
   },
