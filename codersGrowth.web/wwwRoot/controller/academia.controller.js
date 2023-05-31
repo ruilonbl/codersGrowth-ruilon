@@ -4,7 +4,7 @@ sap.ui.define([
  ], function (Controller, JSONModel) {
     "use strict";
     //const uri = 'https://localhost:7020/api/alunos';
-    return Controller.extend("sap.ui.demo.academia.controller.academia",{
+    return Controller.extend("sap.ui.demo.academia.controller.aop",{
       onInit:function() {
          let tela = this.getView();
          fetch("https://localhost:7020/api/alunos")

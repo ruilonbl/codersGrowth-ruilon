@@ -2,41 +2,15 @@
    controllerName="sap.ui.demo.academia.controller.academia" 
    xmlns:mvc="sap.ui.core.mvc"
    xmlns="sap.m">
-   <Text text = "bem vindo"/>
-   <Table id = "juan" headerText="ACADEMIA" items="{path: 'alunos>/', templateShareable: false}">
-	<columns>
-		<Column>
-		 	<Text  text="id"/>
-		</Column>
-		<Column>
-		 	<Text  text="nome"/>
-		</Column>
-		
-		<Column>
-		 	<Text  text="cpf"/>
-		</Column>
-		<Column>
-		 	<Text  text="altura"/>
-		</Column>
-		<Column>
-		 	<Text  text="data"/>
-		</Column>
-		<Column>
-		 	<Text  text="sexo"/>
-		</Column>		
-	</columns>
-	<items>
-		<ColumnListItem>
-			<cells>
-				<Text text="{alunos>id}"/>
-				<Text text="{alunos>nome}"/>
-				<Text text="{alunos>cpf}"/>
-				<Text text="{alunos>altura}"/>
-				<Text text="{alunos>dat}"/>
-				<Text text="{alunos>sexo}"/>
-			</cells>
-		</ColumnListItem>
-	</items>
+	<List id = "lista" headerText="{i18n>TituloAcademia}" items="{path: 'alunos>/', templateShareable: false}" >
+		<CustomListItem>
+			<HBox>
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+					<Link text="{alunos>nome}"/>
+					<Text text="{alunos>sexo}"/>
+				</VBox>
+			</HBox>
+		</CustomListItem>
+	</List>
 
-   </Table>
 </mvc:View>

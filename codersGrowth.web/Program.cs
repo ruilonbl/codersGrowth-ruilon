@@ -1,4 +1,6 @@
 ﻿using codersGrowth.Infra.Data;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
 using trabalho01.crud;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +14,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")
+                ),
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.UseFileServer();
