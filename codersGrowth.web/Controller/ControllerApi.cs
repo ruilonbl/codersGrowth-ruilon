@@ -59,7 +59,11 @@ namespace codersGrowth.web.Controller
         public IActionResult AdicionarPessoa([FromBody, Required()] Pessoas pessoa)
         {
             try
-            {               
+            {
+                if (pessoa == null)
+                {
+                    throw new Exception("precisa preencher os campos");
+                }
                 _validacao.ValidarPessoa(pessoa, _repositorio);
                 _repositorio.Criar(pessoa);
                 return Created($"pessoa",pessoa);

@@ -13,9 +13,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
+app.UseDefaultFiles();
+app.UseFileServer();
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
+
+app.UseCors(options =>{
+    options.AllowAnyOrigin();
+    options.AllowAnyMethod();
+    options.AllowAnyHeader();
+});
 
 app.MapControllers();
 

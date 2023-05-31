@@ -1,33 +1,28 @@
 {
-    "_version": "1.12.0",
     "sap.app": {
       "id": "sap.ui.demo.academia",
-      "type": "application",
-      "title": "{{appTitle}}",
-      "description": "{{appDescription}}",
       "applicationVersion": {
-        "version": "1.0.0"
-      }
-    },
-    "sap.ui": {
-      "technology": "UI5",
-      "deviceTypes": {
-          "desktop": true,
-          "tablet": true,
-          "phone": true
+        "version": "1.12.0"
       }
     },
     "sap.ui5": {
       "rootView": {
-          "viewName": "sap.ui.demo.academia.view.Academia",
-          "type": "XML",
-          "id": "app"
+        "viewName": "sap.ui.demo.academia.view.Academia",
+        "type": "XML",
+        "async": true
       },
       "dependencies": {
-        "minUI5Version": "1.93",
         "libs": {
-          "sap.ui.core": {},
-          "sap.m": {}
+          "sap.ui.layout": {}
+        }
+      },
+      "config": {
+        "sample": {
+          "files": [
+              "Academia.view.xml",
+              "academia.controller.js",
+              "manifest.json"
+          ]
         }
       }
     }

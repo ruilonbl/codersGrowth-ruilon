@@ -1,6 +1,42 @@
 <mvc:View
-   controllerName="sap.ui.demo.academia.controller.academia"
-   xmlns="sap.m"
-   xmlns:mvc="sap.ui.core.mvc">
+   controllerName="sap.ui.demo.academia.controller.academia" 
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns="sap.m">
    <Text text = "bem vindo"/>
+   <Table id = "juan" headerText="ACADEMIA" items="{path: 'alunos>/', templateShareable: false}">
+	<columns>
+		<Column>
+		 	<Text  text="id"/>
+		</Column>
+		<Column>
+		 	<Text  text="nome"/>
+		</Column>
+		
+		<Column>
+		 	<Text  text="cpf"/>
+		</Column>
+		<Column>
+		 	<Text  text="altura"/>
+		</Column>
+		<Column>
+		 	<Text  text="data"/>
+		</Column>
+		<Column>
+		 	<Text  text="sexo"/>
+		</Column>		
+	</columns>
+	<items>
+		<ColumnListItem>
+			<cells>
+				<Text text="{alunos>id}"/>
+				<Text text="{alunos>nome}"/>
+				<Text text="{alunos>cpf}"/>
+				<Text text="{alunos>altura}"/>
+				<Text text="{alunos>dat}"/>
+				<Text text="{alunos>sexo}"/>
+			</cells>
+		</ColumnListItem>
+	</items>
+
+   </Table>
 </mvc:View>

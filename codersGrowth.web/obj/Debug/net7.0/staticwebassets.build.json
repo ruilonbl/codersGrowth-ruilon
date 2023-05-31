@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gfTRB2EouD+J08woZmuYY3Yv06MQSycj8caGDOOQaOU=",
+  "Hash": "Gu9AYPWV503RNJVNlrF1ehQEn2e1+hMvMKCl3mHyTkE=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -51,6 +51,23 @@
       "OriginalItemSpec": "wwwroot\\controller\\academia.controller.js"
     },
     {
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\I18n\\i18n",
+      "SourceId": "codersGrowth.web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "BasePath": "_content/codersGrowth.web",
+      "RelativePath": "I18n/i18n",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\I18n\\i18n"
+    },
+    {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\index.html",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
@@ -83,23 +100,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.js"
-    },
-    {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\manifest - Cópia.json",
-      "SourceId": "codersGrowth.web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
-      "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "manifest - Cópia.json",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\manifest - Cópia.json"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\manifest.json",
