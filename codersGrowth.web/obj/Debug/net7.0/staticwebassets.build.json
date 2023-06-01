@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Gu9AYPWV503RNJVNlrF1ehQEn2e1+hMvMKCl3mHyTkE=",
+  "Hash": "mx2On7/Yqfte7hrYcqgCo77aYV57pulGjALOgzkYvAo=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\controller\\academia.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\I18n\\i18n",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\i18n\\i18n",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "I18n/i18n",
+      "RelativePath": "i18n/i18n",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +65,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\I18n\\i18n"
+      "OriginalItemSpec": "wwwroot\\i18n\\i18n"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\index.html",
@@ -83,23 +83,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
-    },
-    {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\index.js",
-      "SourceId": "codersGrowth.web",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
-      "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "index.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\index.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\manifest.json",

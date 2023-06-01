@@ -59,34 +59,6 @@ namespace trabalho01.crud
             }
         }
 
-        public BindingList<Pessoas> ObiterNaListaPorId(int id)
-        {
-            string query = $"select * from Pessoas where Id={id}";
-            using (SqlConnection connection = new SqlConnection(CadastroPessoas))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(query, connection);
-                SqlDataReader dr = command.ExecuteReader();
-                lista.Clear();
-                while (dr.Read())
-                {
-                    Pessoas pessoa = new Pessoas()
-                    {
-                        Id = (int)dr.GetInt64(0),
-                        Nome = (string)dr.GetString(1),
-                        Cpf = (string)dr.GetString(2),
-                        Altura = (string)dr.GetString(3),
-                        Dat = dr.GetDateTime(4),
-                        Sexo = (string)dr.GetString(5),
-                    };
-
-                    lista.Add(pessoa);
-                }
-
-            }
-            return lista;
-        }
-
         public BindingList<Pessoas> ObterTodos()
         {
             string query = "select * from Pessoas";

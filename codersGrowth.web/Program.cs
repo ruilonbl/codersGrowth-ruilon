@@ -24,7 +24,6 @@ app.UseStaticFiles(new StaticFileOptions
         Mappings = { [".properties"] = "application/x-msdownload" }
     }
 });
-app.UseStaticFiles();
 app.UseDefaultFiles();
 app.UseFileServer();
 app.UseHttpsRedirection();
