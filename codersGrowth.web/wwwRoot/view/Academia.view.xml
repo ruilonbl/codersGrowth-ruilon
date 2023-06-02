@@ -4,12 +4,12 @@
    xmlns="sap.m">
 	<List id="lista" items="{path: 'alunos>/'}" >
 	<headerToolbar>
-         <Toolbar>
-		 <Title text="{i18n>TituloAcademia}"/>		 
-				<ToolbarSpacer/>
-				<Button text="Cadastrar"
-						press=".onCadastro"/>
-				<SearchField width="50%" search=".onFiltro"/>
+			<Toolbar>
+			<Title text="{i18n>TituloAcademia}"/>		 
+					<ToolbarSpacer/>
+					<Button text="Cadastrar"
+							press=".onCadastro"/>
+					<SearchField width="50%" search=".onFiltro"/>
 			</Toolbar>
 			
       </headerToolbar>

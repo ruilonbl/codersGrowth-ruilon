@@ -59,7 +59,7 @@ namespace trabalho01.crud
             }
         }
 
-        public BindingList<Pessoas> ObterTodos()
+        public BindingList<Pessoas> ObterTodos(string nome = null)
         {
             string query = "select * from Pessoas";
             using (SqlConnection connection = new SqlConnection(CadastroPessoas))

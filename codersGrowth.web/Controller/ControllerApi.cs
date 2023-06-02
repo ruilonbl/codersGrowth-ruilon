@@ -13,21 +13,27 @@ namespace codersGrowth.web.Controller
     {
         private readonly IRepositorio _repositorio;
         private Validacao _validacao = new();
-       // private Pessoas _aluno = new();
         public ControllerApi(IRepositorio repositorio)
         {
             _repositorio = repositorio;
         }
 
         [HttpGet]
-        public IActionResult BuscarTodosOsAlunos()
+        public IActionResult BuscarTodosOsAlunos([FromQuery] string? nome)
         {
             try
             {
-                var alunos = _repositorio.ObterTodos();
-                if (alunos==null)
+                var alunos = new BindingList<Pessoas>();
+                var lista = new BindingList<Pessoas>();
+                if (nome == null)
                 {
-                    throw new Exception("Falha ao obter os alunos");
+                    alunos = _repositorio.ObterTodos();
+                }
+                else
+                {
+                    lista = _repositorio.ObterTodos();
+                     var aluno = lista.Where(p => p.Nome.Contains(nome));
+                    return Ok(aluno);
                 }
                 return Ok(alunos);
             }

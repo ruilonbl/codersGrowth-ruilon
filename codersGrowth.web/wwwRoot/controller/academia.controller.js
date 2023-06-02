@@ -26,14 +26,19 @@ sap.ui.define([
          MessageToast.show("vamos cadastrar");
       },
       onFiltro : function (oEvent) {
-			var aFilter = [];
+         let tela = this.getView();
 			var sQuery = oEvent.getParameter("query");
-			if (sQuery) {
-				aFilter.push(new Filter("nome", FilterOperator.Contains, sQuery));
-			}
-			var oList = this.byId("lista");
-			var oBinding = oList.getBinding("items");
-			oBinding.filter(aFilter);
+         fetch(`https://localhost:7020/api/alunos?nome=${sQuery}`)
+            .then(function(response){
+               return response.json();
+            })
+            .then(function (data){
+               tela.setModel(new JSONModel(data),"alunos");
+            })
+            .catch(function (error){
+               console.error(error);
+            }); 
+			
 		}
     });    
  });

@@ -37,7 +37,7 @@ namespace codersGrowth.Infra.Data
                 .FirstOrDefault(Pessoas => Pessoas.Id.Equals(id));
         }
 
-        public BindingList<Pessoas> ObterTodos()
+        public BindingList<Pessoas> ObterTodos(string nome = null)
         {
             using var conexaoLinq2db = Conexao();
             var _lista = conexaoLinq2db.GetTable<Pessoas>().ToList();
