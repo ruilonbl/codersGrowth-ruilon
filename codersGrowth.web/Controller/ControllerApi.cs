@@ -24,17 +24,7 @@ namespace codersGrowth.web.Controller
             try
             {
                 var alunos = new BindingList<Pessoas>();
-                var lista = new BindingList<Pessoas>();
-                if (nome == null)
-                {
-                    alunos = _repositorio.ObterTodos();
-                }
-                else
-                {
-                    lista = _repositorio.ObterTodos();
-                     var aluno = lista.Where(p => p.Nome.Contains(nome));
-                    return Ok(aluno);
-                }
+                alunos = _repositorio.ObterTodos(nome);
                 return Ok(alunos);
             }
             catch (Exception ex)
