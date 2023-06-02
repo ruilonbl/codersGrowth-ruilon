@@ -85,13 +85,13 @@ namespace codersGrowth.web.Controller
         {
             try
             {
-                pessoa = _repositorio.ObiterNaListaPorId(id);
                 if(pessoa==null)
                 {
                     throw new Exception("ID não existente");
                 }
                 pessoa.Id = id;
-                _validacao.ValidarPessoa(pessoa, _repositorio);              
+                _validacao.ValidarPessoa(pessoa, _repositorio);
+                _repositorio.Atualizar(pessoa, id);
                 return Ok(pessoa);
             }
             catch (Exception ex)

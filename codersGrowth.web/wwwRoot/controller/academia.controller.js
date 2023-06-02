@@ -28,7 +28,7 @@ sap.ui.define([
       onFiltro : function (oEvent) {
          let tela = this.getView();
 			var sQuery = oEvent.getParameter("query");
-         fetch(`https://localhost:7020/api/alunos?nome=${sQuery}`)
+         fetch(uri+"nome=${sQuery}")
             .then(function(response){
                return response.json();
             })
