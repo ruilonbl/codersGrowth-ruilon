@@ -1,34 +1,79 @@
 {
-    "_version": "1.12.0",
-    "sap.app": {
-      "id": "sap.ui.demo.academia",
-      "type": "application",
-      "title": "{{appTitle}}",
-      "description": "{{appDescription}}",
-      "applicationVersion": {
-        "version": "1.0.0"
+  "_version": "1.12.0",
+  "sap.app": {
+    "id": "sap.ui.demo.academia",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "applicationVersion": {
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "sap.ui.demo.academia.view.Academia",
+      "type": "XML",
+      "id": "app"
+    },
+    "dependencies": {
+      "minUI5Version": "1.93",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {}
       }
     },
-    "sap.ui": {
-      "technology": "UI5",
-      "deviceTypes": {
-          "desktop": true,
-          "tablet": true,
-          "phone": true
-      }
-    },
-    "sap.ui5": {
-      "rootView": {
-          "viewName": "sap.ui.demo.academia.view.Academia",
-          "type": "XML",
-          "id": "app"
-      },
-      "dependencies": {
-        "minUI5Version": "1.93",
-        "libs": {
-          "sap.ui.core": {},
-          "sap.m": {}
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "sap.ui.demo.academia.i18n.i18n",
+          "supportedLocales": [
+            ""
+          ],
+          "fallbackLocale": ""
         }
       }
+    },
+    "routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"type": "View",
+				"viewType": "XML",
+				"path": "sap.ui.demo.academia.view",
+				"controlId": "app",
+				"controlAggregation": "pages"
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "academia",
+					"target": "academia"
+				},
+				{
+					"pattern": "",
+					"name": "app",
+					"target": "app"
+				}
+			],
+			"targets": {
+				"academia": {
+					"id": "academia",
+					"name": "Academia"
+				},
+				"app": {
+					"id": "app",
+					"name": "app"
+				}
+			}
     }
   }
+}
