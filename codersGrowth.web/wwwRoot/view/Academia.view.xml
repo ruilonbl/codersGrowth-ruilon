@@ -1,6 +1,31 @@
 <mvc:View
-   controllerName="sap.ui.demo.academia.controller.academia"
-   xmlns="sap.m"
-   xmlns:mvc="sap.ui.core.mvc">
-   <Text text = "bem vindo"/>
+   controllerName="sap.ui.demo.academia.controller.academia" 
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns="sap.m">
+	<List id="lista" items="{path: 'alunos>/'}" >
+	<headerToolbar>
+			<Toolbar>
+			<Title text="{i18n>TituloAcademia}"/>		 
+					<ToolbarSpacer/>
+					<Button text="Cadastrar"
+							press=".onCadastro"/>
+					<SearchField width="50%" search=".onFiltro"/>
+			</Toolbar>
+			
+      </headerToolbar>
+		<CustomListItem>
+			<HBox>
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+					<Link text="{alunos>nome}"/>
+					<Text text="{alunos>sexo}"/>
+					<Label text="{
+                    path: 'alunos>dat',
+                    type: 'sap.ui.model.type.Date',
+                    formatOptions: {style : 'full', 
+                    source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
+				</VBox>
+			</HBox>
+		</CustomListItem>
+	</List>
+
 </mvc:View>

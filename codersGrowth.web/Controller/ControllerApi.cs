@@ -12,57 +12,101 @@ namespace codersGrowth.web.Controller
     public class ControllerApi : ControllerBase
     {
         private readonly IRepositorio _repositorio;
-
+        private Validacao _validacao = new();
         public ControllerApi(IRepositorio repositorio)
         {
             _repositorio = repositorio;
         }
 
         [HttpGet]
-        public IActionResult BuscarTodosOsAlunos()
+        public IActionResult BuscarTodosOsAlunos([FromQuery] string? nome)
         {
-            BindingList<Pessoas> alunos = _repositorio.ObterTodos();
-            return Ok(alunos);
+            try
+            {
+                var alunos = new BindingList<Pessoas>();
+                alunos = _repositorio.ObterTodos(nome);
+                return Ok(alunos);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }     
         }
 
         [HttpGet("{id}")]
         public IActionResult BuscarAlunoPorId(int id)
         {
-            Pessoas alunos = _repositorio.ObiterNaListaPorId(id);
-            return Ok(alunos);
+            try
+            {
+                var aluno = _repositorio.ObiterNaListaPorId(id);
+                if (aluno==null)
+                {
+                    throw new Exception("ID não existente");
+                }
+                return Ok(aluno);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost]
         public IActionResult AdicionarPessoa([FromBody, Required()] Pessoas pessoa)
         {
-            if (pessoa == null)
-                return BadRequest();
-
-            Validacao validacao = new();
-            validacao.ValidarPessoa(pessoa, _repositorio);
-
-            _repositorio.Criar(pessoa);
-            return Created($"pessoa", pessoa);
+            try
+            {
+                if (pessoa == null)
+                {
+                    throw new Exception("precisa preencher os campos");
+                }
+                _validacao.ValidarPessoa(pessoa, _repositorio);
+                _repositorio.Criar(pessoa);
+                return Created($"pessoa",pessoa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }  
         }
 
         [HttpPut("{id}")]
         public IActionResult AtualizarPessoa([FromBody, Required()] Pessoas pessoa, int id)
         {
-            if (pessoa == null)
-                return BadRequest();
-
-            Validacao validacao = new();
-            pessoa.Id = id;
-            validacao.ValidarPessoa(pessoa, _repositorio);
-
-            _repositorio.Atualizar(pessoa, id);
-            return Ok(pessoa);
+            try
+            {
+                if(pessoa==null)
+                {
+                    throw new Exception("ID não existente");
+                }
+                pessoa.Id = id;
+                _validacao.ValidarPessoa(pessoa, _repositorio);
+                _repositorio.Atualizar(pessoa, id);
+                return Ok(pessoa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
         [HttpDelete("{id}")]
         public IActionResult DeletaPessoa(int id)
         {
-           _repositorio.Deletar(id);
-            return Ok();
+            try
+            {
+                 var _aluno = _repositorio.ObiterNaListaPorId(id);
+                if (_aluno==null)
+                {
+                    throw new Exception("ID não existente");
+                }
+                _repositorio.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

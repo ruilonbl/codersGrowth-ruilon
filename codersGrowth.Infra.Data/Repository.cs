@@ -36,7 +36,7 @@ namespace trabalho01.crud
             return lista;
         }
 
-        public BindingList<Pessoas> ObterTodos()
+        public BindingList<Pessoas> ObterTodos(string nome = null)
         {
             return lista;
         }

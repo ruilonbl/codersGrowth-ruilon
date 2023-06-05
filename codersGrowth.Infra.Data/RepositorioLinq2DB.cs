@@ -2,6 +2,7 @@
 using LinqToDB.Data;
 using LinqToDB.DataProvider.SqlServer;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using trabalho01.crud;
 using trabalho01.model;
@@ -37,11 +38,22 @@ namespace codersGrowth.Infra.Data
                 .FirstOrDefault(Pessoas => Pessoas.Id.Equals(id));
         }
 
-        public BindingList<Pessoas> ObterTodos()
+        public BindingList<Pessoas> ObterTodos(string nome = null)
         {
             using var conexaoLinq2db = Conexao();
-            var _lista = conexaoLinq2db.GetTable<Pessoas>().ToList();
-            return new BindingList<Pessoas>(_lista);
+            var list = new List<Pessoas>();
+            if(!string.IsNullOrWhiteSpace(nome))
+            {
+                var query = from Pessoas in conexaoLinq2db.GetTable<Pessoas>()
+                            where Pessoas.Nome.Contains(nome)
+                            select Pessoas;
+                list = query.ToList();
+            }
+            else
+            {
+                list = conexaoLinq2db.GetTable<Pessoas>().ToList();
+            }
+            return new BindingList<Pessoas>(list);
         }
 
         public bool VerificaSeExisteCpfNoBanco(string cpf)
