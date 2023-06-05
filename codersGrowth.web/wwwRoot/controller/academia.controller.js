@@ -37,8 +37,13 @@ sap.ui.define([
             })
             .catch(function (error){
                console.error(error);
-            }); 
-			
-		}
+            }); 			
+		},
+      aoClicarNaLinha: function (evento) {
+         var oRouter = this.getOwnerComponent().getRouter()
+         var id = evento.getSource().getBindingContext("alunos").getObject().id
+         debugger
+         oRouter.navTo("detalhes", {id})
+       }
     });    
  });

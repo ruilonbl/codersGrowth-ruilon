@@ -2,7 +2,7 @@
    controllerName="sap.ui.demo.academia.controller.academia" 
    xmlns:mvc="sap.ui.core.mvc"
    xmlns="sap.m">
-	<List id="lista" items="{path: 'alunos>/'}" >
+	<List id="lista" items="{path: 'alunos>/'}">
 	<headerToolbar>
 			<Toolbar>
 			<Title text="{i18n>TituloAcademia}"/>		 
@@ -13,7 +13,7 @@
 			</Toolbar>
 			
       </headerToolbar>
-		<CustomListItem>
+		<CustomListItem class="sapUiSmallMargin" type="Navigation" press="aoClicarNaLinha">
 			<HBox>
 				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
 					<Link text="{alunos>nome}"/>

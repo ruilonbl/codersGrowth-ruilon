@@ -20,7 +20,7 @@
   },
   "sap.ui5": {
     "rootView": {
-      "viewName": "sap.ui.demo.academia.view.Academia",
+      "viewName": "sap.ui.demo.academia.view.App",
       "type": "XML",
       "id": "app"
     },
@@ -59,9 +59,9 @@
 					"target": "academia"
 				},
 				{
-					"pattern": "",
-					"name": "app",
-					"target": "app"
+					"pattern": "detalhes/{id}",
+					"name": "detalhes",
+					"target": "detalhes"
 				}
 			],
 			"targets": {
@@ -69,11 +69,11 @@
 					"id": "academia",
 					"name": "Academia"
 				},
-				"app": {
-					"id": "app",
-					"name": "app"
+				"detalhes": {
+					"id": "detalhes",
+					"name": "Detalhes"
 				}
 			}
-    }
+		}
   }
 }
