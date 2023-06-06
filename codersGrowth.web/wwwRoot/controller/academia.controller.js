@@ -1,14 +1,11 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast",
-    "sap/ui/model/resource/ResourceModel",
-    "sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
- ], function (Controller, JSONModel,MessageToast,ResourceModel, Filter, FilterOperator) {
+    "sap/m/MessageToast"
+ ], function (Controller, JSONModel,MessageToast) {
     "use strict";
     const uri = 'https://localhost:7020/api/alunos';
-    return Controller.extend("sap.ui.demo.academia.controller.App",{
+    return Controller.extend("sap.ui.demo.academia.controller.Academia",{
       onInit:function() {
          let tela = this.getView();
          fetch(uri)
@@ -22,10 +19,10 @@ sap.ui.define([
                console.error(error);
             });       
       },
-      onCadastro : function(){
+      aoClicarEmCadastro : function(event){
          MessageToast.show("vamos cadastrar");
       },
-      onFiltro : function (oEvent) {
+      aoFiltrar : function (oEvent) {
          let tela = this.getView();
 			var sQuery = oEvent.getParameter("query");
          fetch(`${uri}?nome=${sQuery}`)
@@ -42,8 +39,7 @@ sap.ui.define([
       aoClicarNaLinha: function (evento) {
          var oRouter = this.getOwnerComponent().getRouter()
          var id = evento.getSource().getBindingContext("alunos").getObject().id
-         debugger
          oRouter.navTo("detalhes", {id})
-       }
+       },
     });    
  });
