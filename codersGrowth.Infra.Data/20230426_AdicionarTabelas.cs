@@ -13,7 +13,7 @@ namespace trabalho01.crud
                 .WithColumn("CPF").AsString()
                 .WithColumn("Altura").AsString()
                 .WithColumn("Data_de_nascimento").AsDate()
-                .WithColumn("Sexo").AsString();            
+                .WithColumn("Sexo").AsString();
         }
 
         public override void Down()
