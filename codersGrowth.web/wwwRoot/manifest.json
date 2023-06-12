@@ -59,7 +59,7 @@
 					"target": "academia"
 				},
 				{
-					"pattern": "detalhes/{id}",
+					"pattern": "Detalhes/{id}",
 					"name": "detalhes",
 					"target": "detalhes"
 				}

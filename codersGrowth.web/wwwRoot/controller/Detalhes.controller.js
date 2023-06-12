@@ -1,33 +1,27 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "sap/ui/core/routing/History"
-], function(Controller,JSONModel,History) {
+    "sap/ui/model/json/JSONModel"
+], function(Controller,JSONModel) {
 	"use strict";
     const uri = 'https://localhost:7020/api/alunos';
 	return Controller.extend("sap.ui.demo.academia.controller.Detalhes", {
 
         onInit: function () {
-
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("detalhes").attachPatternMatched(this. _onObjectMatched, this);
+			oRouter.getRoute("detalhes").attachPatternMatched(this._aoCoincidirRota, this);
 		},
-        _onObjectMatched: function (oEvent) {
-            var Id = oEvent.getParameter("arguments").id
-            this.detalhes(Id);
-		},
-        onNavBack: function () {
-			var oHistory = History.getInstance();
-			var sPreviousHash = oHistory.getPreviousHash();
 
-			if (sPreviousHash !== undefined) {
-				window.history.go(-1);
-			} else {
-				var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("academia", {}, true)
-			}
+        _aoCoincidirRota: function (oEvent) {
+            var Id = oEvent.getParameter("arguments").id
+            this._detalhes(Id);
 		},
-        detalhes : function (id){
+
+        aoClicarEmVoltar: function () {
+			let oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("academia", {}, true);
+		},
+
+        _detalhes : function (id){
             let tela = this.getView();
             fetch(`${uri}/${id}`)
                .then(function(response){
@@ -39,6 +33,6 @@ sap.ui.define([
                .catch(function (error){
                   console.error(error);
                }); 			
-           },
+        },
 	});
 });

@@ -2,26 +2,77 @@
 	controllerName="sap.ui.demo.academia.controller.Detalhes" 
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
-	displayBlock="true"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
 	height="100%"
-	busyIndicatorDelay="0">
-    <Shell>
-        <Page title="{path: 'alunos>/nome'}" showNavButton="true" navButtonPress=".onNavBack"  binding="{path: 'alunos>/'}">
+	xmlns:core="sap.ui.core">
+        <Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="editar"
-						icon="sap-icon://edit"/>
-				<Button text="excluir"
-						icon="sap-icon://delete"/>
+				<Button text="editar" icon="sap-icon://edit"/>
+				<Button text="excluir" icon="sap-icon://delete"/>
 			</Toolbar>
-			<ObjectAttribute text="Altura: {alunos>altura}"/>
-			<ObjectAttribute text="Sexo: {alunos>sexo}"/>
-			<ObjectAttribute text="Cpf: {alunos>cpf}"/>
+			<!-- <ObjectAttribute text="Altura: {alunos>/altura}"/>
+			<ObjectAttribute text="Sexo: {alunos>/sexo}"/>
+			<ObjectAttribute text="Cpf: {alunos>/cpf}"/>
 			<ObjectAttribute text="Data de nascimento: {
-							path: 'alunos>dat',
+							path: 'alunos>/dat',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {style : 'full', 
-							source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
+							source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/> -->
+
+			<VBox class="sapUiSmallMargin">
+				<f:Form editable="false">
+					<f:title>
+						<core:Title text="{alunos>/nome}" />
+					</f:title>
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanXL="3"
+							labelSpanL="3"
+							labelSpanM="3"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="4"
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0"
+							columnsXL="1"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false" />
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="Altura">
+									<f:fields>
+										<Text text="{alunos>/altura}" id="nameText"  />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Sexo">
+									<f:fields>
+										<Text text="{alunos>/sexo}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="CPF">
+									<f:fields>
+										<Text text="{alunos>/cpf}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Data de nascimento">
+									<f:fields>
+										<Text text="{
+											path: 'alunos>/dat',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {style : 'full', 
+											source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}" />
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
         </Page>
-	</Shell>
 </mvc:View>

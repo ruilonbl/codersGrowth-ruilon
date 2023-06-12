@@ -19,9 +19,11 @@ sap.ui.define([
                console.error(error);
             });       
       },
+
       aoClicarEmCadastro : function(event){
          MessageToast.show("vamos cadastrar");
       },
+
       aoFiltrar : function (oEvent) {
          let tela = this.getView();
 			var sQuery = oEvent.getParameter("query");
@@ -36,9 +38,11 @@ sap.ui.define([
                console.error(error);
             }); 			
 		},
+
       aoClicarNaLinha: function (evento) {
-         var oRouter = this.getOwnerComponent().getRouter()
-         var id = evento.getSource().getBindingContext("alunos").getObject().id
+         let id = evento.getSource().getBindingContext("alunos").getObject().id
+
+         let oRouter = this.getOwnerComponent().getRouter()
          oRouter.navTo("detalhes", {id})
        },
     });    
