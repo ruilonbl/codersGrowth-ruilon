@@ -12,15 +12,6 @@
 				<Button text="editar" icon="sap-icon://edit"/>
 				<Button text="excluir" icon="sap-icon://delete"/>
 			</Toolbar>
-			<!-- <ObjectAttribute text="Altura: {alunos>/altura}"/>
-			<ObjectAttribute text="Sexo: {alunos>/sexo}"/>
-			<ObjectAttribute text="Cpf: {alunos>/cpf}"/>
-			<ObjectAttribute text="Data de nascimento: {
-							path: 'alunos>/dat',
-							type: 'sap.ui.model.type.Date',
-							formatOptions: {style : 'full', 
-							source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/> -->
-
 			<VBox class="sapUiSmallMargin">
 				<f:Form editable="false">
 					<f:title>
@@ -57,7 +48,8 @@
 								</f:FormElement>
 								<f:FormElement label="CPF">
 									<f:fields>
-										<Text text="{alunos>/cpf}" />
+										<Text text="{path: 'alunos>/cpf',
+													formatter: '.formatter.formataCPF'}" />
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Data de nascimento">

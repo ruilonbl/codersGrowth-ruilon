@@ -1,8 +1,7 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel",
-    "sap/m/MessageToast"
- ], function (Controller, JSONModel,MessageToast) {
+    "sap/ui/model/json/JSONModel"
+ ], function (Controller, JSONModel) {
     "use strict";
     const uri = 'https://localhost:7020/api/alunos';
     return Controller.extend("sap.ui.demo.academia.controller.Academia",{
@@ -21,7 +20,8 @@ sap.ui.define([
       },
 
       aoClicarEmCadastro : function(event){
-         MessageToast.show("vamos cadastrar");
+         let oRouter = this.getOwnerComponent().getRouter()
+         oRouter.navTo("cadastro")
       },
 
       aoFiltrar : function (oEvent) {
@@ -41,7 +41,6 @@ sap.ui.define([
 
       aoClicarNaLinha: function (evento) {
          let id = evento.getSource().getBindingContext("alunos").getObject().id
-
          let oRouter = this.getOwnerComponent().getRouter()
          oRouter.navTo("detalhes", {id})
        },

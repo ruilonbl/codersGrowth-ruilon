@@ -1,0 +1,29 @@
+<mvc:View
+    controllerName="sap.ui.demo.academia.controller.Cadastro" 
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+	<l:VerticalLayout class="sapUiContentPadding" width="100%">
+        <Toolbar>
+            <ToolbarSpacer/>
+            <Button text="voltar" press="aoClicarEmVoltar"/>
+            <Button text="salvar" press="aoClicarEmCadastro"/>
+            <Button text="cancelar" press="aoClicarEmCadastro"/>
+        </Toolbar>
+		<Label text="Nome" labelFor="input-a" />
+		<Input id="input-a" required="true" />
+		<Label text="cpf" labelFor="input-b" />
+		<Input id="input-b" />
+		<Label text="altura" labelFor="input-c" />
+		<Input id="input-c" />
+        <Label text="Data de nascimento" labelFor="DP2"/>
+        <DatePicker
+        id="DP1"
+        placeholder="Enter Date"
+        change="handleChange"
+        class="sapUiSmallMarginBottom"/>
+        <Label text="Sexo"/>
+        <CheckBox text="Masculino"/>
+        <CheckBox text="Feminino"/>
+	</l:VerticalLayout>
+</mvc:View>
