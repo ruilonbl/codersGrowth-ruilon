@@ -43,6 +43,6 @@ sap.ui.define([
          let id = evento.getSource().getBindingContext("alunos").getObject().id
          let oRouter = this.getOwnerComponent().getRouter()
          oRouter.navTo("detalhes", {id})
-       },
+       }
     });    
  });

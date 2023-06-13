@@ -1,29 +1,101 @@
-<mvc:View
+<!-- <mvc:View
     controllerName="sap.ui.demo.academia.controller.Cadastro" 
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout">
-	<l:VerticalLayout class="sapUiContentPadding" width="100%">
+    <l:VerticalLayout class="sapUiContentPadding" width="100%" >
         <Toolbar>
-            <ToolbarSpacer/>
             <Button text="voltar" press="aoClicarEmVoltar"/>
-            <Button text="salvar" press="aoClicarEmCadastro"/>
-            <Button text="cancelar" press="aoClicarEmCadastro"/>
+            <ToolbarSpacer/>
+            <Button text="salvar" press="aoClicarEmSalvar"/>
+            <Button text="cancelar" press="aoClicarEmCancelar"/>
         </Toolbar>
-		<Label text="Nome" labelFor="input-a" />
-		<Input id="input-a" required="true" />
-		<Label text="cpf" labelFor="input-b" />
-		<Input id="input-b" />
-		<Label text="altura" labelFor="input-c" />
-		<Input id="input-c" />
-        <Label text="Data de nascimento" labelFor="DP2"/>
+        <Label text="Nome" labelFor="inputNome" />
+        <Input id="inputNome" required="true" width="30%"/>
+        <Label text="cpf" labelFor="inputCpf" />
+        <Input id="inputCpf" width="10%"/>
+        <Label text="altura" labelFor="inputAltura"/>
+        <Input id="inputAltura" width="5%"/>
+        <Label text="Data de nascimento" labelFor="imputData"/>
         <DatePicker
-        id="DP1"
+        id="inputData"
         placeholder="Enter Date"
         change="handleChange"
-        class="sapUiSmallMarginBottom"/>
-        <Label text="Sexo"/>
-        <CheckBox text="Masculino"/>
-        <CheckBox text="Feminino"/>
-	</l:VerticalLayout>
+        class="sapUiSmallMarginBottom"
+        width="30%"/>
+        <Label text="Sexo" labelFor="grupoRadioButonId" />
+        <RadioButtonGroup id="grupoRadioButonId">
+            <RadioButton text="Feminino" />
+            <RadioButton text="Masculino"/>
+        </RadioButtonGroup>
+    </l:VerticalLayout>
+</mvc:View> -->
+<mvc:View
+	height="100%"
+	controllerName="sap.ui.demo.academia.controller.Cadastro"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m">
+	<Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="editar" icon="sap-icon://edit"/>
+				<Button text="excluir" icon="sap-icon://delete"/>
+			</Toolbar>
+			<VBox class="sapUiSmallMargin">
+				<f:Form editable="false">
+					<f:title>
+						<core:Title text="{alunos>/nome}" />
+					</f:title>
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanXL="3"
+							labelSpanL="3"
+							labelSpanM="3"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="4"
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0"
+							columnsXL="1"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false" />
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="Altura">
+									<f:fields>
+										<Text text="{alunos>/altura}" id="nameText"  />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Sexo">
+									<f:fields>
+										<Text text="{alunos>/sexo}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="CPF">
+									<f:fields>
+										<Text text="{path: 'alunos>/cpf',
+													formatter: '.formatter.formataCPF'}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="Data de nascimento">
+									<f:fields>
+										<Text text="{
+											path: 'alunos>/dat',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {style : 'full', 
+											source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}" />
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+        </Page>
 </mvc:View>
