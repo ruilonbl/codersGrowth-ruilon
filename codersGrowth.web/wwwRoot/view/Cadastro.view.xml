@@ -36,66 +36,59 @@
 	xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
-	xmlns="sap.m">
-	<Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Page showNavButton="true" navButtonPress="aoClicarEmVoltar">
+	<VBox class="sapUiSmallMargin">
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="editar" icon="sap-icon://edit"/>
-				<Button text="excluir" icon="sap-icon://delete"/>
+				<Button text="salvar" press="aoClicarEmSalvar"/>
+            	<Button text="cancelar" press="aoClicarEmCancelar"/>
 			</Toolbar>
-			<VBox class="sapUiSmallMargin">
-				<f:Form editable="false">
-					<f:title>
-						<core:Title text="{alunos>/nome}" />
-					</f:title>
-					<f:layout>
-						<f:ResponsiveGridLayout
-							labelSpanXL="3"
-							labelSpanL="3"
-							labelSpanM="3"
-							labelSpanS="12"
-							adjustLabelSpan="false"
-							emptySpanXL="4"
-							emptySpanL="4"
-							emptySpanM="4"
-							emptySpanS="0"
-							columnsXL="1"
-							columnsL="1"
-							columnsM="1"
-							singleContainerFullSize="false" />
-					</f:layout>
-					<f:formContainers>
-						<f:FormContainer>
-							<f:formElements>
-								<f:FormElement label="Altura">
-									<f:fields>
-										<Text text="{alunos>/altura}" id="nameText"  />
-									</f:fields>
-								</f:FormElement>
-								<f:FormElement label="Sexo">
-									<f:fields>
-										<Text text="{alunos>/sexo}" />
-									</f:fields>
-								</f:FormElement>
-								<f:FormElement label="CPF">
-									<f:fields>
-										<Text text="{path: 'alunos>/cpf',
-													formatter: '.formatter.formataCPF'}" />
-									</f:fields>
-								</f:FormElement>
-								<f:FormElement label="Data de nascimento">
-									<f:fields>
-										<Text text="{
-											path: 'alunos>/dat',
-											type: 'sap.ui.model.type.Date',
-											formatOptions: {style : 'full', 
-											source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}" />
-									</f:fields>
-								</f:FormElement>
-							</f:formElements>
-						</f:FormContainer>
-					</f:formContainers>
-				</f:Form>
-			</VBox>
+		<f:SimpleForm id="SimpleFormChange354wideDual"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="CADASTRO"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="NOME" />
+				<Input id="inputNome"/>
+				<Label text="CPF/Altura" />
+				<Input id = "inputCpf">
+				</Input>
+					<Input id ="inputAltura">
+						<layoutData>
+							<l:GridData span="XL2 L1 M3 S4" />
+						</layoutData>
+					</Input>
+				<Label text="SEXO" />
+				<Select id="inputSexo">
+					<items>
+						<core:Item text="Feminino" key="Feminino"/>
+						<core:Item text="Masculino" key="Masculino"/>
+					</items>
+				</Select>
+				<Label text="Data de nascimento" />
+				<DatePicker
+					id="inputData"
+					placeholder="Enter Date"
+					change="handleChange"
+					class="sapUiSmallMarginBottom"
+					width="40%"/>
+			</f:content>
+		</f:SimpleForm>
+		</VBox>
         </Page>
 </mvc:View>

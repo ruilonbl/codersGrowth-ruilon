@@ -6,6 +6,11 @@ sap.ui.define([
     const uri = 'https://localhost:7020/api/alunos';
     return Controller.extend("sap.ui.demo.academia.controller.Academia",{
       onInit:function() {
+         var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.getRoute("academia").attachPatternMatched(this._aoCoincidirRota, this);     
+      },
+      _aoCoincidirRota : function()
+      {
          let tela = this.getView();
          fetch(uri)
             .then(function(response){
@@ -16,9 +21,8 @@ sap.ui.define([
             })
             .catch(function (error){
                console.error(error);
-            });       
+            }); 
       },
-
       aoClicarEmCadastro : function(event){
          let oRouter = this.getOwnerComponent().getRouter()
          oRouter.navTo("cadastro")

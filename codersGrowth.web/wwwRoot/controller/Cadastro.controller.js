@@ -12,17 +12,16 @@ sap.ui.define([
 				cpf: this.byId("inputCpf").getValue(),
 				altura: this.byId("inputAltura").getValue(),
 				dat: this.byId("inputData").getProperty("dateValue").toISOString(),
-				sexo: this.byId("grupoRadioButonId").getProperty("selectedIndex"),
+				sexo: this.byId("inputSexo").getProperty("select"),
 			};
-
-			//console.log(this.byId("grupoRadioButonId"))
-			 this.salvarAluno(aluno);
+			
+			console.log(this.byId("inputSexo").getProperty(""))
+			 //this.salvarAluno(aluno);
 		},
 
 		aoClicarEmCancelar: function () {
 			this._limparTela()
-			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("academia", {}, true);
+			this.aoClicarEmVoltar()
 		},
 
         aoClicarEmVoltar: function () {
