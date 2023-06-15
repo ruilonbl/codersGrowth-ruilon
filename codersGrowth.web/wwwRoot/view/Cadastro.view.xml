@@ -42,8 +42,8 @@
 	<VBox class="sapUiSmallMargin">
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="salvar" press="aoClicarEmSalvar"/>
-            	<Button text="cancelar" press="aoClicarEmCancelar"/>
+				<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar"/>
+            	<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar"/>
 			</Toolbar>
 		<f:SimpleForm id="SimpleFormChange354wideDual"
 			editable="true"
@@ -63,29 +63,26 @@
 			columnsM="1"
 			singleContainerFullSize="false" >
 			<f:content>
-				<Label text="NOME" />
-				<Input id="inputNome"/>
+				<Label text="Nome" />
+				<Input id="inputNome" value="{alunos>/nome}"/>
 				<Label text="CPF/Altura" />
-				<Input id = "inputCpf">
+				<Input  id = "inputCpf" value="{alunos>/cpf}" >
 				</Input>
-					<Input id ="inputAltura">
+					<Input id ="inputAltura" value="{alunos>/altura}">
 						<layoutData>
 							<l:GridData span="XL2 L1 M3 S4" />
 						</layoutData>
 					</Input>
-				<Label text="SEXO" />
-				<Select id="inputSexo">
+				<Label text="Sexo" />
+				<Select id="inputSexo" selectedKey="{alunos>/sexo}">
 					<items>
+						<core:Item text="Você se identifica com" key=""/>
 						<core:Item text="Feminino" key="Feminino"/>
 						<core:Item text="Masculino" key="Masculino"/>
 					</items>
 				</Select>
 				<Label text="Data de nascimento" />
-				<DatePicker
-					id="inputData"
-					placeholder="Enter Date"
-					change="handleChange"
-					class="sapUiSmallMarginBottom"
+				<DatePicker id="inputData" value="{alunos>/dat}" placeholder="Dia/Mês/Ano" valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" displayFormat="dd/MM/yyyy" 
 					width="40%"/>
 			</f:content>
 		</f:SimpleForm>

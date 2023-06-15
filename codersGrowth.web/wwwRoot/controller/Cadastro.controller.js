@@ -1,22 +1,30 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/m/MessageToast"
+], function (Controller, JSONModel,MessageToast) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
+			onInit:function() {
+			var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);     
+		},
+		_aoCoincidirRota : function()
+		{
+			let aluno = {
+				nome : "",
+				cpf : "",
+				altura : "",
+				dat : "",
+				sexo : ""
+			}
+			this.getView().setModel(new JSONModel(aluno), "alunos");
+		},
 		aoClicarEmSalvar : function(){
-			var aluno = {
-				nome: this.byId("inputNome").getValue(),
-				cpf: this.byId("inputCpf").getValue(),
-				altura: this.byId("inputAltura").getValue(),
-				dat: this.byId("inputData").getProperty("dateValue").toISOString(),
-				sexo: this.byId("inputSexo").getProperty("select"),
-			};
-			
-			console.log(this.byId("inputSexo").getProperty(""))
-			 //this.salvarAluno(aluno);
+			let alunoCriacao = this.getView().getModel("alunos").getData();
+			this.salvarAluno(alunoCriacao);
 		},
 
 		aoClicarEmCancelar: function () {
@@ -42,7 +50,7 @@ sap.ui.define([
 		},
 
 		salvarAluno(aluno){
-			aluno.sexo = aluno.sexo == 1 ? "Masculino" : "Feminino"
+			console.log(aluno);
 			const response = fetch(uri, {
 				method: "POST", 
 				mode: "cors", 
@@ -51,7 +59,13 @@ sap.ui.define([
 				},
 				body: JSON.stringify(aluno), 
 			  }).then(response => response.json())
-			  .then(data => console.log(data));
+			  .then(data => console.log(data))
+			  .then(function (){
+				MessageToast.show("Aluno cadastrado com sucesso");
+			 	})
+				 .then(() => {
+					this.aoClicarEmVoltar()
+				  }) 
 		}
 	});
 
