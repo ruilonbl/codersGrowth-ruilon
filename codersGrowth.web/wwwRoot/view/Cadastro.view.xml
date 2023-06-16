@@ -42,8 +42,8 @@
 	<VBox class="sapUiSmallMargin">
 			<Toolbar>
 				<ToolbarSpacer/>
-				<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar"/>
-            	<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar"/>
+				<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar" width="8%"/>
+            	<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar" width="8%"/>
 			</Toolbar>
 		<f:SimpleForm id="SimpleFormChange354wideDual"
 			editable="true"

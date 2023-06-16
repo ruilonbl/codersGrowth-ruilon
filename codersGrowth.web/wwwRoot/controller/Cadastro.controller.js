@@ -1,11 +1,17 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
-], function (Controller, JSONModel,MessageToast) {
+	"sap/m/MessageToast",
+	"sap/m/Dialog",
+	"sap/m/Button",
+	"sap/m/library",
+	"sap/m/Text",
+	"sap/m/TextArea"
+], function (Controller, JSONModel,MessageToast,Dialog,Button,mobileLibrary,Text,TextArea) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
-	
+	var ButtonType = mobileLibrary.ButtonType;
+	var DialogType = mobileLibrary.DialogType;
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
 			onInit:function() {
 			var oRouter = this.getOwnerComponent().getRouter();
@@ -28,8 +34,31 @@ sap.ui.define([
 		},
 
 		aoClicarEmCancelar: function () {
-			this._limparTela()
-			this.aoClicarEmVoltar()
+			if (!this.oApproveDialog) {
+				this.oApproveDialog = new Dialog({
+					type: DialogType.Message,
+					title: "Cancelar",
+					content: new Text({ text: "Deseja realmente cancelar?" }),
+					beginButton: new Button({
+						type: ButtonType.Emphasized,
+						text: "sim",
+						press: function () {
+							this.oApproveDialog.close();
+							this._limparTela()
+							this.aoClicarEmVoltar()
+							this.oApproveDialog = null;
+						}.bind(this)
+					}),
+					endButton: new Button({
+						text: "nao",
+						press: function () {
+							this.oApproveDialog.close();
+							this.oApproveDialog = null;
+						}.bind(this)
+					})
+				});
+			}
+			this.oApproveDialog.open();
 		},
 
         aoClicarEmVoltar: function () {
@@ -60,12 +89,24 @@ sap.ui.define([
 				body: JSON.stringify(aluno), 
 			  }).then(response => response.json())
 			  .then(data => console.log(data))
-			  .then(function (){
-				MessageToast.show("Aluno cadastrado com sucesso");
-			 	})
-				 .then(() => {
-					this.aoClicarEmVoltar()
-				  }) 
+			  if (!this.oApproveDialog) {
+				this.oApproveDialog = new Dialog({
+					type: DialogType.Message,
+					title: "Sucesso",
+					content: new Text({ text: "Aluno cadastrado com sucesso" }),
+					beginButton: new Button({
+						type: ButtonType.Emphasized,
+						text: "OK",
+						press: function () {
+							this.oApproveDialog.close();
+							this._limparTela()
+							this.aoClicarEmVoltar()
+							this.oApproveDialog = null;
+						}.bind(this)
+					})
+				});
+			}
+			this.oApproveDialog.open();
 		}
 	});
 

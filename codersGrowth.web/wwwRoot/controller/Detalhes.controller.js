@@ -13,7 +13,7 @@ sap.ui.define([
 		},
 
         _aoCoincidirRota: function (oEvent) {
-            var Id = oEvent.getParameter("arguments").id
+            let Id = oEvent.getParameter("arguments").id
             this._detalhes(Id);
 		},
 
