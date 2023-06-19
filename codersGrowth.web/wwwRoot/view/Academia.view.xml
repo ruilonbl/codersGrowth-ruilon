@@ -2,7 +2,7 @@
    controllerName="sap.ui.demo.academia.controller.Academia" 
    xmlns:mvc="sap.ui.core.mvc"
    xmlns="sap.m">
-   <Page >
+   <Page>
 		<List id="lista" items="{path: 'alunos>/'}">
 		<headerToolbar>
 				<Toolbar>

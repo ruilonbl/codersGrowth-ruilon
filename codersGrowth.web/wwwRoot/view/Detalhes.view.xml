@@ -7,11 +7,10 @@
 	height="100%"
 	xmlns:core="sap.ui.core">
         <Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
-			<Toolbar>
-				<ToolbarSpacer/>
-				<Button text="editar" icon="sap-icon://edit"/>
-				<Button text="excluir" icon="sap-icon://delete"/>
-			</Toolbar>
+		<headerContent>
+				<Button text="editar" icon="sap-icon://edit" width="50%"/>
+				<Button text="excluir" icon="sap-icon://delete" width="50%"/>
+		</headerContent>
 			<VBox class="sapUiSmallMargin">
 				<f:Form editable="false">
 					<f:title>

@@ -1,13 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast",
 	"sap/m/Dialog",
 	"sap/m/Button",
 	"sap/m/library",
 	"sap/m/Text",
 	"sap/m/TextArea"
-], function (Controller, JSONModel,MessageToast,Dialog,Button,mobileLibrary,Text,TextArea) {
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,TextArea) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	var ButtonType = mobileLibrary.ButtonType;
@@ -87,26 +86,50 @@ sap.ui.define([
 				  "Content-Type": "application/json",
 				},
 				body: JSON.stringify(aluno), 
-			  }).then(response => response.json())
-			  .then(data => console.log(data))
-			  if (!this.oApproveDialog) {
-				this.oApproveDialog = new Dialog({
-					type: DialogType.Message,
-					title: "Sucesso",
-					content: new Text({ text: "Aluno cadastrado com sucesso" }),
-					beginButton: new Button({
-						type: ButtonType.Emphasized,
-						text: "OK",
-						press: function () {
-							this.oApproveDialog.close();
-							this._limparTela()
-							this.aoClicarEmVoltar()
-							this.oApproveDialog = null;
-						}.bind(this)
-					})
-				});
-			}
-			this.oApproveDialog.open();
+			  }).then(response => {
+				response.json()
+				if (response.status == 400){
+					if (!this.oApproveDialog) {
+						this.oApproveDialog = new Dialog({
+							type: DialogType.Message,
+							title: "Erro",
+							content: new Text({ text: "Não foi possivel cadastrar o aluno" }),
+							beginButton: new Button({
+								type: ButtonType.Emphasized,
+								text: "OK",
+								press: function () {
+									this.oApproveDialog.close();
+									this._limparTela()
+									this.oApproveDialog = null;
+								}.bind(this)
+							})
+						});
+					}
+					this.oApproveDialog.open();	
+				}
+				else
+				{
+					if (!this.oApproveDialog) {
+						this.oApproveDialog = new Dialog({
+							type: DialogType.Message,
+							title: "Sucesso",
+							content: new Text({ text: "Aluno cadastrado com sucesso" }),
+							beginButton: new Button({
+								type: ButtonType.Emphasized,
+								text: "OK",
+								press: function () {
+									this.oApproveDialog.close();
+									this._limparTela()
+									this.aoClicarEmVoltar()
+									this.oApproveDialog = null;
+								}.bind(this)
+							})
+						});
+					}
+					this.oApproveDialog.open();	
+				}
+			})
+			.then(data => console.log(data))	  
 		}
 	});
 
