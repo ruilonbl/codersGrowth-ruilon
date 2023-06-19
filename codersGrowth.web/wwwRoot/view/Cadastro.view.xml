@@ -40,8 +40,8 @@
 	xmlns:core="sap.ui.core">
 	<Page showNavButton="true" navButtonPress="aoClicarEmVoltar" >
 	<headerContent>
-		<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar" width="60%"/>
-		<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar" width="60%"/>
+		<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar" />
+		<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar" />
 	</headerContent>
 	<VBox class="sapUiSmallMargin">
 		<f:SimpleForm id="SimpleFormChange354wideDual"

@@ -5,8 +5,8 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/m/library",
 	"sap/m/Text",
-	"sap/m/TextArea"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,TextArea) {
+	"../services/Validacao"
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacoes) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	var ButtonType = mobileLibrary.ButtonType;
@@ -16,6 +16,7 @@ sap.ui.define([
 			var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);     
 		},
+
 		_aoCoincidirRota : function()
 		{
 			let aluno = {
@@ -27,6 +28,7 @@ sap.ui.define([
 			}
 			this.getView().setModel(new JSONModel(aluno), "alunos");
 		},
+
 		aoClicarEmSalvar : function(){
 			let alunoCriacao = this.getView().getModel("alunos").getData();
 			this.salvarAluno(alunoCriacao);
@@ -130,6 +132,14 @@ sap.ui.define([
 				}
 			})
 			.then(data => console.log(data))	  
+		},
+
+		aoIncerirDadoNome : function()
+		{
+			var oInputNome = this.getView().byId("inputNome");
+			var resultadoValidacaoInput = Validacao.validarInput(oInputNome);
+			this.validacaoResultado.nome = resultadoValidacaoInput;
+			this.aoValidarAtivarOuNaoBotaoSalvar();
 		}
 	});
 
