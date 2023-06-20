@@ -62,7 +62,12 @@
 					"pattern": "Detalhes/{id}",
 					"name": "detalhes",
 					"target": "detalhes"
-				}
+				},
+        {
+          "pattern": "Cadastro",
+					"name": "cadastro",
+					"target": "cadastro"
+        }
 			],
 			"targets": {
 				"academia": {
@@ -72,7 +77,11 @@
 				"detalhes": {
 					"id": "detalhes",
 					"name": "Detalhes"
-				}
+				},
+          "cadastro": {
+            "id": "cadastro",
+            "name": "Cadastro"
+        }
 			}
 		}
   }

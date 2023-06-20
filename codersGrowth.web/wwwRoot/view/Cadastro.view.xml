@@ -1,0 +1,91 @@
+<!-- <mvc:View
+    controllerName="sap.ui.demo.academia.controller.Cadastro" 
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
+    <l:VerticalLayout class="sapUiContentPadding" width="100%" >
+        <Toolbar>
+            <Button text="voltar" press="aoClicarEmVoltar"/>
+            <ToolbarSpacer/>
+            <Button text="salvar" press="aoClicarEmSalvar"/>
+            <Button text="cancelar" press="aoClicarEmCancelar"/>
+        </Toolbar>
+        <Label text="Nome" labelFor="inputNome" />
+        <Input id="inputNome" required="true" width="30%"/>
+        <Label text="cpf" labelFor="inputCpf" />
+        <Input id="inputCpf" width="10%"/>
+        <Label text="altura" labelFor="inputAltura"/>
+        <Input id="inputAltura" width="5%"/>
+        <Label text="Data de nascimento" labelFor="imputData"/>
+        <DatePicker
+        id="inputData"
+        placeholder="Enter Date"
+        change="handleChange"
+        class="sapUiSmallMarginBottom"
+        width="30%"/>
+        <Label text="Sexo" labelFor="grupoRadioButonId" />
+        <RadioButtonGroup id="grupoRadioButonId">
+            <RadioButton text="Feminino" />
+            <RadioButton text="Masculino"/>
+        </RadioButtonGroup>
+    </l:VerticalLayout>
+</mvc:View> -->
+<mvc:View
+	height="100%"
+	controllerName="sap.ui.demo.academia.controller.Cadastro"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Page showNavButton="true" navButtonPress="aoClicarEmVoltar" >
+	<headerContent>
+		<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar"/>
+		<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar"/>
+	</headerContent>
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="SimpleFormChange354wideDual"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="CADASTRO"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<!-- <BusyIndicator text="Aguardando o cadastro ser efetuado" class="sapUiTinyMarginBottom"/> -->
+			<f:content>
+				<Label text="Nome" />
+				<Input id="inputNome" value="{alunos>/nome}"/>
+				<Label text="CPF/Altura" />
+				<Input  id = "inputCpf" value="{alunos>/cpf}" >
+				</Input>
+					<Input id ="inputAltura" value="{alunos>/altura}">
+						<layoutData>
+							<l:GridData span="XL2 L1 M3 S4" />
+						</layoutData>
+					</Input>
+				<Label text="Sexo" />
+				<Select id="inputSexo" selectedKey="{alunos>/sexo}">
+					<items>
+						<core:Item text="Você se identifica com" key=""/>
+						<core:Item text="Feminino" key="Feminino"/>
+						<core:Item text="Masculino" key="Masculino"/>
+					</items>
+				</Select>
+				<Label text="Data de nascimento" />
+				<DatePicker id="inputData" value="{alunos>/dat}" placeholder="Dia/Mês/Ano" valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" displayFormat="dd/MM/yyyy" 
+					width="40%"/>
+			</f:content>
+		</f:SimpleForm>
+		</VBox>
+        </Page>
+</mvc:View>

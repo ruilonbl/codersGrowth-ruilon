@@ -52,7 +52,7 @@ namespace codersGrowth.web.Controller
         }
 
         [HttpPost]
-        public IActionResult AdicionarPessoa([FromBody, Required()] Pessoas pessoa)
+        public IActionResult AdicionarPessoa([FromBody] Pessoas? pessoa)
         {
             try
             {

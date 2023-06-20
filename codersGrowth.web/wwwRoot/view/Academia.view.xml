@@ -2,14 +2,13 @@
    controllerName="sap.ui.demo.academia.controller.Academia" 
    xmlns:mvc="sap.ui.core.mvc"
    xmlns="sap.m">
-   <Page >
+   <Page>
 		<List id="lista" items="{path: 'alunos>/'}">
 		<headerToolbar>
 				<Toolbar>
 				<Title text="{i18n>TituloAcademia}"/>		 
 						<ToolbarSpacer/>
-						<Button text="Cadastrar"
-								press="aoClicarEmCadastro"/>
+						<Button text="Cadastrar" icon="sap-icon://doctor" press="aoClicarEmCadastro"/>
 						<SearchField width="50%" search="aoFiltrar"/>
 				</Toolbar>
 		</headerToolbar>
@@ -26,7 +25,6 @@
 					</VBox>
 				</HBox>
 			</CustomListItem>
-
 		</List>
 	</Page>
 
