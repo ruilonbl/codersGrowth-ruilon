@@ -5,8 +5,9 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/m/library",
 	"sap/m/Text",
-	"../services/Validacao"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacoes) {
+	"../services/Validacao",
+	"sap/ui/core/BusyIndicator"
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacoes,BusyIndicator) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	var ButtonType = mobileLibrary.ButtonType;
@@ -29,9 +30,10 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel(aluno), "alunos");
 		},
 
-		aoClicarEmSalvar : function(){
-			let alunoCriacao = this.getView().getModel("alunos").getData();
-			this.salvarAluno(alunoCriacao);
+		aoClicarEmSalvar : async function(){
+			let alunoCriacao = this.getView().getModel("alunos").getData()
+			debugger
+			await this.salvarAluno(alunoCriacao);
 		},
 
 		aoClicarEmCancelar: function () {
@@ -79,9 +81,9 @@ sap.ui.define([
 			data.setValue("")
 		},
 
-		salvarAluno(aluno){
-			console.log(aluno);
-			const response = fetch(uri, {
+		salvarAluno : function (aluno){
+			BusyIndicator.show()
+			 fetch(uri, {
 				method: "POST", 
 				mode: "cors", 
 				headers: {
@@ -89,6 +91,7 @@ sap.ui.define([
 				},
 				body: JSON.stringify(aluno), 
 			  }).then(response => {
+				BusyIndicator.hide()
 				response.json()
 				if (response.status == 400){
 					if (!this.oApproveDialog) {

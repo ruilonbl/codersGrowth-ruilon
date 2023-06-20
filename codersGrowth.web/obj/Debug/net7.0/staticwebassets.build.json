@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ld76XWK7RImJUycC4IeYdpZIBBL+XakgSOO8osogNXY=",
+  "Hash": "mqkDZ5RkqWVQvbWWiBIWLe+wlREbmW7CZHdqRC89ulU=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -119,12 +119,12 @@
       "OriginalItemSpec": "wwwroot\\i18n\\i18n.properties"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\Index.html",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "index.html",
+      "RelativePath": "Index.html",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +133,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\index.html"
+      "OriginalItemSpec": "wwwroot\\Index.html"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\manifest.json",
@@ -153,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\manifest.json"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\model\\formatter.js",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\model\\Formatter.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "model/formatter.js",
+      "RelativePath": "model/Formatter.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,7 +167,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\model\\formatter.js"
+      "OriginalItemSpec": "wwwroot\\model\\Formatter.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\services\\Validacao.js",
+      "SourceId": "codersGrowth.web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "BasePath": "_content/codersGrowth.web",
+      "RelativePath": "services/Validacao.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\services\\Validacao.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\Academia.view.xml",
@@ -187,12 +204,12 @@
       "OriginalItemSpec": "wwwroot\\view\\Academia.view.xml"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\app.view.xml",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\App.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "view/app.view.xml",
+      "RelativePath": "view/App.view.xml",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -201,7 +218,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\view\\app.view.xml"
+      "OriginalItemSpec": "wwwroot\\view\\App.view.xml"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\Cadastro.view.xml",
