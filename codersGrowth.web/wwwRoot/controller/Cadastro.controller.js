@@ -31,8 +31,7 @@ sap.ui.define([
 		},
 
 		aoClicarEmSalvar : async function(){
-			let alunoCriacao = this.getView().getModel("alunos").getData()
-			debugger
+			let alunoCriacao = this.getView().getModel("alunos").getData();
 			await this.salvarAluno(alunoCriacao);
 		},
 
