@@ -7,7 +7,7 @@ sap.ui.define([
 	"sap/m/Text",
 	"../services/Validacao",
 	"sap/ui/core/BusyIndicator"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacoes,BusyIndicator) {
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	var ButtonType = mobileLibrary.ButtonType;
@@ -20,6 +20,7 @@ sap.ui.define([
 
 		_aoCoincidirRota : function()
 		{
+			window.inputNome = this.byId("inputNome");
 			let aluno = {
 				nome : "",
 				cpf : "",
@@ -32,7 +33,7 @@ sap.ui.define([
 
 		aoClicarEmSalvar : async function(){
 			let alunoCriacao = this.getView().getModel("alunos").getData();
-			await this.salvarAluno(alunoCriacao);
+			await this._salvarAluno(alunoCriacao);
 		},
 
 		aoClicarEmCancelar: function () {
@@ -80,7 +81,8 @@ sap.ui.define([
 			data.setValue("")
 		},
 
-		salvarAluno : function (aluno){
+		_salvarAluno : function (aluno){
+			Validacao.validarNome(aluno.getData(nome),this.byId("inputNome"))
 			BusyIndicator.show()
 			 fetch(uri, {
 				method: "POST", 
@@ -135,14 +137,15 @@ sap.ui.define([
 			})
 			.then(data => console.log(data))	  
 		},
-
-		aoIncerirDadoNome : function()
-		{
-			var oInputNome = this.getView().byId("inputNome");
-			var resultadoValidacaoInput = Validacao.validarInput(oInputNome);
-			this.validacaoResultado.nome = resultadoValidacaoInput;
-			this.aoValidarAtivarOuNaoBotaoSalvar();
-		}
+		aoInserirValor : function(){
+			let nome = this.getView().byId("inputNome")
+			console.log(nome)
+			Validacao.validarNome(nome)
+		},
+		aoInserirValorCpf: function () {
+			let cpf = this.getView().byId("inputCpf")
+			Validacao.formatarCpf(cpf)
+		  },
 	});
 
 });

@@ -1,35 +1,3 @@
-<!-- <mvc:View
-    controllerName="sap.ui.demo.academia.controller.Cadastro" 
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:l="sap.ui.layout">
-    <l:VerticalLayout class="sapUiContentPadding" width="100%" >
-        <Toolbar>
-            <Button text="voltar" press="aoClicarEmVoltar"/>
-            <ToolbarSpacer/>
-            <Button text="salvar" press="aoClicarEmSalvar"/>
-            <Button text="cancelar" press="aoClicarEmCancelar"/>
-        </Toolbar>
-        <Label text="Nome" labelFor="inputNome" />
-        <Input id="inputNome" required="true" width="30%"/>
-        <Label text="cpf" labelFor="inputCpf" />
-        <Input id="inputCpf" width="10%"/>
-        <Label text="altura" labelFor="inputAltura"/>
-        <Input id="inputAltura" width="5%"/>
-        <Label text="Data de nascimento" labelFor="imputData"/>
-        <DatePicker
-        id="inputData"
-        placeholder="Enter Date"
-        change="handleChange"
-        class="sapUiSmallMarginBottom"
-        width="30%"/>
-        <Label text="Sexo" labelFor="grupoRadioButonId" />
-        <RadioButtonGroup id="grupoRadioButonId">
-            <RadioButton text="Feminino" />
-            <RadioButton text="Masculino"/>
-        </RadioButtonGroup>
-    </l:VerticalLayout>
-</mvc:View> -->
 <mvc:View
 	height="100%"
 	controllerName="sap.ui.demo.academia.controller.Cadastro"
@@ -61,18 +29,22 @@
 			columnsL="1"
 			columnsM="1"
 			singleContainerFullSize="false" >
-			<!-- <BusyIndicator text="Aguardando o cadastro ser efetuado" class="sapUiTinyMarginBottom"/> -->
 			<f:content>
 				<Label text="Nome" />
 				<Input id="inputNome" value="{alunos>/nome}"/>
 				<Label text="CPF/Altura" />
-				<Input  id = "inputCpf" value="{alunos>/cpf}" >
+				<!-- <MaskInput mask="CCC.CCC.CCC-CC">
+					<rules>
+						<MaskInputRule maskFormatSymbol="C" regex="[A-Z0-9]"/>
+					</rules>
+				</MaskInput> -->
+				<Input  id = "inputCpf" value="{alunos>/cpf}"  type="Tel"  maxLength="14"  liveChange="aoInserirValorCpf">
 				</Input>
-					<Input id ="inputAltura" value="{alunos>/altura}">
+					<Input id ="inputAltura" value="{alunos>/altura}" maxLength="3">
 						<layoutData>
 							<l:GridData span="XL2 L1 M3 S4" />
 						</layoutData>
-					</Input>
+				</Input>
 				<Label text="Sexo" />
 				<Select id="inputSexo" selectedKey="{alunos>/sexo}">
 					<items>

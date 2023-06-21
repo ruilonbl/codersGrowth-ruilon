@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mqkDZ5RkqWVQvbWWiBIWLe+wlREbmW7CZHdqRC89ulU=",
+  "Hash": "HrGg/ncisyzcVThZXDBJ9le3j1/sd1akDbFPmMdBYHg=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -34,12 +34,12 @@
       "OriginalItemSpec": "wwwroot\\Component.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\Academia.controller.js",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\academia.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "controller/Academia.controller.js",
+      "RelativePath": "controller/academia.controller.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Academia.controller.js"
+      "OriginalItemSpec": "wwwroot\\controller\\academia.controller.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\App.controller.js",
@@ -153,12 +153,12 @@
       "OriginalItemSpec": "wwwroot\\manifest.json"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\model\\Formatter.js",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\model\\formatter.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "model/Formatter.js",
+      "RelativePath": "model/formatter.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,7 +167,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\model\\Formatter.js"
+      "OriginalItemSpec": "wwwroot\\model\\formatter.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\services\\Validacao.js",
