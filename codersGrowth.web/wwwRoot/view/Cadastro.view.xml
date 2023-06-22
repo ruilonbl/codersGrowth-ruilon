@@ -33,14 +33,9 @@
 				<Label text="Nome" />
 				<Input id="inputNome" value="{alunos>/nome}"/>
 				<Label text="CPF/Altura" />
-				<!-- <MaskInput mask="CCC.CCC.CCC-CC">
-					<rules>
-						<MaskInputRule maskFormatSymbol="C" regex="[A-Z0-9]"/>
-					</rules>
-				</MaskInput> -->
-				<Input  id = "inputCpf" value="{alunos>/cpf}"  type="Tel"  maxLength="14"  liveChange="aoInserirValorCpf">
+				<Input  id = "inputCpf" value="{alunos>/cpf}"  maxLength="14"  liveChange="aoInserirValorCpf">
 				</Input>
-					<Input id ="inputAltura" value="{alunos>/altura}" maxLength="3">
+					<Input id ="inputAltura" value="{alunos>/altura}" maxLength="3" liveChange="aoInserirValorAltura" >
 						<layoutData>
 							<l:GridData span="XL2 L1 M3 S4" />
 						</layoutData>
@@ -54,8 +49,14 @@
 					</items>
 				</Select>
 				<Label text="Data de nascimento" />
-				<DatePicker id="inputData" value="{alunos>/dat}" placeholder="Dia/Mês/Ano" valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" displayFormat="dd/MM/yyyy" 
-					width="40%"/>
+				<DatePicker 
+					id="inputData" 
+					value="{alunos>/dat}" 
+					placeholder="Dia/Mês/Ano" 
+					valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" 
+					displayFormat="dd/MM/yyyy" 
+					width="40%"
+				/>
 			</f:content>
 		</f:SimpleForm>
 		</VBox>

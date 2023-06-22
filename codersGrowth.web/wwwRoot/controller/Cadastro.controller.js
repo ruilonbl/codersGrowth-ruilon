@@ -29,14 +29,27 @@ sap.ui.define([
 				sexo : ""
 			}
 			this.getView().setModel(new JSONModel(aluno), "alunos");
+			this._configurarData()
+			window.dataaaa = this.getView().byId("inputData");
 		},
 
 		aoClicarEmSalvar : async function(){
 			let alunoCriacao = this.getView().getModel("alunos").getData();
-			await this._salvarAluno(alunoCriacao);
+			alunoCriacao.cpf = this._cpf(alunoCriacao.cpf)
+			let nome = this.getView().byId("inputNome")
+			let cpf = this.getView().byId("inputCpf")
+			let altura = this.getView().byId("inputAltura")
+			let sexo = this.getView().byId("inputSexo")
+			let data = this.getView().byId("inputData")
+			Validacao.validarNome(nome)
+			Validacao.validarCpf(cpf)
+			Validacao.validarAltura(altura)
+			Validacao.validarSexo(sexo)
+			Validacao.validarData(data)
+			await this._salvarAluno(alunoCriacao)	
 		},
 
-		aoClicarEmCancelar: function () {
+		aoClicarEmCancelar: function () {		
 			if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
@@ -48,6 +61,7 @@ sap.ui.define([
 						press: function () {
 							this.oApproveDialog.close();
 							this._limparTela()
+							this._aoDevolverCamposVazios()	
 							this.aoClicarEmVoltar()
 							this.oApproveDialog = null;
 						}.bind(this)
@@ -61,11 +75,12 @@ sap.ui.define([
 					})
 				});
 			}
-			this.oApproveDialog.open();
+			this.oApproveDialog.open()
 		},
 
         aoClicarEmVoltar: function () {
 			this._limparTela()
+			this._aoDevolverCamposVazios()	
 			let oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("academia", {}, true);
 		},
@@ -82,7 +97,6 @@ sap.ui.define([
 		},
 
 		_salvarAluno : function (aluno){
-			Validacao.validarNome(aluno.getData(nome),this.byId("inputNome"))
 			BusyIndicator.show()
 			 fetch(uri, {
 				method: "POST", 
@@ -105,7 +119,6 @@ sap.ui.define([
 								text: "OK",
 								press: function () {
 									this.oApproveDialog.close();
-									this._limparTela()
 									this.oApproveDialog = null;
 								}.bind(this)
 							})
@@ -135,17 +148,40 @@ sap.ui.define([
 					this.oApproveDialog.open();	
 				}
 			})
-			.then(data => console.log(data))	  
+			.then(data => console.log(data))  
 		},
-		aoInserirValor : function(){
-			let nome = this.getView().byId("inputNome")
-			console.log(nome)
-			Validacao.validarNome(nome)
-		},
+
 		aoInserirValorCpf: function () {
 			let cpf = this.getView().byId("inputCpf")
 			Validacao.formatarCpf(cpf)
-		  },
+		},
+
+		aoInserirValorAltura : function(){
+			let altura = this.getView().byId("inputAltura")
+			Validacao.formatarAltura(altura)
+		},
+		_aoDevolverCamposVazios : function () {
+            this.byId("inputNome").setValueState("None");
+            this.byId("inputAltura").setValueState("None");
+            this.byId("inputCpf").setValueState("None");
+            this.byId("inputData").setValueState("None");
+            this.byId("inputSexo").setValueState("None");
+        },
+
+		_cpf :function(cpf)
+		{
+			return cpf.replace(/\D/g, '');
+		},
+
+		_configurarData: function()
+		{
+			var oDatePicker = this.getView().byId("inputData");
+			var oDate = new Date();
+			const idadeMaxima = 80;
+			oDate.setFullYear(oDate.getFullYear() - idadeMaxima);
+			oDatePicker.setMinDate(oDate);
+			oDatePicker.setMaxDate(new Date());
+		}
 	});
 
 });
