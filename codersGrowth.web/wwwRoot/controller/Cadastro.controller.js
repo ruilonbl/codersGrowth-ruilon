@@ -29,7 +29,6 @@ sap.ui.define([
 				sexo : ""
 			}
 			this.getView().setModel(new JSONModel(aluno), "alunos");
-			this._configurarData()
 			window.dataaaa = this.getView().byId("inputData");
 		},
 
@@ -41,12 +40,20 @@ sap.ui.define([
 			let altura = this.getView().byId("inputAltura")
 			let sexo = this.getView().byId("inputSexo")
 			let data = this.getView().byId("inputData")
-			Validacao.validarNome(nome)
-			Validacao.validarCpf(cpf)
-			Validacao.validarAltura(altura)
-			Validacao.validarSexo(sexo)
-			Validacao.validarData(data)
-			await this._salvarAluno(alunoCriacao)	
+			let NomeValidado = Validacao.validarNome(nome) 
+			let CpfValidado  = Validacao.validarCpf(cpf)
+			let AlturaValidado  = Validacao.validarAltura(altura)
+			let SexoValidado  = Validacao.validarSexo(sexo) 
+			let DataValidado  = Validacao.validarData(data)
+			if(NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado)
+			{
+				await this._salvarAluno(alunoCriacao)
+			}
+			// Validacao.validarCpf(cpf)
+			// Validacao.validarAltura(altura)
+			// Validacao.validarSexo(sexo)
+			// Validacao.validarData(data)
+				
 		},
 
 		aoClicarEmCancelar: function () {		
@@ -99,36 +106,48 @@ sap.ui.define([
 		_salvarAluno : function (aluno){
 			BusyIndicator.show()
 			 fetch(uri, {
-				method: "POST", 
-				mode: "cors", 
+				method: "POST",
 				headers: {
-				  "Content-Type": "application/json",
+				  "Content-Type": "application/json"
 				},
-				body: JSON.stringify(aluno), 
+				body: JSON.stringify(aluno)
 			  }).then(response => {
+				debugger
+				console.log(response)
 				BusyIndicator.hide()
-				response.json()
-				if (response.status == 400){
-					if (!this.oApproveDialog) {
-						this.oApproveDialog = new Dialog({
-							type: DialogType.Message,
-							title: "Erro",
-							content: new Text({ text: "Não foi possivel cadastrar o aluno" }),
-							beginButton: new Button({
-								type: ButtonType.Emphasized,
-								text: "OK",
-								press: function () {
-									this.oApproveDialog.close();
-									this.oApproveDialog = null;
-								}.bind(this)
-							})
-						});
-					}
-					this.oApproveDialog.open();	
+				if (response.status >=400 && response.status <=599 ){
+					return response.text();
+					
 				}
-				else
-				{
-					if (!this.oApproveDialog) {
+				response.json()
+			}).then(response => {
+					debugger
+					let cpg = this.getView().byId("inputCpf").getValue()
+					cpg = this._cpf(cpg)
+					console.log(cpg)
+                    if (response == `O cpf ${cpg} ja existe`) {
+                        this.byId("inputCpf").setValueState(sap.ui.core.ValueState.Error);
+                        this.byId("inputCpf").setValueStateText("CPF já existe");
+						if (!this.oApproveDialog) {
+							this.oApproveDialog = new Dialog({
+								type: DialogType.Message,
+								title: "Erro",
+								content: new Text({text: "Não foi possivel efetuar o cadastro" }),
+								beginButton: new Button({
+									type: ButtonType.Emphasized,
+									text: "OK",
+									press: function () {
+										this.oApproveDialog.close();
+										this.oApproveDialog = null;
+									}.bind(this)
+								})
+							});
+						}
+						this.oApproveDialog.open();	
+                    }
+					else
+					{
+						if (!this.oApproveDialog) {
 						this.oApproveDialog = new Dialog({
 							type: DialogType.Message,
 							title: "Sucesso",
@@ -144,9 +163,9 @@ sap.ui.define([
 								}.bind(this)
 							})
 						});
+						}
+						this.oApproveDialog.open();	
 					}
-					this.oApproveDialog.open();	
-				}
 			})
 			.then(data => console.log(data))  
 		},

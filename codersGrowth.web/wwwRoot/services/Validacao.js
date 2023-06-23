@@ -8,10 +8,12 @@ sap.ui.define([
     let aluno = inpoutAluno.getValue()
       if (aluno == "") {
         inpoutAluno.setValueState(sap.ui.core.ValueState.Error);
-          return inpoutAluno.setValueStateText("Por favor preencha o campo do nome")
+          inpoutAluno.setValueStateText("Por favor preencha o campo do nome")
+          return false
       }
       else{
-        return inpoutAluno.setValueState(sap.ui.core.ValueState.None)
+        inpoutAluno.setValueState(sap.ui.core.ValueState.None)
+        return true
       }
     },
     validarCpf: function (inpoutCpf) {
@@ -19,16 +21,19 @@ sap.ui.define([
       let cpfTamanho = 12
         if (cpf == "") {
           inpoutCpf.setValueState(sap.ui.core.ValueState.Error);
-          return inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
+          inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
+          return false
         }
         else
         {
           if (cpf.length<cpfTamanho) {
             inpoutCpf.setValueState(sap.ui.core.ValueState.Error)
-            return inpoutCpf.setValueStateText("Cpf invalido")
+            inpoutCpf.setValueStateText("Cpf invalido")
+            return false
           }
           else{
-            return inpoutCpf.setValueState(sap.ui.core.ValueState.None)
+              inpoutCpf.setValueState(sap.ui.core.ValueState.None)
+              return true
           }
         }
       },
@@ -36,20 +41,24 @@ sap.ui.define([
       let altura = inpoutAltura.getValue()
         if (altura == "") {
           inpoutAltura.setValueState(sap.ui.core.ValueState.Error)
-          return inpoutAltura.setValueStateText("Por favor preencha o campo da altura")
+          inpoutAltura.setValueStateText("Por favor preencha o campo da altura")
+          return false
         }
         else{
-          return inpoutAltura.setValueState(sap.ui.core.ValueState.None)
+          inpoutAltura.setValueState(sap.ui.core.ValueState.None)
+          return true
         }
     },
     validarSexo: function (inpoutSexo) {
       let sexo = inpoutSexo.getSelectedKey()
       if (sexo == "") {
         inpoutSexo.setValueState(sap.ui.core.ValueState.Error)
-        return inpoutSexo.setValueStateText("Por favor selecione o seu Sexo")
+        inpoutSexo.setValueStateText("Por favor selecione o seu Sexo")
+        return false
       }
       else{
-        return inpoutSexo.setValueState(sap.ui.core.ValueState.None)
+        inpoutSexo.setValueState(sap.ui.core.ValueState.None)
+        return true
       }
     },
     validarData: function (inpoutData) {
@@ -61,22 +70,26 @@ sap.ui.define([
       data = new Date(data).getFullYear()
       if (dataTotal == "") {
         inpoutData.setValueState(sap.ui.core.ValueState.Error)
-        return inpoutData.setValueStateText("Por favor seleciona a sua data de nascimento")
+        inpoutData.setValueStateText("Por favor seleciona a sua data de nascimento")
+        return false
       }
       else{
         if(idadeMinima > dataAtual - data)
         {
           inpoutData.setValueState(sap.ui.core.ValueState.Error)
-          return inpoutData.setValueStateText("Idade minima de 12 anos")
+          inpoutData.setValueStateText("Idade minima de 12 anos")
+          return false
         }
         else
         {
           if(idadeMaxima < dataAtual - data){
             inpoutData.setValueState(sap.ui.core.ValueState.Error)
-            return inpoutData.setValueStateText("Idade maxima de 80 anos")
+            inpoutData.setValueStateText("Idade maxima de 80 anos")
+            return false
           }
           else{
-            return inpoutData.setValueState(sap.ui.core.ValueState.None)
+            inpoutData.setValueState(sap.ui.core.ValueState.None)
+            return true
           } 
         }
                
