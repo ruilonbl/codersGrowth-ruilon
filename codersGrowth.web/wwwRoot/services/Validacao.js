@@ -16,13 +16,14 @@ sap.ui.define([
     },
     validarCpf: function (inpoutCpf) {
       let cpf = inpoutCpf.getValue()
+      let cpfTamanho = 12
         if (cpf == "") {
           inpoutCpf.setValueState(sap.ui.core.ValueState.Error);
           return inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
         }
         else
         {
-          if (cpf.length<14) {
+          if (cpf.length<cpfTamanho) {
             inpoutCpf.setValueState(sap.ui.core.ValueState.Error)
             return inpoutCpf.setValueStateText("Cpf invalido")
           }
@@ -54,10 +55,11 @@ sap.ui.define([
     validarData: function (inpoutData) {
       let data = inpoutData.getValue()
       let idadeMinima = 12
+      let idadeMaxima = 80
       let dataAtual = 2023
+      let dataTotal =data
       data = new Date(data).getFullYear()
-      console.log(data)
-      if (data == "") {
+      if (dataTotal == "") {
         inpoutData.setValueState(sap.ui.core.ValueState.Error)
         return inpoutData.setValueStateText("Por favor seleciona a sua data de nascimento")
       }
@@ -67,9 +69,17 @@ sap.ui.define([
           inpoutData.setValueState(sap.ui.core.ValueState.Error)
           return inpoutData.setValueStateText("Idade minima de 12 anos")
         }
-        else{
-          return inpoutData.setValueState(sap.ui.core.ValueState.None)
-        }        
+        else
+        {
+          if(idadeMaxima < dataAtual - data){
+            inpoutData.setValueState(sap.ui.core.ValueState.Error)
+            return inpoutData.setValueStateText("Idade maxima de 80 anos")
+          }
+          else{
+            return inpoutData.setValueState(sap.ui.core.ValueState.None)
+          } 
+        }
+               
       }
     },
     formatarCpf : function(cpf){
@@ -78,7 +88,7 @@ sap.ui.define([
       {
          return cpf.setValue(Formater.formataCPF(cpformatado))
       }else {
-				return cpf.setValue(cpformatado.replace(/[^\d+]/, ""))
+				return cpf.setValue(cpformatado.replaceAll(/[^0-9]/g,''))
       }    
     },
     formatarAltura : function(altura){

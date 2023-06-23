@@ -6,7 +6,7 @@ sap.ui.define([
 	"sap/m/library",
 	"sap/m/Text",
 	"../services/Validacao",
-	"sap/ui/core/BusyIndicator"
+	"sap/ui/core/BusyIndicator",
 ], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
@@ -155,7 +155,6 @@ sap.ui.define([
 			let cpf = this.getView().byId("inputCpf")
 			Validacao.formatarCpf(cpf)
 		},
-
 		aoInserirValorAltura : function(){
 			let altura = this.getView().byId("inputAltura")
 			Validacao.formatarAltura(altura)
@@ -171,16 +170,6 @@ sap.ui.define([
 		_cpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
-		},
-
-		_configurarData: function()
-		{
-			var oDatePicker = this.getView().byId("inputData");
-			var oDate = new Date();
-			const idadeMaxima = 80;
-			oDate.setFullYear(oDate.getFullYear() - idadeMaxima);
-			oDatePicker.setMinDate(oDate);
-			oDatePicker.setMaxDate(new Date());
 		}
 	});
 
