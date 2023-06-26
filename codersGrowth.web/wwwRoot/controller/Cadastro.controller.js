@@ -43,7 +43,7 @@ sap.ui.define([
 
 		aoClicarEmSalvar : async function(){
 			let alunoCriacao = this.getView().getModel("alunos").getData();
-			alunoCriacao.cpf = this.RetirarCatacterCpf(alunoCriacao.cpf)
+			alunoCriacao.cpf = this._RetirarCatacterCpf(alunoCriacao.cpf)
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
@@ -129,7 +129,7 @@ sap.ui.define([
 			}).then(response => {
 				debugger
 					let cpf = this.getView().byId(inputCpf).getValue()
-					cpf = this._cpf(cpf)
+					cpf = this._RetirarCatacterCpf(cpf)
 					console.log(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
@@ -196,7 +196,7 @@ sap.ui.define([
             this.byId(inputSexo).setValueState(valorPadrao);
         },
 
-		RetirarCatacterCpf :function(cpf)
+		_RetirarCatacterCpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
 		}

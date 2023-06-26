@@ -69,6 +69,7 @@ sap.ui.define([
     },
 
     validarData: function (inpoutData) {
+      debugger
       let data = inpoutData.getValue()
       let idadeMinima = 12
       let idadeMaxima = 80
@@ -84,7 +85,7 @@ sap.ui.define([
       else{
         if(idadeMinima > dataAtual - data)
         {
-          inpoutData.setValueState(ValueState)
+          inpoutData.setValueState(ValueStateErro)
           inpoutData.setValueStateText("Idade minima de 12 anos")
           return false
         }
