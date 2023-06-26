@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mqkDZ5RkqWVQvbWWiBIWLe+wlREbmW7CZHdqRC89ulU=",
+  "Hash": "Xy1U4DVoIMgrSqEA10WdwS+Syd7Sdu1VNdA/gl1cqjs=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -34,12 +34,12 @@
       "OriginalItemSpec": "wwwroot\\Component.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\Academia.controller.js",
+      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\academia.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "controller/Academia.controller.js",
+      "RelativePath": "controller/academia.controller.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -48,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Academia.controller.js"
+      "OriginalItemSpec": "wwwroot\\controller\\academia.controller.js"
     },
     {
       "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\App.controller.js",
