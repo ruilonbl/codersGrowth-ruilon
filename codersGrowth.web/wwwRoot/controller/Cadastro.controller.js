@@ -58,7 +58,6 @@ sap.ui.define([
 			{
 				await this._salvarAluno(alunoCriacao)
 			}
-				
 		},
 
 		aoClicarEmCancelar: function () {		
@@ -127,10 +126,8 @@ sap.ui.define([
 				}
 				response.json()
 			}).then(response => {
-				debugger
 					let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = this._RetirarCatacterCpf(cpf)
-					console.log(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
                         this.byId(inputCpf).setValueStateText("CPF já existe");

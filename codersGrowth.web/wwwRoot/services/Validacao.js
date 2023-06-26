@@ -7,7 +7,6 @@ sap.ui.define([
     const ValueStatePadrao = coreLibrary.ValueState.None;
     return {
     validarNome: function (inpoutAluno) {
-
     let aluno = inpoutAluno.getValue()
       if (aluno == stringVazia) {
         inpoutAluno.setValueState(ValueStateErro);

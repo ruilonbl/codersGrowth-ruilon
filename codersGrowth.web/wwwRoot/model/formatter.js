@@ -16,8 +16,9 @@ sap.ui.define([], function () {
 		  },
 	  
 		  formatarAltura : function(altura){
+			debugger
 			let alturaFormatada = altura.getValue()
-			return altura.setValue(alturaFormatada.replace(/[^\d]/g, ""))
+			return altura.setValue(alturaFormatada.replaceAll(/[^\d]/g, ""))
 		  }
 	};
 });
