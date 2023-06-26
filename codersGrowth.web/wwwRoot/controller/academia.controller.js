@@ -7,8 +7,9 @@ sap.ui.define([
     return Controller.extend("sap.ui.demo.academia.controller.Academia",{
       onInit:function() {
          var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("academia").attachPatternMatched(this._aoCoincidirRota, this);     
+			oRouter.getRoute("ListaDeAlunos").attachPatternMatched(this._aoCoincidirRota, this);     
       },
+
       _aoCoincidirRota : function()
       {
          let tela = this.getView();
@@ -23,6 +24,7 @@ sap.ui.define([
                console.error(error);
             }); 
       },
+
       aoClicarEmCadastro : function(event){
          let oRouter = this.getOwnerComponent().getRouter()
          oRouter.navTo("cadastro")

@@ -48,7 +48,7 @@
 								<f:FormElement label="CPF">
 									<f:fields>
 										<Text text="{path: 'alunos>/cpf',
-													formatter: '.formatter.formataCPF'}" />
+													formatter: '.formatter.formataCPFDetalhes'}" />
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Data de nascimento">

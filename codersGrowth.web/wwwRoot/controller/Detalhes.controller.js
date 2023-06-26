@@ -19,7 +19,7 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("academia", {}, true);
+            oRouter.navTo("ListaDeAlunos", {}, true);
 		},
 
         _detalhes : function (id){

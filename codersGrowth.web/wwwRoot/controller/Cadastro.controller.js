@@ -1,3 +1,4 @@
+
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
@@ -7,11 +8,20 @@ sap.ui.define([
 	"sap/m/Text",
 	"../services/Validacao",
 	"sap/ui/core/BusyIndicator",
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator) {
+	"sap/ui/core/library",
+	"../model/Formatter"
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,Formatter) {
 	"use strict";
 	const uri = 'https://localhost:7020/api/alunos/';
 	var ButtonType = mobileLibrary.ButtonType;
 	var DialogType = mobileLibrary.DialogType;
+	var ValueState = coreLibrary.ValueState;
+	const inputNome = "inputNome";
+	const inputAltura = "inputAltura";
+	const inputCpf = "inputCpf";
+	const inputData = "inputData";
+	const inputSexo = "inputSexo";
+	const stringVazia = "";
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
 			onInit:function() {
 			var oRouter = this.getOwnerComponent().getRouter();
@@ -20,26 +30,25 @@ sap.ui.define([
 
 		_aoCoincidirRota : function()
 		{
-			window.inputNome = this.byId("inputNome");
 			let aluno = {
-				nome : "",
-				cpf : "",
-				altura : "",
-				dat : "",
-				sexo : ""
+				nome : stringVazia,
+				cpf : stringVazia,
+				altura : stringVazia,
+				dat : stringVazia,
+				sexo : stringVazia
 			}
 			this.getView().setModel(new JSONModel(aluno), "alunos");
-			window.dataaaa = this.getView().byId("inputData");
+			this.DefinirEstadoPadrao()
 		},
 
 		aoClicarEmSalvar : async function(){
 			let alunoCriacao = this.getView().getModel("alunos").getData();
-			alunoCriacao.cpf = this._cpf(alunoCriacao.cpf)
-			let nome = this.getView().byId("inputNome")
-			let cpf = this.getView().byId("inputCpf")
-			let altura = this.getView().byId("inputAltura")
-			let sexo = this.getView().byId("inputSexo")
-			let data = this.getView().byId("inputData")
+			alunoCriacao.cpf = this.RetirarCatacterCpf(alunoCriacao.cpf)
+			let nome = this.getView().byId(inputNome )
+			let cpf = this.getView().byId(inputCpf)
+			let altura = this.getView().byId(inputAltura)
+			let sexo = this.getView().byId(inputSexo)
+			let data = this.getView().byId(inputData)
 			let NomeValidado = Validacao.validarNome(nome) 
 			let CpfValidado  = Validacao.validarCpf(cpf)
 			let AlturaValidado  = Validacao.validarAltura(altura)
@@ -49,10 +58,6 @@ sap.ui.define([
 			{
 				await this._salvarAluno(alunoCriacao)
 			}
-			// Validacao.validarCpf(cpf)
-			// Validacao.validarAltura(altura)
-			// Validacao.validarSexo(sexo)
-			// Validacao.validarData(data)
 				
 		},
 
@@ -68,13 +73,13 @@ sap.ui.define([
 						press: function () {
 							this.oApproveDialog.close();
 							this._limparTela()
-							this._aoDevolverCamposVazios()	
-							this.aoClicarEmVoltar()
+							this.DefinirEstadoPadrao()	
+							this._navegarParaLista()
 							this.oApproveDialog = null;
 						}.bind(this)
 					}),
 					endButton: new Button({
-						text: "nao",
+						text: "Não",
 						press: function () {
 							this.oApproveDialog.close();
 							this.oApproveDialog = null;
@@ -86,21 +91,23 @@ sap.ui.define([
 		},
 
         aoClicarEmVoltar: function () {
-			this._limparTela()
-			this._aoDevolverCamposVazios()	
+			this._navegarParaLista();
+		},
+
+		_navegarParaLista: function(){
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("academia", {}, true);
+            oRouter.navTo("ListaDeAlunos", {}, true);
 		},
 
 		_limparTela: function () {
-			let nome = this.byId("inputNome")
-			let altura = this.byId("inputAltura")
-			let cpf = this.byId("inputCpf")
-			let data = this.byId("inputData")
-			nome.setValue("")
-			altura.setValue("")
-			cpf.setValue("")
-			data.setValue("")
+			let nome = this.byId(inputNome)
+			let altura = this.byId(inputAltura)
+			let cpf = this.byId(inputCpf)
+			let data = this.byId(inputData)
+			nome.setValue(stringVazia)
+			altura.setValue(stringVazia)
+			cpf.setValue(stringVazia)
+			data.setValue(stringVazia)
 		},
 
 		_salvarAluno : function (aluno){
@@ -112,7 +119,6 @@ sap.ui.define([
 				},
 				body: JSON.stringify(aluno)
 			  }).then(response => {
-				debugger
 				console.log(response)
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
@@ -121,29 +127,30 @@ sap.ui.define([
 				}
 				response.json()
 			}).then(response => {
-					debugger
-					let cpg = this.getView().byId("inputCpf").getValue()
-					cpg = this._cpf(cpg)
-					console.log(cpg)
-                    if (response == `O cpf ${cpg} ja existe`) {
-                        this.byId("inputCpf").setValueState(sap.ui.core.ValueState.Error);
-                        this.byId("inputCpf").setValueStateText("CPF já existe");
-						if (!this.oApproveDialog) {
-							this.oApproveDialog = new Dialog({
+				debugger
+					let cpf = this.getView().byId(inputCpf).getValue()
+					cpf = this._cpf(cpf)
+					console.log(cpf)
+                    if (response == `O cpf ${cpf} ja existe`) {
+                        this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
+                        this.byId(inputCpf).setValueStateText("CPF já existe");
+						if (!this.oErrorMessageDialog) {
+							this.oErrorMessageDialog = new Dialog({
 								type: DialogType.Message,
 								title: "Erro",
+								state: ValueState.Error,
 								content: new Text({text: "Não foi possivel efetuar o cadastro" }),
 								beginButton: new Button({
 									type: ButtonType.Emphasized,
 									text: "OK",
 									press: function () {
-										this.oApproveDialog.close();
-										this.oApproveDialog = null;
+										this.oErrorMessageDialog.close();
+										this.oErrorMessageDialog = null;
 									}.bind(this)
 								})
 							});
 						}
-						this.oApproveDialog.open();	
+						this.oErrorMessageDialog.open();	
                     }
 					else
 					{
@@ -158,7 +165,7 @@ sap.ui.define([
 								press: function () {
 									this.oApproveDialog.close();
 									this._limparTela()
-									this.aoClicarEmVoltar()
+									this._navegarParaLista()
 									this.oApproveDialog = null;
 								}.bind(this)
 							})
@@ -171,22 +178,25 @@ sap.ui.define([
 		},
 
 		aoInserirValorCpf: function () {
-			let cpf = this.getView().byId("inputCpf")
-			Validacao.formatarCpf(cpf)
+			let cpf = this.getView().byId(inputCpf)
+			Formatter.formatarCpf(cpf)
 		},
+
 		aoInserirValorAltura : function(){
-			let altura = this.getView().byId("inputAltura")
-			Validacao.formatarAltura(altura)
+			let altura = this.getView().byId(inputAltura)
+			Formatter.formatarAltura(altura)
 		},
-		_aoDevolverCamposVazios : function () {
-            this.byId("inputNome").setValueState("None");
-            this.byId("inputAltura").setValueState("None");
-            this.byId("inputCpf").setValueState("None");
-            this.byId("inputData").setValueState("None");
-            this.byId("inputSexo").setValueState("None");
+
+		DefinirEstadoPadrao : function () {
+			const valorPadrao = "None";
+            this.byId(inputNome).setValueState(valorPadrao);
+            this.byId(inputAltura).setValueState(valorPadrao);
+            this.byId(inputCpf).setValueState(valorPadrao);
+            this.byId(inputData).setValueState(valorPadrao);
+            this.byId(inputSexo).setValueState(valorPadrao);
         },
 
-		_cpf :function(cpf)
+		RetirarCatacterCpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
 		}

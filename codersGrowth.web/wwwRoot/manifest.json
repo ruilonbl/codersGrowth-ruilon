@@ -55,7 +55,7 @@
 			"routes": [
 				{
 					"pattern": "",
-					"name": "academia",
+					"name": "ListaDeAlunos",
 					"target": "academia"
 				},
 				{
