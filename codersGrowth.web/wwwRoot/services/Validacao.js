@@ -2,14 +2,13 @@ sap.ui.define([
   "sap/ui/core/library"
   ], function (coreLibrary) {
     "use strict";
-    const stringVazia = "";
     const ValueStateErro = coreLibrary.ValueState.Error;
     const ValueStatePadrao = coreLibrary.ValueState.None;
     return {
     validarNome: function (inpoutAluno) {
 
     let aluno = inpoutAluno.getValue()
-      if (aluno == stringVazia) {
+      if (!aluno) {
         inpoutAluno.setValueState(ValueStateErro);
         inpoutAluno.setValueStateText("Por favor preencha o campo do nome")
         return false
@@ -23,7 +22,7 @@ sap.ui.define([
     validarCpf: function (inpoutCpf) {
       let cpf = inpoutCpf.getValue()
       let cpfTamanho = 12
-        if (cpf == stringVazia) {
+        if (!cpf) {
           inpoutCpf.setValueState(ValueStateErro);
           inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
           return false
@@ -44,7 +43,7 @@ sap.ui.define([
 
     validarAltura: function (inpoutAltura) {
       let altura = inpoutAltura.getValue()
-        if (altura == stringVazia) {
+        if (!altura) {
           inpoutAltura.setValueState(ValueStateErro)
           inpoutAltura.setValueStateText("Por favor preencha o campo da altura")
           return false
@@ -57,7 +56,7 @@ sap.ui.define([
 
     validarSexo: function (inputSexo) {
       let sexo = inputSexo.getSelectedKey()
-      if (sexo == stringVazia) {
+      if (!sexo) {
         inputSexo.setValueState(ValueStateErro)
         inputSexo.setValueStateText("Por favor selecione o seu Sexo")
         return false
@@ -69,7 +68,6 @@ sap.ui.define([
     },
 
     validarData: function (inpoutData) {
-      debugger
       let data = inpoutData.getValue()
       let idadeMinima = 12
       let idadeMaxima = 80
@@ -77,7 +75,7 @@ sap.ui.define([
       let dataTotal =data
       data = new Date(data).getFullYear()
 
-      if (dataTotal == stringVazia) {
+      if (!dataTotal) {
         inpoutData.setValueState(ValueStateErro)
         inpoutData.setValueStateText("Por favor seleciona a sua data de nascimento")
         return false

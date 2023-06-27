@@ -12,7 +12,7 @@ sap.ui.define([
 	"../model/Formatter"
 ], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,Formatter) {
 	"use strict";
-	const uri = 'https://localhost:7020/api/alunos/';
+	const uri = 'https://localhost:7020/api/alunos';
 	var ButtonType = mobileLibrary.ButtonType;
 	var DialogType = mobileLibrary.DialogType;
 	var ValueState = coreLibrary.ValueState;
@@ -25,10 +25,11 @@ sap.ui.define([
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
 			onInit:function() {
 			var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);     
+				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);
+				oRouter.getRoute("editar").attachPatternMatched(this._aoCoincidirRotaEditar, this);      
 		},
 
-		_aoCoincidirRota : function()
+		_aoCoincidirRota : function(oEvent)
 		{
 			let aluno = {
 				nome : stringVazia,
@@ -37,13 +38,62 @@ sap.ui.define([
 				dat : stringVazia,
 				sexo : stringVazia
 			}
-			this.getView().setModel(new JSONModel(aluno), "alunos");
+			this.getView().setModel(new JSONModel(aluno), "alunos");				
 			this.DefinirEstadoPadrao()
+		},
+		_modeloAlunos: function(modelo){
+            const nomeModelo = "alunos";
+            if (modelo){
+                return this.getView().setModel(modelo, nomeModelo);   
+            } else{
+                return this.getView().getModel(nomeModelo);
+            }
+        },
+
+		_aoCoincidirRotaEditar : function(oEvent)
+		{
+			let Id = oEvent.getParameter("arguments").id
+			this.DefinirEstadoPadrao()
+			this._PreencherTela(Id)
+		},
+
+		_PreencherTela : function(id)
+		{
+			let tela = this.getView();
+            fetch(`${uri}/${id}`)
+               .then(function(response){
+                  return response.json();
+               })
+               .then(function (data){
+                  tela.setModel(new JSONModel(data),"alunos")
+               })
+               .catch(function (error){
+                  console.error(error);
+               }); 		
 		},
 
 		aoClicarEmSalvar : async function(){
-			let alunoCriacao = this.getView().getModel("alunos").getData();
-			alunoCriacao.cpf = this._RetirarCatacterCpf(alunoCriacao.cpf)
+			let aluno = this._modeloAlunos().getData();
+			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
+            if (aluno.id) {
+                
+				if(this._validarCampos())
+				{
+					this._EditarAluno()
+
+				}      
+            }
+            else {
+                if(this._validarCampos())
+				{
+					this._salvarAluno(aluno)
+				}              
+            }
+				
+		},
+
+		_validarCampos: function()
+		{			
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
@@ -56,9 +106,8 @@ sap.ui.define([
 			let DataValidado  = Validacao.validarData(data)
 			if(NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado)
 			{
-				await this._salvarAluno(alunoCriacao)
+				return true
 			}
-				
 		},
 
 		aoClicarEmCancelar: function () {		
@@ -112,7 +161,7 @@ sap.ui.define([
 
 		_salvarAluno : function (aluno){
 			BusyIndicator.show()
-			 fetch(uri, {
+			 fetch(`${uri}/`,{
 				method: "POST",
 				headers: {
 				  "Content-Type": "application/json"
@@ -127,7 +176,6 @@ sap.ui.define([
 				}
 				response.json()
 			}).then(response => {
-				debugger
 					let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = this._RetirarCatacterCpf(cpf)
 					console.log(cpf)
@@ -177,6 +225,62 @@ sap.ui.define([
 			.then(data => console.log(data))  
 		},
 
+		_EditarAluno : function (){
+			let aluno = this._modeloAlunos().getData();
+			BusyIndicator.show()
+			 fetch(`${uri}/${aluno.id}`,{
+				method: 'PUT',
+				headers: {
+				  "Content-Type": "application/json"
+				},
+				body: JSON.stringify(aluno)
+			  }).then(response => {
+				console.log(response)
+				BusyIndicator.hide()
+				if (response.status >=400 && response.status <=599 ){
+					if (!this.oErrorMessageDialog) {
+						this.oErrorMessageDialog = new Dialog({
+							type: DialogType.Message,
+							title: "Erro",
+							state: ValueState.Error,
+							content: new Text({text: "Não foi possivel efetuar a atualização" }),
+							beginButton: new Button({
+								type: ButtonType.Emphasized,
+								text: "OK",
+								press: function () {
+									this.oErrorMessageDialog.close();
+									this.oErrorMessageDialog = null;
+								}.bind(this)
+							})
+						});
+					}
+					this.oErrorMessageDialog.open();	
+				}
+				else
+				{
+					if (!this.oApproveDialog) {
+					this.oApproveDialog = new Dialog({
+						type: DialogType.Message,
+						title: "Sucesso",
+						content: new Text({ text: "Aluno atualizado com sucesso" }),
+						beginButton: new Button({
+							type: ButtonType.Emphasized,
+							text: "OK",
+							press: function () {
+								this.oApproveDialog.close();
+								this._limparTela()
+								this._navegarParaLista()
+								this.oApproveDialog = null;
+							}.bind(this)
+						})
+					});
+					}
+					this.oApproveDialog.open();	
+					}
+			})
+			.then(data => console.log(data))  
+		},
+
 		aoInserirValorCpf: function () {
 			let cpf = this.getView().byId(inputCpf)
 			Formatter.formatarCpf(cpf)
@@ -199,7 +303,21 @@ sap.ui.define([
 		_RetirarCatacterCpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
-		}
+		},
+
+		_Atualizar : function (id){
+            let tela = this.getView();
+            fetch(`${uri}/${id}`)
+               .then(function(response){
+                  return response.json();
+               })
+               .then(function (data){
+                  tela.setModel(new JSONModel(data),"alunos")
+               })
+               .catch(function (error){
+                  console.error(error);
+               }); 			
+        },
 	});
 
 });
