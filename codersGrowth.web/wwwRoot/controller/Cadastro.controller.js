@@ -53,9 +53,9 @@ sap.ui.define([
 		_aoCoincidirRotaEditar : function(oEvent)
 		{
 			let Id = oEvent.getParameter("arguments").id
+			this.byId("inputForm").setTitle("Atualizar Aluno");
 			this.DefinirEstadoPadrao()
 			this._PreencherTela(Id)
-			debugger
 			var input = this.getView().byId(inputCpf)
 			input.setEnabled(false)
 		},
@@ -68,6 +68,7 @@ sap.ui.define([
                   return response.json();
                })
                .then(function (data){
+				  data.cpf = Formatter.formataCPF(data.cpf)
                   tela.setModel(new JSONModel(data),"alunos")
                })
                .catch(function (error){
@@ -179,7 +180,6 @@ sap.ui.define([
 			}).then(response => {
 					let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = this._RetirarCatacterCpf(cpf)
-					console.log(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
                         this.byId(inputCpf).setValueStateText("CPF já existe");

@@ -12,7 +12,7 @@
 		<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar"/>
 	</headerContent>
 	<VBox class="sapUiSmallMargin">
-		<f:SimpleForm id="SimpleFormChange354wideDual"
+		<f:SimpleForm id="inputForm"
 			editable="true"
 			layout="ResponsiveGridLayout"
 			title="CADASTRO"
