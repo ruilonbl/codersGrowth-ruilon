@@ -50,7 +50,7 @@ sap.ui.define([
                })
                .catch(function (error){
                   console.error(error);
-               }); 			
+               });	
         },
 	});
 });

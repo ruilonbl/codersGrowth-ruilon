@@ -33,7 +33,7 @@
 				<Label text="Nome" />
 				<Input id="inputNome" value="{alunos>/nome}"/>
 				<Label text="CPF/Altura" />
-				<Input  id = "inputCpf" value="{alunos>/cpf}"  maxLength="14"  liveChange="aoInserirValorCpf">
+				<Input id = "inputCpf" value="{alunos>/cpf}"  maxLength="14"  liveChange="aoInserirValorCpf">
 				</Input>
 					<Input id ="inputAltura" value="{alunos>/altura}" maxLength="3" liveChange="aoInserirValorAltura" >
 						<layoutData>

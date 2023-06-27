@@ -55,6 +55,9 @@ sap.ui.define([
 			let Id = oEvent.getParameter("arguments").id
 			this.DefinirEstadoPadrao()
 			this._PreencherTela(Id)
+			debugger
+			var input = this.getView().byId(inputCpf)
+			input.setEnabled(false)
 		},
 
 		_PreencherTela : function(id)
@@ -69,23 +72,21 @@ sap.ui.define([
                })
                .catch(function (error){
                   console.error(error);
-               }); 		
+               });
 		},
 
 		aoClicarEmSalvar : async function(){
 			let aluno = this._modeloAlunos().getData();
 			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
             if (aluno.id) {
-                
 				if(this._validarCampos())
-				{
+				{	
 					this._EditarAluno()
-
 				}      
             }
             else {
                 if(this._validarCampos())
-				{
+				{	
 					this._salvarAluno(aluno)
 				}              
             }

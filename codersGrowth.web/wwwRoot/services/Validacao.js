@@ -21,7 +21,7 @@ sap.ui.define([
 
     validarCpf: function (inpoutCpf) {
       let cpf = inpoutCpf.getValue()
-      let cpfTamanho = 12
+      let cpfTamanho = 11
         if (!cpf) {
           inpoutCpf.setValueState(ValueStateErro);
           inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
