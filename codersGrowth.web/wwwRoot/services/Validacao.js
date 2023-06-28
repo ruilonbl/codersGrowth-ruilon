@@ -1,5 +1,5 @@
 sap.ui.define([
-  "sap/ui/core/library"
+  "sap/ui/core/library",
   ], function (coreLibrary) {
     "use strict";
     const ValueStateErro = coreLibrary.ValueState.Error;
@@ -20,6 +20,7 @@ sap.ui.define([
     },
 
     validarCpf: function (inpoutCpf) {
+      debugger
       let cpf = inpoutCpf.getValue()
       let cpfTamanho = 11
         if (!cpf) {
@@ -67,35 +68,34 @@ sap.ui.define([
       }
     },
 
-    validarData: function (inpoutData) {
+    validarData: function (inpoutData, buttonData) {
       let data = inpoutData.getValue()
       let idadeMinima = 12
       let idadeMaxima = 80
       let dataAtual = 2023
-      let dataTotal =data
+      let dataTotal = data
       data = new Date(data).getFullYear()
-
       if (!dataTotal) {
-        inpoutData.setValueState(ValueStateErro)
-        inpoutData.setValueStateText("Por favor seleciona a sua data de nascimento")
+        buttonData.setType(sap.m.ButtonType.Reject)
+        buttonData.setText("Por favor seleciona a sua data de nascimento")
         return false
       }
       else{
         if(idadeMinima > dataAtual - data)
         {
-          inpoutData.setValueState(ValueStateErro)
-          inpoutData.setValueStateText("Idade minima de 12 anos")
+          buttonData.setType(sap.m.ButtonType.Reject)
+          buttonData.setText("Idade minima de 12 anos")
           return false
         }
         else
         {
           if(idadeMaxima < dataAtual - data){
-            inpoutData.setValueState(ValueStateErro)
-            inpoutData.setValueStateText("Idade maxima de 80 anos")
+            buttonData.setType(sap.m.ButtonType.Reject)
+            buttonData.setText("Idade maxima de 80 anos")
             return false
           }
           else{
-            inpoutData.setValueState(ValueStatePadrao)
+            buttonData.setType(sap.m.ButtonType.Default)
             return true
           } 
         }

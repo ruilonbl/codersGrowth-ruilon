@@ -9,9 +9,10 @@ sap.ui.define([
 	"../services/Validacao",
 	"sap/ui/core/BusyIndicator",
 	"sap/ui/core/library",
-	"../model/Formatter"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,Formatter) {
+	"../model/formatter"
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,formatter) {
 	"use strict";
+	
 	const uri = 'https://localhost:7020/api/alunos';
 	var ButtonType = mobileLibrary.ButtonType;
 	var DialogType = mobileLibrary.DialogType;
@@ -20,17 +21,18 @@ sap.ui.define([
 	const inputAltura = "inputAltura";
 	const inputCpf = "inputCpf";
 	const inputData = "inputData";
+	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
+			formatter: formatter,
 			onInit:function() {
 			var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);
-				oRouter.getRoute("editar").attachPatternMatched(this._aoCoincidirRotaEditar, this);      
+				oRouter.getRoute("editar").attachPatternMatched(this._aoCoincidirRotaEditar, this);
 		},
 
-		_aoCoincidirRota : function(oEvent)
-		{
+		_setarModeloAluno(){
 			let aluno = {
 				nome : stringVazia,
 				cpf : stringVazia,
@@ -38,37 +40,48 @@ sap.ui.define([
 				dat : stringVazia,
 				sexo : stringVazia
 			}
-			this.getView().setModel(new JSONModel(aluno), "alunos");				
-			this.DefinirEstadoPadrao()
+			this.getView().setModel(new JSONModel(aluno), "alunos");
 		},
+
+		_aoCoincidirRota : function(oEvent)
+		{
+			this._setarModeloAluno();
+			this.byId("inputForm").setTitle("Cadastro");
+			this.DefinirEstadoPadrao()
+			let input = this.getView().byId(inputCpf)
+			input.setEnabled(true)
+		},
+		
+		_aoCoincidirRotaEditar : function(oEvent)
+		{
+			this._setarModeloAluno();
+			let Id = oEvent.getParameter("arguments").id
+			this.byId("inputForm").setTitle("Atualizar Aluno");
+			this.DefinirEstadoPadrao()
+			this._PreencherTela(Id)
+			let input = this.getView().byId(inputCpf)
+			input.setEnabled(false)
+		},
+
 		_modeloAlunos: function(modelo){
             const nomeModelo = "alunos";
             if (modelo){
-                return this.getView().setModel(modelo, nomeModelo);   
+                return this.getView().setModel(modelo, nomeModelo);
             } else{
                 return this.getView().getModel(nomeModelo);
             }
         },
 
-		_aoCoincidirRotaEditar : function(oEvent)
-		{
-			let Id = oEvent.getParameter("arguments").id
-			this.byId("inputForm").setTitle("Atualizar Aluno");
-			this.DefinirEstadoPadrao()
-			this._PreencherTela(Id)
-			var input = this.getView().byId(inputCpf)
-			input.setEnabled(false)
-		},
-
 		_PreencherTela : function(id)
 		{
+			debugger
 			let tela = this.getView();
             fetch(`${uri}/${id}`)
                .then(function(response){
                   return response.json();
                })
                .then(function (data){
-				  data.cpf = Formatter.formataCPF(data.cpf)
+				  data.cpf = formatter.formataCPF(data.cpf)
                   tela.setModel(new JSONModel(data),"alunos")
                })
                .catch(function (error){
@@ -81,38 +94,36 @@ sap.ui.define([
 			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
             if (aluno.id) {
 				if(this._validarCampos())
-				{	
+				{
 					this._EditarAluno()
-				}      
+				}
             }
             else {
                 if(this._validarCampos())
-				{	
+				{
 					this._salvarAluno(aluno)
-				}              
+				}
             }
-				
+
 		},
 
 		_validarCampos: function()
-		{			
+		{
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
 			let sexo = this.getView().byId(inputSexo)
-			let data = this.getView().byId(inputData)
-			let NomeValidado = Validacao.validarNome(nome) 
+			let dataValor = this.getView().byId(inputData)
+			let dataButton = this.getView().byId(buttonDataId)
+			let NomeValidado = Validacao.validarNome(nome)
 			let CpfValidado  = Validacao.validarCpf(cpf)
 			let AlturaValidado  = Validacao.validarAltura(altura)
-			let SexoValidado  = Validacao.validarSexo(sexo) 
-			let DataValidado  = Validacao.validarData(data)
-			if(NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado)
-			{
-				return true
-			}
+			let SexoValidado  = Validacao.validarSexo(sexo)
+			let DataValidado  = Validacao.validarData(dataValor, dataButton)
+			return NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado
 		},
 
-		aoClicarEmCancelar: function () {		
+		aoClicarEmCancelar: function () {
 			if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
@@ -124,7 +135,6 @@ sap.ui.define([
 						press: function () {
 							this.oApproveDialog.close();
 							this._limparTela()
-							this.DefinirEstadoPadrao()	
 							this._navegarParaLista()
 							this.oApproveDialog = null;
 						}.bind(this)
@@ -174,7 +184,7 @@ sap.ui.define([
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
 					return response.text();
-					
+
 				}
 				response.json()
 			}).then(response => {
@@ -199,7 +209,7 @@ sap.ui.define([
 								})
 							});
 						}
-						this.oErrorMessageDialog.open();	
+						this.oErrorMessageDialog.open();
                     }
 					else
 					{
@@ -220,10 +230,10 @@ sap.ui.define([
 							})
 						});
 						}
-						this.oApproveDialog.open();	
+						this.oApproveDialog.open();
 					}
 			})
-			.then(data => console.log(data))  
+			.then(data => console.log(data))
 		},
 
 		_EditarAluno : function (){
@@ -255,7 +265,7 @@ sap.ui.define([
 							})
 						});
 					}
-					this.oErrorMessageDialog.open();	
+					this.oErrorMessageDialog.open();
 				}
 				else
 				{
@@ -276,34 +286,42 @@ sap.ui.define([
 						})
 					});
 					}
-					this.oApproveDialog.open();	
+					this.oApproveDialog.open();
 					}
 			})
-			.then(data => console.log(data))  
+			.then(data => console.log(data))
 		},
 
 		aoInserirValorCpf: function () {
 			let cpf = this.getView().byId(inputCpf)
-			Formatter.formatarCpf(cpf)
+			formatter.formatarCpf(cpf)
 		},
 
 		aoInserirValorAltura : function(){
 			let altura = this.getView().byId(inputAltura)
-			Formatter.formatarAltura(altura)
+			formatter.formatarAltura(altura)
 		},
 
 		DefinirEstadoPadrao : function () {
+			debugger
 			const valorPadrao = "None";
             this.byId(inputNome).setValueState(valorPadrao);
             this.byId(inputAltura).setValueState(valorPadrao);
             this.byId(inputCpf).setValueState(valorPadrao);
             this.byId(inputData).setValueState(valorPadrao);
+			this.byId(buttonDataId).setType(sap.m.ButtonType.Default)
             this.byId(inputSexo).setValueState(valorPadrao);
         },
 
 		_RetirarCatacterCpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
+		},
+
+		aoMudarValorData : function()
+		{
+			let data = this.getView().byId(inputData)
+			formatter.formatarData(data)
 		},
 
 		_Atualizar : function (id){
@@ -317,8 +335,13 @@ sap.ui.define([
                })
                .catch(function (error){
                   console.error(error);
-               }); 			
+               });
         },
+		abrirDatePicker: function (oEvent) {
+			this.getView()
+			  .byId(inputData)
+			  .openBy(oEvent.getSource().getDomRef());
+		  },
 	});
 
 });

@@ -8,8 +8,8 @@
 	xmlns:core="sap.ui.core">
         <Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<headerContent>
-				<Button text="editar" icon="sap-icon://edit" width="50%" press="aoClicarEmEditar"/>
-				<Button text="excluir" icon="sap-icon://delete" width="50%" />
+				<Button text="editar" icon="sap-icon://edit" press="aoClicarEmEditar"/>
+				<Button text="excluir" icon="sap-icon://delete"  />
 		</headerContent>
 			<VBox class="sapUiSmallMargin">
 				<f:Form editable="false">

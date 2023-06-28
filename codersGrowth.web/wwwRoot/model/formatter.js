@@ -17,7 +17,16 @@ sap.ui.define([], function () {
 	  
 		  formatarAltura : function(altura){
 			let alturaFormatada = altura.getValue()
-			return altura.setValue(alturaFormatada.replace(/[^\d]/g, ""))
-		  }
+			return altura.setValue(alturaFormatada.replaceAll(/[^\d]/g, ""))
+		  },
+
+		  formatarData: function(data) {
+			if (!data) {
+				return "Escolha uma data"
+			}
+			var dataMoment = moment(data,"YYYY-MM-DDTHH:mm:ss.MMM");
+			var dataHoraFormatada = dataMoment.format("DD/MM/YYYY");
+			return dataHoraFormatada;
+		},
 	};
 });
