@@ -17,10 +17,27 @@ sap.ui.define([
             this._detalhes(Id);
 		},
 
+        modeloAlunos: function(modelo){
+            const nomeModelo = "alunos";
+            if (modelo){
+                return this.getView().setModel(modelo, nomeModelo);   
+            } else{
+                return this.getView().getModel(nomeModelo);
+            }
+        },
+
         aoClicarEmVoltar: function () {
 			let oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo("ListaDeAlunos", {}, true);
 		},
+
+        aoClicarEmEditar: function(){
+            let alunos = this. modeloAlunos().getData();
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("editar", {
+                id: alunos.id
+            });
+        },
 
         _detalhes : function (id){
             let tela = this.getView();
@@ -33,7 +50,7 @@ sap.ui.define([
                })
                .catch(function (error){
                   console.error(error);
-               }); 			
+               });	
         },
 	});
 });

@@ -67,6 +67,11 @@
           "pattern": "Cadastro",
 					"name": "cadastro",
 					"target": "cadastro"
+        },
+        {
+          "pattern": "Editar/{id}",
+					"name": "editar",
+					"target": "cadastro"
         }
 			],
 			"targets": {

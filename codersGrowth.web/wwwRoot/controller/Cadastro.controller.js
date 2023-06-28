@@ -9,10 +9,11 @@ sap.ui.define([
 	"../services/Validacao",
 	"sap/ui/core/BusyIndicator",
 	"sap/ui/core/library",
-	"../model/Formatter"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,Formatter) {
+	"../model/formatter"
+], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,formatter) {
 	"use strict";
-	const uri = 'https://localhost:7020/api/alunos/';
+	
+	const uri = 'https://localhost:7020/api/alunos';
 	var ButtonType = mobileLibrary.ButtonType;
 	var DialogType = mobileLibrary.DialogType;
 	var ValueState = coreLibrary.ValueState;
@@ -20,16 +21,18 @@ sap.ui.define([
 	const inputAltura = "inputAltura";
 	const inputCpf = "inputCpf";
 	const inputData = "inputData";
+	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
 	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
+			formatter: formatter,
 			onInit:function() {
 			var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);     
+				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);
+				oRouter.getRoute("editar").attachPatternMatched(this._aoCoincidirRotaEditar, this);
 		},
 
-		_aoCoincidirRota : function()
-		{
+		_setarModeloAluno(){
 			let aluno = {
 				nome : stringVazia,
 				cpf : stringVazia,
@@ -38,30 +41,89 @@ sap.ui.define([
 				sexo : stringVazia
 			}
 			this.getView().setModel(new JSONModel(aluno), "alunos");
+		},
+
+		_aoCoincidirRota : function(oEvent)
+		{
+			this._setarModeloAluno();
+			this.byId("inputForm").setTitle("Cadastro");
 			this.DefinirEstadoPadrao()
+			let input = this.getView().byId(inputCpf)
+			input.setEnabled(true)
+		},
+		
+		_aoCoincidirRotaEditar : function(oEvent)
+		{
+			this._setarModeloAluno();
+			let Id = oEvent.getParameter("arguments").id
+			this.byId("inputForm").setTitle("Atualizar Aluno");
+			this.DefinirEstadoPadrao()
+			this._PreencherTela(Id)
+			let input = this.getView().byId(inputCpf)
+			input.setEnabled(false)
+		},
+
+		_modeloAlunos: function(modelo){
+            const nomeModelo = "alunos";
+            if (modelo){
+                return this.getView().setModel(modelo, nomeModelo);
+            } else{
+                return this.getView().getModel(nomeModelo);
+            }
+        },
+
+		_PreencherTela : function(id)
+		{
+			debugger
+			let tela = this.getView();
+            fetch(`${uri}/${id}`)
+               .then(function(response){
+                  return response.json();
+               })
+               .then(function (data){
+				  data.cpf = formatter.formataCPF(data.cpf)
+                  tela.setModel(new JSONModel(data),"alunos")
+               })
+               .catch(function (error){
+                  console.error(error);
+               });
 		},
 
 		aoClicarEmSalvar : async function(){
-			let alunoCriacao = this.getView().getModel("alunos").getData();
-			alunoCriacao.cpf = this._RetirarCatacterCpf(alunoCriacao.cpf)
+			let aluno = this._modeloAlunos().getData();
+			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
+            if (aluno.id) {
+				if(this._validarCampos())
+				{
+					this._EditarAluno()
+				}
+            }
+            else {
+                if(this._validarCampos())
+				{
+					this._salvarAluno(aluno)
+				}
+            }
+
+		},
+
+		_validarCampos: function()
+		{
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
 			let sexo = this.getView().byId(inputSexo)
-			let data = this.getView().byId(inputData)
-			let NomeValidado = Validacao.validarNome(nome) 
+			let dataValor = this.getView().byId(inputData)
+			let dataButton = this.getView().byId(buttonDataId)
+			let NomeValidado = Validacao.validarNome(nome)
 			let CpfValidado  = Validacao.validarCpf(cpf)
 			let AlturaValidado  = Validacao.validarAltura(altura)
-			let SexoValidado  = Validacao.validarSexo(sexo) 
-			let DataValidado  = Validacao.validarData(data)
-			if(NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado)
-			{
-				await this._salvarAluno(alunoCriacao)
-			}
-				
+			let SexoValidado  = Validacao.validarSexo(sexo)
+			let DataValidado  = Validacao.validarData(dataValor, dataButton)
+			return NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado
 		},
 
-		aoClicarEmCancelar: function () {		
+		aoClicarEmCancelar: function () {
 			if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
@@ -73,7 +135,6 @@ sap.ui.define([
 						press: function () {
 							this.oApproveDialog.close();
 							this._limparTela()
-							this.DefinirEstadoPadrao()	
 							this._navegarParaLista()
 							this.oApproveDialog = null;
 						}.bind(this)
@@ -112,7 +173,7 @@ sap.ui.define([
 
 		_salvarAluno : function (aluno){
 			BusyIndicator.show()
-			 fetch(uri, {
+			 fetch(`${uri}/`,{
 				method: "POST",
 				headers: {
 				  "Content-Type": "application/json"
@@ -123,14 +184,12 @@ sap.ui.define([
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
 					return response.text();
-					
+
 				}
 				response.json()
 			}).then(response => {
-				debugger
 					let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = this._RetirarCatacterCpf(cpf)
-					console.log(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
                         this.byId(inputCpf).setValueStateText("CPF já existe");
@@ -150,7 +209,7 @@ sap.ui.define([
 								})
 							});
 						}
-						this.oErrorMessageDialog.open();	
+						this.oErrorMessageDialog.open();
                     }
 					else
 					{
@@ -171,35 +230,118 @@ sap.ui.define([
 							})
 						});
 						}
-						this.oApproveDialog.open();	
+						this.oApproveDialog.open();
 					}
 			})
-			.then(data => console.log(data))  
+			.then(data => console.log(data))
+		},
+
+		_EditarAluno : function (){
+			let aluno = this._modeloAlunos().getData();
+			BusyIndicator.show()
+			 fetch(`${uri}/${aluno.id}`,{
+				method: 'PUT',
+				headers: {
+				  "Content-Type": "application/json"
+				},
+				body: JSON.stringify(aluno)
+			  }).then(response => {
+				console.log(response)
+				BusyIndicator.hide()
+				if (response.status >=400 && response.status <=599 ){
+					if (!this.oErrorMessageDialog) {
+						this.oErrorMessageDialog = new Dialog({
+							type: DialogType.Message,
+							title: "Erro",
+							state: ValueState.Error,
+							content: new Text({text: "Não foi possivel efetuar a atualização" }),
+							beginButton: new Button({
+								type: ButtonType.Emphasized,
+								text: "OK",
+								press: function () {
+									this.oErrorMessageDialog.close();
+									this.oErrorMessageDialog = null;
+								}.bind(this)
+							})
+						});
+					}
+					this.oErrorMessageDialog.open();
+				}
+				else
+				{
+					if (!this.oApproveDialog) {
+					this.oApproveDialog = new Dialog({
+						type: DialogType.Message,
+						title: "Sucesso",
+						content: new Text({ text: "Aluno atualizado com sucesso" }),
+						beginButton: new Button({
+							type: ButtonType.Emphasized,
+							text: "OK",
+							press: function () {
+								this.oApproveDialog.close();
+								this._limparTela()
+								this._navegarParaLista()
+								this.oApproveDialog = null;
+							}.bind(this)
+						})
+					});
+					}
+					this.oApproveDialog.open();
+					}
+			})
+			.then(data => console.log(data))
 		},
 
 		aoInserirValorCpf: function () {
 			let cpf = this.getView().byId(inputCpf)
-			Formatter.formatarCpf(cpf)
+			formatter.formatarCpf(cpf)
 		},
 
 		aoInserirValorAltura : function(){
 			let altura = this.getView().byId(inputAltura)
-			Formatter.formatarAltura(altura)
+			formatter.formatarAltura(altura)
 		},
 
 		DefinirEstadoPadrao : function () {
+			debugger
 			const valorPadrao = "None";
             this.byId(inputNome).setValueState(valorPadrao);
             this.byId(inputAltura).setValueState(valorPadrao);
             this.byId(inputCpf).setValueState(valorPadrao);
             this.byId(inputData).setValueState(valorPadrao);
+			this.byId(buttonDataId).setType(sap.m.ButtonType.Default)
             this.byId(inputSexo).setValueState(valorPadrao);
         },
 
 		_RetirarCatacterCpf :function(cpf)
 		{
 			return cpf.replace(/\D/g, '');
-		}
+		},
+
+		aoMudarValorData : function()
+		{
+			let data = this.getView().byId(inputData)
+			formatter.formatarData(data)
+		},
+
+		_Atualizar : function (id){
+            let tela = this.getView();
+            fetch(`${uri}/${id}`)
+               .then(function(response){
+                  return response.json();
+               })
+               .then(function (data){
+                  tela.setModel(new JSONModel(data),"alunos")
+               })
+               .catch(function (error){
+                  console.error(error);
+               });
+        },
+		abrirDatePicker: function (oEvent) {
+			this.getView()
+			  .byId(inputData)
+			  .openBy(oEvent.getSource().getDomRef());
+		  },
 	});
 
 });

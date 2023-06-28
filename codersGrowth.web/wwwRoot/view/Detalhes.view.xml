@@ -8,8 +8,8 @@
 	xmlns:core="sap.ui.core">
         <Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<headerContent>
-				<Button text="editar" icon="sap-icon://edit" width="50%"/>
-				<Button text="excluir" icon="sap-icon://delete" width="50%"/>
+				<Button text="editar" icon="sap-icon://edit" press="aoClicarEmEditar"/>
+				<Button text="excluir" icon="sap-icon://delete"  />
 		</headerContent>
 			<VBox class="sapUiSmallMargin">
 				<f:Form editable="false">
@@ -37,7 +37,7 @@
 							<f:formElements>
 								<f:FormElement label="Altura">
 									<f:fields>
-										<Text text="{alunos>/altura}" id="nameText"  />
+										<Text text="{alunos>/altura}" id="nameText"/>
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Sexo">
@@ -48,7 +48,7 @@
 								<f:FormElement label="CPF">
 									<f:fields>
 										<Text text="{path: 'alunos>/cpf',
-													formatter: '.formatter.formataCPFDetalhes'}" />
+													formatter: '.formatter.formataCPF'}" />
 									</f:fields>
 								</f:FormElement>
 								<f:FormElement label="Data de nascimento">
