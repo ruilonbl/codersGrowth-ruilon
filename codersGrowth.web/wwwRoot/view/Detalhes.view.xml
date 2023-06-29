@@ -6,10 +6,10 @@
 	xmlns:f="sap.ui.layout.form"
 	height="100%"
 	xmlns:core="sap.ui.core">
-        <Page title="DETALHES" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+        <Page title="{i18n>TituloDetalhes}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
 		<headerContent>
-				<Button text="editar" icon="sap-icon://edit" press="aoClicarEmEditar"/>
-				<Button text="excluir" icon="sap-icon://delete"  />
+				<Button text="{i18n>BotaoEditar}" icon="sap-icon://edit" press="aoClicarEmEditar"/>
+				<Button text="{i18n>BotaoExcluir}" icon="sap-icon://delete" press="aoClicarEmExcluir" />
 		</headerContent>
 			<VBox class="sapUiSmallMargin">
 				<f:Form editable="false">
@@ -35,23 +35,23 @@
 					<f:formContainers>
 						<f:FormContainer>
 							<f:formElements>
-								<f:FormElement label="Altura">
+								<f:FormElement label="{i18n>LabelAltura}">
 									<f:fields>
 										<Text text="{alunos>/altura}" id="nameText"/>
 									</f:fields>
 								</f:FormElement>
-								<f:FormElement label="Sexo">
+								<f:FormElement label="{i18n>LabelSexo}">
 									<f:fields>
 										<Text text="{alunos>/sexo}" />
 									</f:fields>
 								</f:FormElement>
-								<f:FormElement label="CPF">
+								<f:FormElement label="{i18n>LabelCpf}">
 									<f:fields>
 										<Text text="{path: 'alunos>/cpf',
 													formatter: '.formatter.formataCPF'}" />
 									</f:fields>
 								</f:FormElement>
-								<f:FormElement label="Data de nascimento">
+								<f:FormElement label="{i18n>LabelData}">
 									<f:fields>
 										<Text text="{
 											path: 'alunos>/dat',

@@ -4,8 +4,6 @@
     "id": "sap.ui.demo.academia",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
     "applicationVersion": {
       "version": "1.0.0"
     }

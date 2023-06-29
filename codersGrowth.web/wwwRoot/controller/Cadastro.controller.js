@@ -12,24 +12,31 @@ sap.ui.define([
 	"../model/formatter"
 ], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,formatter) {
 	"use strict";
-	
 	const uri = 'https://localhost:7020/api/alunos';
-	var ButtonType = mobileLibrary.ButtonType;
-	var DialogType = mobileLibrary.DialogType;
-	var ValueState = coreLibrary.ValueState;
+	const ButtonType = mobileLibrary.ButtonType;
+	const DialogType = mobileLibrary.DialogType;
+	const ValueState = coreLibrary.ValueState;
+	const ValueStateErro = coreLibrary.ValueState.Error;
+	let _i18n = null
+	const _nomeModeloi18n = "i18n"
 	const inputNome = "inputNome";
+	const inputForm = "inputForm"
 	const inputAltura = "inputAltura";
 	const inputCpf = "inputCpf";
 	const inputData = "inputData";
 	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
-	return Controller.extend("sap.ui.demo.academia.controller.Cadastro", {
+	const rotaCadastro = "cadastro"
+	const rotaEditar ="editar"
+	const caminhoControler = "sap.ui.demo.academia.controller.Cadastro"
+	return Controller.extend(caminhoControler, {
 			formatter: formatter,
 			onInit:function() {
+			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute("cadastro").attachPatternMatched(this._aoCoincidirRota, this);
-				oRouter.getRoute("editar").attachPatternMatched(this._aoCoincidirRotaEditar, this);
+				oRouter.getRoute(rotaCadastro).attachPatternMatched(this._aoCoincidirRota, this);
+				oRouter.getRoute(rotaEditar).attachPatternMatched(this._aoCoincidirRotaEditar, this);
 		},
 
 		_setarModeloAluno(){
@@ -43,20 +50,21 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel(aluno), "alunos");
 		},
 
-		_aoCoincidirRota : function(oEvent)
+		_aoCoincidirRota : function()
 		{
 			this._setarModeloAluno();
-			this.byId("inputForm").setTitle("Cadastro");
+			this.byId(inputForm).setTitle("Cadastro");
 			this.DefinirEstadoPadrao()
 			let input = this.getView().byId(inputCpf)
 			input.setEnabled(true)
 		},
 		
-		_aoCoincidirRotaEditar : function(oEvent)
+		_aoCoincidirRotaEditar : function(aluno)
 		{
+			const tituloTelaAtualizar = "Atualizar Aluno"
 			this._setarModeloAluno();
-			let Id = oEvent.getParameter("arguments").id
-			this.byId("inputForm").setTitle("Atualizar Aluno");
+			let Id = aluno.getParameter("arguments").id
+			this.byId("inputForm").setTitle(tituloTelaAtualizar);
 			this.DefinirEstadoPadrao()
 			this._PreencherTela(Id)
 			let input = this.getView().byId(inputCpf)
@@ -74,7 +82,6 @@ sap.ui.define([
 
 		_PreencherTela : function(id)
 		{
-			debugger
 			let tela = this.getView();
             fetch(`${uri}/${id}`)
                .then(function(response){
@@ -124,11 +131,12 @@ sap.ui.define([
 		},
 
 		aoClicarEmCancelar: function () {
+			const caixaDeDialogoExcluir="caixaDeDialogoExcluir"
 			if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
 					title: "Cancelar",
-					content: new Text({ text: "Deseja realmente cancelar?" }),
+					content: new Text({ text: _i18n.getText(caixaDeDialogoExcluir) }),
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
 						text: "sim",
@@ -180,7 +188,6 @@ sap.ui.define([
 				},
 				body: JSON.stringify(aluno)
 			  }).then(response => {
-				console.log(response)
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
 					return response.text();
@@ -191,14 +198,14 @@ sap.ui.define([
 					let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = this._RetirarCatacterCpf(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
-                        this.byId(inputCpf).setValueState(sap.ui.core.ValueState.Error);
+                        this.byId(inputCpf).setValueState(ValueStateErro);
                         this.byId(inputCpf).setValueStateText("CPF já existe");
 						if (!this.oErrorMessageDialog) {
 							this.oErrorMessageDialog = new Dialog({
 								type: DialogType.Message,
 								title: "Erro",
 								state: ValueState.Error,
-								content: new Text({text: "Não foi possivel efetuar o cadastro" }),
+								content: new Text({text:  "Não foi possivel efetuar o cadastro" }),
 								beginButton: new Button({
 									type: ButtonType.Emphasized,
 									text: "OK",
@@ -246,7 +253,6 @@ sap.ui.define([
 				},
 				body: JSON.stringify(aluno)
 			  }).then(response => {
-				console.log(response)
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
 					if (!this.oErrorMessageDialog) {
@@ -289,7 +295,6 @@ sap.ui.define([
 					this.oApproveDialog.open();
 					}
 			})
-			.then(data => console.log(data))
 		},
 
 		aoInserirValorCpf: function () {
@@ -303,7 +308,6 @@ sap.ui.define([
 		},
 
 		DefinirEstadoPadrao : function () {
-			debugger
 			const valorPadrao = "None";
             this.byId(inputNome).setValueState(valorPadrao);
             this.byId(inputAltura).setValueState(valorPadrao);
