@@ -77,7 +77,7 @@ sap.ui.define([
       data = new Date(data).getFullYear()
       if (!dataTotal) {
         buttonData.setType(sap.m.ButtonType.Reject)
-        buttonData.setText("Por favor seleciona a sua data de nascimento")
+        buttonData.setText("Por favor selecione a sua data de nascimento")
         return false
       }
       else{

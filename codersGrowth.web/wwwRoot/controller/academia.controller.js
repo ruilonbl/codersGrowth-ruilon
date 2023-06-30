@@ -4,10 +4,14 @@ sap.ui.define([
  ], function (Controller, JSONModel) {
     "use strict";
     const uri = 'https://localhost:7020/api/alunos';
-    return Controller.extend("sap.ui.demo.academia.controller.Academia",{
+    const caminhoControler = "sap.ui.demo.academia.controller.Academia"
+    const rotaDeLista = "ListaDeAlunos"
+    const rotaCadastro = "cadastro"
+    const rotaDetalhes = "detalhes"
+    return Controller.extend(caminhoControler,{
       onInit:function() {
          var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("ListaDeAlunos").attachPatternMatched(this._aoCoincidirRota, this);     
+			oRouter.getRoute(rotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
       },
 
       _aoCoincidirRota : function()
@@ -25,9 +29,9 @@ sap.ui.define([
             }); 
       },
 
-      aoClicarEmCadastro : function(event){
+      aoClicarEmCadastro : function(){
          let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo("cadastro")
+         oRouter.navTo(rotaCadastro)
       },
 
       aoFiltrar : function (oEvent) {
@@ -48,7 +52,7 @@ sap.ui.define([
       aoClicarNaLinha: function (evento) {
          let id = evento.getSource().getBindingContext("alunos").getObject().id
          let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo("detalhes", {id})
+         oRouter.navTo(rotaDetalhes , {id})
        }
     });    
  });

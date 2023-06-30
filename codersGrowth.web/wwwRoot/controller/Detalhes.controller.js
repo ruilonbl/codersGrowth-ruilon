@@ -10,15 +10,24 @@ sap.ui.define([
     "sap/ui/core/library"
 ], function(Controller,JSONModel,formatter,Button,mobileLibrary,Dialog,Text,BusyIndicator,coreLibrary) {
 	"use strict"; 
-    var ButtonType = mobileLibrary.ButtonType;
-	var DialogType = mobileLibrary.DialogType;
-    var ValueState = coreLibrary.ValueState;
+    const ButtonType = mobileLibrary.ButtonType;
+	const DialogType = mobileLibrary.DialogType;
+    const ValueState = coreLibrary.ValueState;
+	let _i18n = null
+	const _nomeModeloi18n = "i18n"
     const uri = 'https://localhost:7020/api/alunos';
-	return Controller.extend("sap.ui.demo.academia.controller.Detalhes", {
+	const caminhoControler = "sap.ui.demo.academia.controller.Detalhes"
+	const rotaDeLista = "ListaDeAlunos"
+	const tituloBotaoErro = "Erro"
+	const tituloBotaoSucesso = "Sucesso"
+	const opcaoOK = "OK"
+	const rotaDetalhes = "detalhes"
+	return Controller.extend(caminhoControler, {
         formatter: formatter,
         onInit: function () {
+			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("detalhes").attachPatternMatched(this._aoCoincidirRota, this);
+			oRouter.getRoute(rotaDetalhes).attachPatternMatched(this._aoCoincidirRota, this);
 		},
 
         _aoCoincidirRota: function (oEvent) {
@@ -37,27 +46,32 @@ sap.ui.define([
 
         aoClicarEmVoltar: function () {
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("ListaDeAlunos", {}, true);
+            oRouter.navTo(rotaDeLista, {}, true);
 		},
 
         aoClicarEmEditar: function(){
+			const caminhoEditar="editar"
             let alunos = this._modeloAlunos().getData();
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("editar", {
+            oRouter.navTo(caminhoEditar, {
                 id: alunos.id
             });
         },
 
         aoClicarEmExcluir : function()
         {
+			const caixaDeDialogoExcluir = "caixaDeDialogoExcluir"
+			const tituloBotao = "Excluir"
+			const opcaoSim = "Sim"
+			const opcaoNao = "Não"
             if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
-					title: "Excluir",
-					content: new Text({ text: "Deseja realmente excluir esse alunos?" }),
+					title: tituloBotao,
+					content: new Text({ text: _i18n.getText(caixaDeDialogoExcluir)}),
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
-						text: "Sim",
+						text: opcaoSim,
 						press: function () {
 							this.oApproveDialog.close();
                             this._removerAluno()
@@ -65,7 +79,7 @@ sap.ui.define([
 						}.bind(this)
 					}),
 					endButton: new Button({
-						text: "Não",
+						text: opcaoNao,
 						press: function () {
 							this.oApproveDialog.close();
 							this.oApproveDialog = null;
@@ -78,12 +92,13 @@ sap.ui.define([
 
         _navegarParaLista: function(){
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("ListaDeAlunos", {}, true);
+            oRouter.navTo(rotaDeLista, {}, true);
 		},
 
         _removerAluno: function()
         {
-            debugger
+			const caixaDeDialogoExcluirErro = "caixaDeDialogoExcluirErro"
+			const caixaDeDialogoExcluirAprovado = "caixaDeDialogoExcluirAprovado"
             let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
 			 fetch(`${uri}/${aluno.id}`,{
@@ -98,12 +113,12 @@ sap.ui.define([
 					if (!this.oErrorMessageDialog) {
 						this.oErrorMessageDialog = new Dialog({
 							type: DialogType.Message,
-							title: "Erro",
+							title: tituloBotaoErro,
 							state: ValueState.Error,
-							content: new Text({text: "Não foi possivel exlucir esse aluno" }),
+							content: new Text({text: _i18n.getText(caixaDeDialogoExcluirErro)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
-								text: "OK",
+								text: opcaoOK,
 								press: function () {
 									this.oErrorMessageDialog.close();
 									this.oErrorMessageDialog = null;
@@ -118,11 +133,11 @@ sap.ui.define([
 					if (!this.oApproveDialog) {
 					this.oApproveDialog = new Dialog({
 						type: DialogType.Message,
-						title: "Sucesso",
-						content: new Text({ text: "Aluno excluido com sucesso" }),
+						title: tituloBotaoSucesso,
+						content: new Text({ text: _i18n.getText(caixaDeDialogoExcluirAprovado)}),
 						beginButton: new Button({
 							type: ButtonType.Emphasized,
-							text: "OK",
+							text: opcaoOK,
 							press: function () {
 								this.oApproveDialog.close();
 								this._navegarParaLista()

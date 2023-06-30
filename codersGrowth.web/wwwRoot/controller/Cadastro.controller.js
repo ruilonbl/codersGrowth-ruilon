@@ -12,7 +12,7 @@ sap.ui.define([
 	"../model/formatter"
 ], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,formatter) {
 	"use strict";
-	const uri = 'https://localhost:7020/api/alunos';
+	const _uri = 'https://localhost:7020/api/alunos';
 	const ButtonType = mobileLibrary.ButtonType;
 	const DialogType = mobileLibrary.DialogType;
 	const ValueState = coreLibrary.ValueState;
@@ -27,8 +27,13 @@ sap.ui.define([
 	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
-	const rotaCadastro = "cadastro"
+	const rotaDeLista = "ListaDeAlunos"
+	rotaDeLista
 	const rotaEditar ="editar"
+	const cpfExiste = "CPF já existe"
+	const tituloBotaoErro = "Erro"
+	const tituloBotaoSucesso = "Sucesso"
+	const opcaoOK = "OK"
 	const caminhoControler = "sap.ui.demo.academia.controller.Cadastro"
 	return Controller.extend(caminhoControler, {
 			formatter: formatter,
@@ -52,8 +57,9 @@ sap.ui.define([
 
 		_aoCoincidirRota : function()
 		{
+			const tituloTelaCadastro = "Cadastro"
 			this._setarModeloAluno();
-			this.byId(inputForm).setTitle("Cadastro");
+			this.byId(inputForm).setTitle(tituloTelaCadastro);
 			this.DefinirEstadoPadrao()
 			let input = this.getView().byId(inputCpf)
 			input.setEnabled(true)
@@ -64,7 +70,7 @@ sap.ui.define([
 			const tituloTelaAtualizar = "Atualizar Aluno"
 			this._setarModeloAluno();
 			let Id = aluno.getParameter("arguments").id
-			this.byId("inputForm").setTitle(tituloTelaAtualizar);
+			this.byId(inputForm).setTitle(tituloTelaAtualizar);
 			this.DefinirEstadoPadrao()
 			this._PreencherTela(Id)
 			let input = this.getView().byId(inputCpf)
@@ -83,7 +89,7 @@ sap.ui.define([
 		_PreencherTela : function(id)
 		{
 			let tela = this.getView();
-            fetch(`${uri}/${id}`)
+            fetch(`${_uri}/${id}`)
                .then(function(response){
                   return response.json();
                })
@@ -131,15 +137,18 @@ sap.ui.define([
 		},
 
 		aoClicarEmCancelar: function () {
-			const caixaDeDialogoExcluir="caixaDeDialogoExcluir"
+			const caixaDeDialogocancelar="caixaDeDialogocancelar"
+			const tituloBotao = "Cancelar"
+			const opcaoSim = "Sim"
+			const opcaoNao = "Não"
 			if (!this.oApproveDialog) {
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
-					title: "Cancelar",
-					content: new Text({ text: _i18n.getText(caixaDeDialogoExcluir) }),
+					title: tituloBotao,
+					content: new Text({text: _i18n.getText(caixaDeDialogocancelar)}),
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
-						text: "sim",
+						text: opcaoSim ,
 						press: function () {
 							this.oApproveDialog.close();
 							this._limparTela()
@@ -148,7 +157,7 @@ sap.ui.define([
 						}.bind(this)
 					}),
 					endButton: new Button({
-						text: "Não",
+						text: opcaoNao,
 						press: function () {
 							this.oApproveDialog.close();
 							this.oApproveDialog = null;
@@ -165,7 +174,7 @@ sap.ui.define([
 
 		_navegarParaLista: function(){
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("ListaDeAlunos", {}, true);
+            oRouter.navTo(rotaDeLista, {}, true);
 		},
 
 		_limparTela: function () {
@@ -180,8 +189,11 @@ sap.ui.define([
 		},
 
 		_salvarAluno : function (aluno){
+			const caixaDeDialogoCadastroErro = "caixaDeDialogoCadastroErro"
+			const caixaDeDialogoCadastroAprovado = "caixaDeDialogoCadastroAprovado"
+			
 			BusyIndicator.show()
-			 fetch(`${uri}/`,{
+			 fetch(`${_uri}/`,{
 				method: "POST",
 				headers: {
 				  "Content-Type": "application/json"
@@ -199,16 +211,16 @@ sap.ui.define([
 					cpf = this._RetirarCatacterCpf(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(ValueStateErro);
-                        this.byId(inputCpf).setValueStateText("CPF já existe");
+                        this.byId(inputCpf).setValueStateText(cpfExiste);
 						if (!this.oErrorMessageDialog) {
 							this.oErrorMessageDialog = new Dialog({
 								type: DialogType.Message,
-								title: "Erro",
+								title: tituloBotaoErro ,
 								state: ValueState.Error,
-								content: new Text({text:  "Não foi possivel efetuar o cadastro" }),
+								content: new Text({text: _i18n.getText(caixaDeDialogoCadastroErro)}),
 								beginButton: new Button({
 									type: ButtonType.Emphasized,
-									text: "OK",
+									text: opcaoOK,
 									press: function () {
 										this.oErrorMessageDialog.close();
 										this.oErrorMessageDialog = null;
@@ -223,11 +235,11 @@ sap.ui.define([
 						if (!this.oApproveDialog) {
 						this.oApproveDialog = new Dialog({
 							type: DialogType.Message,
-							title: "Sucesso",
-							content: new Text({ text: "Aluno cadastrado com sucesso" }),
+							title: tituloBotaoSucesso,
+							content: new Text({ text: _i18n.getText(caixaDeDialogoCadastroAprovado)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
-								text: "OK",
+								text:  opcaoOK,
 								press: function () {
 									this.oApproveDialog.close();
 									this._limparTela()
@@ -244,9 +256,11 @@ sap.ui.define([
 		},
 
 		_EditarAluno : function (){
+			const caixaDeDialogoAtualizarErro = "caixaDeDialogoAtualizarErro"
+			const caixaDeDialogoAtualizarAprovado = "caixaDeDialogoCadastroAprovado"
 			let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
-			 fetch(`${uri}/${aluno.id}`,{
+			 fetch(`${_uri}/${aluno.id}`,{
 				method: 'PUT',
 				headers: {
 				  "Content-Type": "application/json"
@@ -258,12 +272,12 @@ sap.ui.define([
 					if (!this.oErrorMessageDialog) {
 						this.oErrorMessageDialog = new Dialog({
 							type: DialogType.Message,
-							title: "Erro",
+							title: tituloBotaoErro,
 							state: ValueState.Error,
-							content: new Text({text: "Não foi possivel efetuar a atualização" }),
+							content: new Text({text: _i18n.getText(caixaDeDialogoAtualizarErro)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
-								text: "OK",
+								text: opcaoOK,
 								press: function () {
 									this.oErrorMessageDialog.close();
 									this.oErrorMessageDialog = null;
@@ -278,11 +292,11 @@ sap.ui.define([
 					if (!this.oApproveDialog) {
 					this.oApproveDialog = new Dialog({
 						type: DialogType.Message,
-						title: "Sucesso",
-						content: new Text({ text: "Aluno atualizado com sucesso" }),
+						title: tituloBotaoSucesso,
+						content: new Text({ text: _i18n.getText(caixaDeDialogoAtualizarAprovado)}),
 						beginButton: new Button({
 							type: ButtonType.Emphasized,
-							text: "OK",
+							text: opcaoOK,
 							press: function () {
 								this.oApproveDialog.close();
 								this._limparTela()
@@ -330,7 +344,7 @@ sap.ui.define([
 
 		_Atualizar : function (id){
             let tela = this.getView();
-            fetch(`${uri}/${id}`)
+            fetch(`${_uri}/${id}`)
                .then(function(response){
                   return response.json();
                })

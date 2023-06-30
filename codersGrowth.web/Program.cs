@@ -19,7 +19,7 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")
                 ),
-    ContentTypeProvider = new FileExtensionContentTypeProvider
+     ContentTypeProvider = new FileExtensionContentTypeProvider
     {
         Mappings = { [".properties"] = "application/x-msdownload" }
     }
