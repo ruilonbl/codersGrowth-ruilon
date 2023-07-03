@@ -7,7 +7,7 @@ sap.ui.define([
     "sap/m/Dialog",
     "sap/m/Text",
     "sap/ui/core/BusyIndicator",
-    "sap/ui/core/library"
+    "sap/ui/core/library",
 ], function(Controller,JSONModel,formatter,Button,mobileLibrary,Dialog,Text,BusyIndicator,coreLibrary) {
 	"use strict"; 
     const ButtonType = mobileLibrary.ButtonType;
@@ -25,6 +25,7 @@ sap.ui.define([
 	const rotaDetalhes = "detalhes"
 	return Controller.extend(caminhoControler, {
         formatter: formatter,
+
         onInit: function () {
 			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();

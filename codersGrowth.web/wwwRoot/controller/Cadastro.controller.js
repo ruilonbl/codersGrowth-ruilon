@@ -29,12 +29,14 @@ sap.ui.define([
 	const stringVazia = "";
 	const rotaDeLista = "ListaDeAlunos"
 	const rotaCadastro = "cadastro"
+	const rotaNotfound = "notFound"
 	const rotaEditar ="editar"
 	const cpfExiste = "CPF já existe"
 	const tituloBotaoErro = "Erro"
 	const tituloBotaoSucesso = "Sucesso"
 	const opcaoOK = "OK"
 	const caminhoControler = "sap.ui.demo.academia.controller.Cadastro"
+	
 	return Controller.extend(caminhoControler, {
 			formatter: formatter,
 			onInit:function() {
@@ -88,14 +90,18 @@ sap.ui.define([
 
 		_PreencherTela : function(id)
 		{
-			let tela = this.getView();
             fetch(`${_uri}/${id}`)
-               .then(function(response){
-                  return response.json();
-               })
-               .then(function (data){
+               .then(response => {
+				if(response.status >= 400 && response.status <= 599)
+				{
+					let oRouter = this.getOwnerComponent().getRouter();
+					oRouter.navTo(rotaNotfound, {}, true);
+				}
+				return response.json();
+				})
+               .then(data =>{
 				  data.cpf = formatter.formataCPF(data.cpf)
-                  tela.setModel(new JSONModel(data),"alunos")
+				  this._modeloAlunos(new JSONModel(data))
                })
                .catch(function (error){
                   console.error(error);
@@ -202,7 +208,7 @@ sap.ui.define([
 				body: JSON.stringify(aluno)
 			  }).then(response => {
 				BusyIndicator.hide()
-				if (response.status >=400 && response.status <=599 ){
+				if (response.status >= 400 && response.status <= 599 ){
 					return response.text();
 
 				}
@@ -253,7 +259,6 @@ sap.ui.define([
 						this.oApproveDialog.open();
 					}
 			})
-			.then(data => console.log(data))
 		},
 
 		_EditarAluno : function (){
@@ -344,18 +349,23 @@ sap.ui.define([
 		},
 
 		_Atualizar : function (id){
-            let tela = this.getView();
             fetch(`${_uri}/${id}`)
-               .then(function(response){
-                  return response.json();
-               })
-               .then(function (data){
-                  tela.setModel(new JSONModel(data),"alunos")
-               })
-               .catch(function (error){
-                  console.error(error);
-               });
+               .then(response => {
+					if(response.status >=400 && response.status <=599)
+					{
+						let oRouter = this.getOwnerComponent().getRouter();
+						oRouter.navTo(rotaNotfound, {}, true);
+					}
+					return response.json();
+					})
+					.then(data =>{
+						this._modeloAlunos(new JSONModel(data))
+					})
+					.catch(function (error){
+						console.error(error);
+                });
         },
+
 		abrirDatePicker: function (oEvent) {
 			this.getView()
 			  .byId(inputData)

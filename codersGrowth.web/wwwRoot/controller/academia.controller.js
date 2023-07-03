@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
- ], function (Controller, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "../const/Const"
+ ], function (Controller, JSONModel,Const) {
     "use strict";
     const uri = 'https://localhost:7020/api/alunos';
     const caminhoControler = "sap.ui.demo.academia.controller.Academia"
@@ -11,7 +12,7 @@ sap.ui.define([
     return Controller.extend(caminhoControler,{
       onInit:function() {
          var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute(rotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
+			oRouter.getRoute(Const.rotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
       },
 
       _aoCoincidirRota : function()
@@ -35,14 +36,13 @@ sap.ui.define([
       },
 
       aoFiltrar : function (oEvent) {
-         let tela = this.getView();
 			var sQuery = oEvent.getParameter("query");
          fetch(`${uri}?nome=${sQuery}`)
             .then(function(response){
                return response.json();
             })
-            .then(function (data){
-               tela.setModel(new JSONModel(data),"alunos");
+            .then(data =>{
+               this._modeloAlunos(new JSONModel(data))
             })
             .catch(function (error){
                console.error(error);

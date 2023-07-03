@@ -111,7 +111,6 @@ sap.ui.define([
             return true
           } 
         }
-               
       }
     }
   };
