@@ -18,6 +18,7 @@ sap.ui.define([
     const uri = 'https://localhost:7020/api/alunos';
 	const caminhoControler = "sap.ui.demo.academia.controller.Detalhes"
 	const rotaDeLista = "ListaDeAlunos"
+	const rotaNotfound = "notFound"
 	const tituloBotaoErro = "Erro"
 	const tituloBotaoSucesso = "Sucesso"
 	const opcaoOK = "OK"
@@ -60,7 +61,7 @@ sap.ui.define([
 
         aoClicarEmExcluir : function()
         {
-			const caixaDeDialogoExcluir = "caixaDeDialogoExcluir"
+			const CaixaDeDialogoExcluir = "CaixaDeDialogoExcluir"
 			const tituloBotao = "Excluir"
 			const opcaoSim = "Sim"
 			const opcaoNao = "Não"
@@ -68,7 +69,7 @@ sap.ui.define([
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
 					title: tituloBotao,
-					content: new Text({ text: _i18n.getText(caixaDeDialogoExcluir)}),
+					content: new Text({ text: _i18n.getText(CaixaDeDialogoExcluir)}),
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
 						text: opcaoSim,
@@ -97,8 +98,8 @@ sap.ui.define([
 
         _removerAluno: function()
         {
-			const caixaDeDialogoExcluirErro = "caixaDeDialogoExcluirErro"
-			const caixaDeDialogoExcluirAprovado = "caixaDeDialogoExcluirAprovado"
+			const CaixaDeDialogoExcluirErro = "CaixaDeDialogoExcluirErro"
+			const CaixaDeDialogoExcluirAprovado = "CaixaDeDialogoExcluirAprovado"
             let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
 			 fetch(`${uri}/${aluno.id}`,{
@@ -115,7 +116,7 @@ sap.ui.define([
 							type: DialogType.Message,
 							title: tituloBotaoErro,
 							state: ValueState.Error,
-							content: new Text({text: _i18n.getText(caixaDeDialogoExcluirErro)}),
+							content: new Text({text: _i18n.getText(CaixaDeDialogoExcluirErro)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
 								text: opcaoOK,
@@ -134,7 +135,7 @@ sap.ui.define([
 					this.oApproveDialog = new Dialog({
 						type: DialogType.Message,
 						title: tituloBotaoSucesso,
-						content: new Text({ text: _i18n.getText(caixaDeDialogoExcluirAprovado)}),
+						content: new Text({ text: _i18n.getText(CaixaDeDialogoExcluirAprovado)}),
 						beginButton: new Button({
 							type: ButtonType.Emphasized,
 							text: opcaoOK,
@@ -154,7 +155,12 @@ sap.ui.define([
         _detalhes : function (id){
             let tela = this.getView();
             fetch(`${uri}/${id}`)
-               .then(function(response){
+               .then(response => {
+					if(response.status >=400 && response.status <=599)
+					{
+						let oRouter = this.getOwnerComponent().getRouter();
+            			oRouter.navTo(rotaNotfound, {}, true);
+					}
                   return response.json();
                })
                .then(function (data){

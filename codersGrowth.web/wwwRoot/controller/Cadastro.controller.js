@@ -28,7 +28,7 @@ sap.ui.define([
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
 	const rotaDeLista = "ListaDeAlunos"
-	rotaDeLista
+	const rotaCadastro = "cadastro"
 	const rotaEditar ="editar"
 	const cpfExiste = "CPF já existe"
 	const tituloBotaoErro = "Erro"
@@ -122,6 +122,7 @@ sap.ui.define([
 
 		_validarCampos: function()
 		{
+			Validacao.criarModeloI18n(_i18n)
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
@@ -137,7 +138,7 @@ sap.ui.define([
 		},
 
 		aoClicarEmCancelar: function () {
-			const caixaDeDialogocancelar="caixaDeDialogocancelar"
+			const CaixaDeDialogocancelar="CaixaDeDialogocancelar"
 			const tituloBotao = "Cancelar"
 			const opcaoSim = "Sim"
 			const opcaoNao = "Não"
@@ -145,7 +146,7 @@ sap.ui.define([
 				this.oApproveDialog = new Dialog({
 					type: DialogType.Message,
 					title: tituloBotao,
-					content: new Text({text: _i18n.getText(caixaDeDialogocancelar)}),
+					content: new Text({text: _i18n.getText(CaixaDeDialogocancelar)}),
 					beginButton: new Button({
 						type: ButtonType.Emphasized,
 						text: opcaoSim ,
@@ -189,8 +190,8 @@ sap.ui.define([
 		},
 
 		_salvarAluno : function (aluno){
-			const caixaDeDialogoCadastroErro = "caixaDeDialogoCadastroErro"
-			const caixaDeDialogoCadastroAprovado = "caixaDeDialogoCadastroAprovado"
+			const CaixaDeDialogoCadastroErro = "CaixaDeDialogoCadastroErro"
+			const CaixaDeDialogoCadastroAprovado = "CaixaDeDialogoCadastroAprovado"
 			
 			BusyIndicator.show()
 			 fetch(`${_uri}/`,{
@@ -217,7 +218,7 @@ sap.ui.define([
 								type: DialogType.Message,
 								title: tituloBotaoErro ,
 								state: ValueState.Error,
-								content: new Text({text: _i18n.getText(caixaDeDialogoCadastroErro)}),
+								content: new Text({text: _i18n.getText(CaixaDeDialogoCadastroErro)}),
 								beginButton: new Button({
 									type: ButtonType.Emphasized,
 									text: opcaoOK,
@@ -236,7 +237,7 @@ sap.ui.define([
 						this.oApproveDialog = new Dialog({
 							type: DialogType.Message,
 							title: tituloBotaoSucesso,
-							content: new Text({ text: _i18n.getText(caixaDeDialogoCadastroAprovado)}),
+							content: new Text({ text: _i18n.getText(CaixaDeDialogoCadastroAprovado)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
 								text:  opcaoOK,
@@ -256,8 +257,8 @@ sap.ui.define([
 		},
 
 		_EditarAluno : function (){
-			const caixaDeDialogoAtualizarErro = "caixaDeDialogoAtualizarErro"
-			const caixaDeDialogoAtualizarAprovado = "caixaDeDialogoCadastroAprovado"
+			const CaixaDeDialogoAtualizarErro = "CaixaDeDialogoAtualizarErro"
+			const CaixaDeDialogoAtualizarAprovado = "CaixaDeDialogoCadastroAprovado"
 			let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
 			 fetch(`${_uri}/${aluno.id}`,{
@@ -274,7 +275,7 @@ sap.ui.define([
 							type: DialogType.Message,
 							title: tituloBotaoErro,
 							state: ValueState.Error,
-							content: new Text({text: _i18n.getText(caixaDeDialogoAtualizarErro)}),
+							content: new Text({text: _i18n.getText(CaixaDeDialogoAtualizarErro)}),
 							beginButton: new Button({
 								type: ButtonType.Emphasized,
 								text: opcaoOK,
@@ -293,7 +294,7 @@ sap.ui.define([
 					this.oApproveDialog = new Dialog({
 						type: DialogType.Message,
 						title: tituloBotaoSucesso,
-						content: new Text({ text: _i18n.getText(caixaDeDialogoAtualizarAprovado)}),
+						content: new Text({ text: _i18n.getText(CaixaDeDialogoAtualizarAprovado)}),
 						beginButton: new Button({
 							type: ButtonType.Emphasized,
 							text: opcaoOK,
