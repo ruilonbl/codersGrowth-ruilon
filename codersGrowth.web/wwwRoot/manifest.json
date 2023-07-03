@@ -4,8 +4,6 @@
     "id": "sap.ui.demo.academia",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
     "applicationVersion": {
       "version": "1.0.0"
     }
@@ -50,7 +48,10 @@
 				"viewType": "XML",
 				"path": "sap.ui.demo.academia.view",
 				"controlId": "app",
-				"controlAggregation": "pages"
+				"controlAggregation": "pages",
+        "bypassed":{
+          "target":"notFound"
+        }
 			},
 			"routes": [
 				{
@@ -72,6 +73,11 @@
           "pattern": "Editar/{id}",
 					"name": "editar",
 					"target": "cadastro"
+        },
+        {
+          "pattern":"notFound",
+          "name":"notFound",
+          "target": "notFound"
         }
 			],
 			"targets": {
@@ -86,6 +92,10 @@
           "cadastro": {
             "id": "cadastro",
             "name": "Cadastro"
+        },
+        "notFound":{
+          "id": "notFound",
+          "name": "NotFound"
         }
 			}
 		}

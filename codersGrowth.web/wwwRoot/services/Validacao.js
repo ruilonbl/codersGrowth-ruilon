@@ -4,35 +4,42 @@ sap.ui.define([
     "use strict";
     const ValueStateErro = coreLibrary.ValueState.Error;
     const ValueStatePadrao = coreLibrary.ValueState.None;
+    let _i18n = null
     return {
-    validarNome: function (inpoutAluno) {
 
-    let aluno = inpoutAluno.getValue()
-      if (!aluno) {
-        inpoutAluno.setValueState(ValueStateErro);
-        inpoutAluno.setValueStateText("Por favor preencha o campo do nome")
-        return false
-      }
-      else{
-        inpoutAluno.setValueState(ValueStatePadrao)
-        return true
-      }
+    criarModeloI18n: function (i18nModel) {
+      _i18n = i18nModel;
+    },
+
+    validarNome: function (inpoutAluno) {
+      const CampoNome = "CampoNome"
+      let aluno = inpoutAluno.getValue()
+        if (!aluno) {
+          inpoutAluno.setValueState(ValueStateErro);
+          inpoutAluno.setValueStateText(_i18n.getText(CampoNome))
+          return false
+        }
+        else{
+          inpoutAluno.setValueState(ValueStatePadrao)
+          return true
+        }
     },
 
     validarCpf: function (inpoutCpf) {
-      debugger
+      const CampoCpf = "CampoCpf"
+      const CampoCpfInvalido = "CampoCpfInvalido"
       let cpf = inpoutCpf.getValue()
       let cpfTamanho = 11
         if (!cpf) {
           inpoutCpf.setValueState(ValueStateErro);
-          inpoutCpf.setValueStateText("Por favor preencha o campo do cpf")
+          inpoutCpf.setValueStateText(_i18n.getText(CampoCpf))
           return false
         }
         else
         {
           if (cpf.length<cpfTamanho) {
             inpoutCpf.setValueState(ValueStateErro)
-            inpoutCpf.setValueStateText("Cpf invalido")
+            inpoutCpf.setValueStateText(_i18n.getText(CampoCpfInvalido))
             return false
           }
           else{
@@ -43,10 +50,11 @@ sap.ui.define([
       },
 
     validarAltura: function (inpoutAltura) {
+      const CampoAltura = "CampoAltura"
       let altura = inpoutAltura.getValue()
         if (!altura) {
           inpoutAltura.setValueState(ValueStateErro)
-          inpoutAltura.setValueStateText("Por favor preencha o campo da altura")
+          inpoutAltura.setValueStateText(_i18n.getText(CampoAltura))
           return false
         }
         else{
@@ -56,10 +64,11 @@ sap.ui.define([
     },
 
     validarSexo: function (inputSexo) {
+      const CampoSexo = "CampoSexo"
       let sexo = inputSexo.getSelectedKey()
       if (!sexo) {
         inputSexo.setValueState(ValueStateErro)
-        inputSexo.setValueStateText("Por favor selecione o seu Sexo")
+        inputSexo.setValueStateText(_i18n.getText(CampoSexo))
         return false
       }
       else{
@@ -69,29 +78,32 @@ sap.ui.define([
     },
 
     validarData: function (inpoutData, buttonData) {
+      const CampoData = "CampoData"
+      const CampodataIdadeMinima = "CampodataIdadeMinima"
+      const CampodataIdadeMaxima = "CampodataIdadeMaxima"
       let data = inpoutData.getValue()
-      let idadeMinima = 12
-      let idadeMaxima = 80
-      let dataAtual = 2023
-      let dataTotal = data
+      const idadeMinima = 12
+      const idadeMaxima = 80
+      const dataAtual = 2023
+      const dataTotal = data
       data = new Date(data).getFullYear()
       if (!dataTotal) {
         buttonData.setType(sap.m.ButtonType.Reject)
-        buttonData.setText("Por favor seleciona a sua data de nascimento")
+        buttonData.setText(_i18n.getText(CampoData))
         return false
       }
       else{
         if(idadeMinima > dataAtual - data)
         {
           buttonData.setType(sap.m.ButtonType.Reject)
-          buttonData.setText("Idade minima de 12 anos")
+          buttonData.setText(_i18n.getText(CampodataIdadeMinima))
           return false
         }
         else
         {
           if(idadeMaxima < dataAtual - data){
             buttonData.setType(sap.m.ButtonType.Reject)
-            buttonData.setText("Idade maxima de 80 anos")
+            buttonData.setText(_i18n.getText(CampodataIdadeMaxima))
             return false
           }
           else{
