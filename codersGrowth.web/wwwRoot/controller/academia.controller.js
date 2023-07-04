@@ -4,26 +4,30 @@ sap.ui.define([
     "../const/Const"
  ], function (Controller, JSONModel,Const) {
     "use strict";
-    const uri = 'https://localhost:7020/api/alunos';
     const caminhoControler = "sap.ui.demo.academia.controller.Academia"
-    const rotaDeLista = "ListaDeAlunos"
-    const rotaCadastro = "cadastro"
-    const rotaDetalhes = "detalhes"
     return Controller.extend(caminhoControler,{
       onInit:function() {
          var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute(Const.rotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
+			oRouter.getRoute(Const.RotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
       },
+      
+      _modeloAlunos: function(modelo){
+         const nomeModelo = "alunos";
+         if (modelo){
+             return this.getView().setModel(modelo, nomeModelo);   
+         } else{
+             return this.getView().getModel(nomeModelo);
+         }
+     },
 
       _aoCoincidirRota : function()
       {
-         let tela = this.getView();
-         fetch(uri)
+         fetch(Const.Url)
             .then(function(response){
                return response.json();
             })
-            .then(function (data){
-               tela.setModel(new JSONModel(data),"alunos");
+            .then(data =>{
+               this._modeloAlunos(new JSONModel(data))
             })
             .catch(function (error){
                console.error(error);
@@ -32,12 +36,12 @@ sap.ui.define([
 
       aoClicarEmCadastro : function(){
          let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo(rotaCadastro)
+         oRouter.navTo(Const.RotaCadastro)
       },
 
       aoFiltrar : function (oEvent) {
 			var sQuery = oEvent.getParameter("query");
-         fetch(`${uri}?nome=${sQuery}`)
+         fetch(`${Const.Url}?nome=${sQuery}`)
             .then(function(response){
                return response.json();
             })
@@ -52,7 +56,7 @@ sap.ui.define([
       aoClicarNaLinha: function (evento) {
          let id = evento.getSource().getBindingContext("alunos").getObject().id
          let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo(rotaDetalhes , {id})
+         oRouter.navTo(Const.RotaDetalhes , {id})
        }
     });    
  });

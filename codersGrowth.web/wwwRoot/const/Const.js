@@ -4,7 +4,10 @@ sap.ui.define([
       return {
         RotaCadastro: "cadastro",
         RotaDetalhes: "detalhes",
-        rotaDeLista: "ListaDeAlunos"
+        RotaEditar: "editar",
+        RotaDeLista: "ListaDeAlunos",
+        RotaNotfound: "notFound",
+        Url: 'https://localhost:7020/api/alunos'
       }
 
   });

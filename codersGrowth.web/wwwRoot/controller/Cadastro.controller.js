@@ -2,20 +2,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/m/Dialog",
-	"sap/m/Button",
-	"sap/m/library",
-	"sap/m/Text",
 	"../services/Validacao",
 	"sap/ui/core/BusyIndicator",
 	"sap/ui/core/library",
-	"../model/formatter"
-], function (Controller, JSONModel,Dialog,Button,mobileLibrary,Text,Validacao,BusyIndicator,coreLibrary,formatter) {
+	"../model/formatter",
+    "../const/Const",
+	"../services/MensagemTela"
+], function (Controller,JSONModel,Validacao,BusyIndicator,coreLibrary,formatter,Const,MensagemTela) {
 	"use strict";
-	const _uri = 'https://localhost:7020/api/alunos';
-	const ButtonType = mobileLibrary.ButtonType;
-	const DialogType = mobileLibrary.DialogType;
-	const ValueState = coreLibrary.ValueState;
 	const ValueStateErro = coreLibrary.ValueState.Error;
 	let _i18n = null
 	const _nomeModeloi18n = "i18n"
@@ -27,14 +21,6 @@ sap.ui.define([
 	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
-	const rotaDeLista = "ListaDeAlunos"
-	const rotaCadastro = "cadastro"
-	const rotaNotfound = "notFound"
-	const rotaEditar ="editar"
-	const cpfExiste = "CPF já existe"
-	const tituloBotaoErro = "Erro"
-	const tituloBotaoSucesso = "Sucesso"
-	const opcaoOK = "OK"
 	const caminhoControler = "sap.ui.demo.academia.controller.Cadastro"
 	
 	return Controller.extend(caminhoControler, {
@@ -42,8 +28,8 @@ sap.ui.define([
 			onInit:function() {
 			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
-				oRouter.getRoute(rotaCadastro).attachPatternMatched(this._aoCoincidirRota, this);
-				oRouter.getRoute(rotaEditar).attachPatternMatched(this._aoCoincidirRotaEditar, this);
+				oRouter.getRoute(Const.RotaCadastro).attachPatternMatched(this._aoCoincidirRota, this);
+				oRouter.getRoute(Const.RotaEditar).attachPatternMatched(this._aoCoincidirRotaEditar, this);
 		},
 
 		_setarModeloAluno(){
@@ -90,12 +76,12 @@ sap.ui.define([
 
 		_PreencherTela : function(id)
 		{
-            fetch(`${_uri}/${id}`)
+            fetch(`${Const.Url}/${id}`)
                .then(response => {
 				if(response.status >= 400 && response.status <= 599)
 				{
 					let oRouter = this.getOwnerComponent().getRouter();
-					oRouter.navTo(rotaNotfound, {}, true);
+					oRouter.navTo(Const.RotaNotfound, {}, true);
 				}
 				return response.json();
 				})
@@ -145,34 +131,7 @@ sap.ui.define([
 
 		aoClicarEmCancelar: function () {
 			const CaixaDeDialogocancelar="CaixaDeDialogocancelar"
-			const tituloBotao = "Cancelar"
-			const opcaoSim = "Sim"
-			const opcaoNao = "Não"
-			if (!this.oApproveDialog) {
-				this.oApproveDialog = new Dialog({
-					type: DialogType.Message,
-					title: tituloBotao,
-					content: new Text({text: _i18n.getText(CaixaDeDialogocancelar)}),
-					beginButton: new Button({
-						type: ButtonType.Emphasized,
-						text: opcaoSim ,
-						press: function () {
-							this.oApproveDialog.close();
-							this._limparTela()
-							this._navegarParaLista()
-							this.oApproveDialog = null;
-						}.bind(this)
-					}),
-					endButton: new Button({
-						text: opcaoNao,
-						press: function () {
-							this.oApproveDialog.close();
-							this.oApproveDialog = null;
-						}.bind(this)
-					})
-				});
-			}
-			this.oApproveDialog.open()
+			MensagemTela.mensagemDeConfirmacao(_i18n.getText(CaixaDeDialogocancelar),this._navegarParaLista.bind(this))
 		},
 
         aoClicarEmVoltar: function () {
@@ -181,7 +140,7 @@ sap.ui.define([
 
 		_navegarParaLista: function(){
 			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(rotaDeLista, {}, true);
+            oRouter.navTo(Const.RotaDeLista, {}, true);
 		},
 
 		_limparTela: function () {
@@ -198,9 +157,9 @@ sap.ui.define([
 		_salvarAluno : function (aluno){
 			const CaixaDeDialogoCadastroErro = "CaixaDeDialogoCadastroErro"
 			const CaixaDeDialogoCadastroAprovado = "CaixaDeDialogoCadastroAprovado"
-			
+			const cpfExiste = "CPF já existe"
 			BusyIndicator.show()
-			 fetch(`${_uri}/`,{
+			 fetch(`${Const.Url}/`,{
 				method: "POST",
 				headers: {
 				  "Content-Type": "application/json"
@@ -219,44 +178,11 @@ sap.ui.define([
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(ValueStateErro);
                         this.byId(inputCpf).setValueStateText(cpfExiste);
-						if (!this.oErrorMessageDialog) {
-							this.oErrorMessageDialog = new Dialog({
-								type: DialogType.Message,
-								title: tituloBotaoErro ,
-								state: ValueState.Error,
-								content: new Text({text: _i18n.getText(CaixaDeDialogoCadastroErro)}),
-								beginButton: new Button({
-									type: ButtonType.Emphasized,
-									text: opcaoOK,
-									press: function () {
-										this.oErrorMessageDialog.close();
-										this.oErrorMessageDialog = null;
-									}.bind(this)
-								})
-							});
-						}
-						this.oErrorMessageDialog.open();
+						MensagemTela.erro(_i18n.getText(CaixaDeDialogoCadastroErro))						
                     }
 					else
 					{
-						if (!this.oApproveDialog) {
-						this.oApproveDialog = new Dialog({
-							type: DialogType.Message,
-							title: tituloBotaoSucesso,
-							content: new Text({ text: _i18n.getText(CaixaDeDialogoCadastroAprovado)}),
-							beginButton: new Button({
-								type: ButtonType.Emphasized,
-								text:  opcaoOK,
-								press: function () {
-									this.oApproveDialog.close();
-									this._limparTela()
-									this._navegarParaLista()
-									this.oApproveDialog = null;
-								}.bind(this)
-							})
-						});
-						}
-						this.oApproveDialog.open();
+						MensagemTela.sucesso(_i18n.getText(CaixaDeDialogoCadastroAprovado),this._navegarParaLista.bind(this))
 					}
 			})
 		},
@@ -266,7 +192,7 @@ sap.ui.define([
 			const CaixaDeDialogoAtualizarAprovado = "CaixaDeDialogoCadastroAprovado"
 			let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
-			 fetch(`${_uri}/${aluno.id}`,{
+			 fetch(`${Const.Url}/${aluno.id}`,{
 				method: 'PUT',
 				headers: {
 				  "Content-Type": "application/json"
@@ -275,45 +201,12 @@ sap.ui.define([
 			  }).then(response => {
 				BusyIndicator.hide()
 				if (response.status >=400 && response.status <=599 ){
-					if (!this.oErrorMessageDialog) {
-						this.oErrorMessageDialog = new Dialog({
-							type: DialogType.Message,
-							title: tituloBotaoErro,
-							state: ValueState.Error,
-							content: new Text({text: _i18n.getText(CaixaDeDialogoAtualizarErro)}),
-							beginButton: new Button({
-								type: ButtonType.Emphasized,
-								text: opcaoOK,
-								press: function () {
-									this.oErrorMessageDialog.close();
-									this.oErrorMessageDialog = null;
-								}.bind(this)
-							})
-						});
-					}
-					this.oErrorMessageDialog.open();
+					MensagemTela.erro(_i18n.getText(CaixaDeDialogoAtualizarErro))						
 				}
 				else
 				{
-					if (!this.oApproveDialog) {
-					this.oApproveDialog = new Dialog({
-						type: DialogType.Message,
-						title: tituloBotaoSucesso,
-						content: new Text({ text: _i18n.getText(CaixaDeDialogoAtualizarAprovado)}),
-						beginButton: new Button({
-							type: ButtonType.Emphasized,
-							text: opcaoOK,
-							press: function () {
-								this.oApproveDialog.close();
-								this._limparTela()
-								this._navegarParaLista()
-								this.oApproveDialog = null;
-							}.bind(this)
-						})
-					});
-					}
-					this.oApproveDialog.open();
-					}
+					MensagemTela.sucesso(_i18n.getText(CaixaDeDialogoAtualizarAprovado),this._navegarParaLista.bind(this))
+				}
 			})
 		},
 
@@ -349,12 +242,12 @@ sap.ui.define([
 		},
 
 		_Atualizar : function (id){
-            fetch(`${_uri}/${id}`)
+            fetch(`${Const.Url}/${id}`)
                .then(response => {
 					if(response.status >=400 && response.status <=599)
 					{
 						let oRouter = this.getOwnerComponent().getRouter();
-						oRouter.navTo(rotaNotfound, {}, true);
+						oRouter.navTo(Const.RotaNotfound, {}, true);
 					}
 					return response.json();
 					})
