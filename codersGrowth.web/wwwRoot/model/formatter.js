@@ -1,6 +1,12 @@
 sap.ui.define([], function () {
 	"use strict";
 	return {
+		
+		RetirarCatacterCpf :function(cpf)
+		{
+			return cpf.replace(/\D/g, '');
+		},
+
 		formataCPF : function(cpf){
 			cpf = cpf.replace(/[^\d]/g, "");
 			return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");

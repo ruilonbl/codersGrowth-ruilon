@@ -36,24 +36,32 @@ sap.ui.define([
         },
 
         aoClicarEmVoltar: function () {
-			let oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(Const.RotaDeLista, {}, true);
+            this._processarEvento(()=>{
+                let oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo(Const.RotaDeLista, {}, true);
+            })
+			
 		},
 
         aoClicarEmEditar: function(){
-			const caminhoEditar="editar"
-            let id = this._modeloAlunos().getData().id;
-            var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(caminhoEditar, {
-                id: id
-            });
+            this._processarEvento(()=>{
+                const caminhoEditar="editar"
+                let id = this._modeloAlunos().getData().id;
+                var oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo(caminhoEditar, {
+                    id: id
+                });
+            })
         },
 
         aoClicarEmExcluir : function(evento)
         {
-			const CaixaDeDialogoExcluir = "CaixaDeDialogoExcluir"
-			let id = this._modeloAlunos().getData().id;
-			MensagemTela.mensagemDeConfirmacao(this._i18n.getText(CaixaDeDialogoExcluir), this._removerAluno.bind(this), [id])
+            debugger
+            this._processarEvento(()=>{
+                const CaixaDeDialogoExcluir = "CaixaDeDialogoExcluir"
+                let id = this._modeloAlunos().getData().id;
+                MensagemTela.mensagemDeConfirmacao(this._i18n.getText(CaixaDeDialogoExcluir), this._removerAluno.bind(this), [id])
+            })
         },
 
         _navegarParaLista: function(){
@@ -104,5 +112,18 @@ sap.ui.define([
                   console.error(error);
                });	
         },
+
+        _processarEvento: function(action){
+			const tipoDaPromise = "catch",
+					tipoBuscado = "function";
+			try {
+					var promise = action();
+					if(promise && typeof(promise[tipoDaPromise]) == tipoBuscado){
+							promise.catch(error => MessageBox.error(error.message));
+					}
+			} catch (error) {
+					MessageBox.error(error.message);
+			}
+	   },
 	});
 });

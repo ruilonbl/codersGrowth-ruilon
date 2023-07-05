@@ -114,7 +114,7 @@ sap.ui.define([
 		aoClicarEmSalvar : async function(){
 			this._processarEvento(() => {
 			let aluno = this._modeloAlunos().getData();
-			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
+			aluno.cpf = formatter.RetirarCatacterCpf(aluno.cpf)
             if (this._validarCampos()){
 					if(aluno.id)
 					{
@@ -195,7 +195,7 @@ sap.ui.define([
 				response.json()
 			}).then(response => {
 					let cpf = this.getView().byId(inputCpf).getValue()
-					cpf = this._RetirarCatacterCpf(cpf)
+					cpf = formatter.RetirarCatacterCpf(cpf)
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(ValueStateErro);
                         this.byId(inputCpf).setValueStateText(cpfExiste);
@@ -251,11 +251,6 @@ sap.ui.define([
 			this.byId(buttonDataId).setType(sap.m.ButtonType.Default)
             this.byId(inputSexo).setValueState(valorPadrao);
         },
-
-		_RetirarCatacterCpf :function(cpf)
-		{
-			return cpf.replace(/\D/g, '');
-		},
 
 		aoMudarValorData : function()
 		{
