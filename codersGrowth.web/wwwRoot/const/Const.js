@@ -7,7 +7,9 @@ sap.ui.define([
         RotaEditar: "editar",
         RotaDeLista: "ListaDeAlunos",
         RotaNotfound: "notFound",
-        Url: 'https://localhost:7020/api/alunos'
+        Url: 'https://localhost:7020/api/alunos',
+        ErrodDeFetch400: "400",
+        ErrodDeFetch500: "500"
       }
 
   });

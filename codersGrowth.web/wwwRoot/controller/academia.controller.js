@@ -35,8 +35,10 @@ sap.ui.define([
       },
 
       aoClicarEmCadastro : function(){
-         let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo(Const.RotaCadastro)
+          this._processarEvento(() => {
+            let oRouter = this.getOwnerComponent().getRouter()
+            oRouter.navTo(Const.RotaCadastro)
+         })
       },
 
       aoFiltrar : function (oEvent) {
@@ -54,9 +56,26 @@ sap.ui.define([
 		},
 
       aoClicarNaLinha: function (evento) {
-         let id = evento.getSource().getBindingContext("alunos").getObject().id
-         let oRouter = this.getOwnerComponent().getRouter()
-         oRouter.navTo(Const.RotaDetalhes , {id})
-       }
+         this._processarEvento(() => {
+            let id = evento.getSource().getBindingContext("alunos").getObject().id
+            let oRouter = this.getOwnerComponent().getRouter()
+            oRouter.navTo(Const.RotaDetalhes , {id})
+
+         })
+       },
+
+       _processarEvento: function(action){
+			const tipoDaPromise = "catch",
+					tipoBuscado = "function";
+			try {
+					var promise = action();
+					if(promise && typeof(promise[tipoDaPromise]) == tipoBuscado){
+							promise.catch(error => MessageBox.error(error.message));
+					}
+			} catch (error) {
+					MessageBox.error(error.message);
+			}
+	   }
+       
     });    
  });

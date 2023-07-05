@@ -1,7 +1,6 @@
 sap.ui.define([
-    "sap/m/MessageBox",
-    "sap/m/MessageToast"
-    ], function (MessageBox,MessageToast) {
+    "sap/m/MessageBox"
+    ], function (MessageBox) {
       "use strict";
       return {
 

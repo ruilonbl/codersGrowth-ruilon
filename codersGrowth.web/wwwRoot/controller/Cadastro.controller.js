@@ -10,9 +10,8 @@ sap.ui.define([
 	"../services/MensagemTela"
 ], function (Controller,JSONModel,Validacao,BusyIndicator,coreLibrary,formatter,Const,MensagemTela) {
 	"use strict";
+
 	const ValueStateErro = coreLibrary.ValueState.Error;
-	let _i18n = null
-	const _nomeModeloi18n = "i18n"
 	const inputNome = "inputNome";
 	const inputForm = "inputForm"
 	const inputAltura = "inputAltura";
@@ -21,12 +20,16 @@ sap.ui.define([
 	const buttonDataId = "buttonDataId";
 	const inputSexo = "inputSexo";
 	const stringVazia = "";
+
 	const caminhoControler = "sap.ui.demo.academia.controller.Cadastro"
 	
 	return Controller.extend(caminhoControler, {
-			formatter: formatter,
-			onInit:function() {
-			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
+		_i18n: null,
+		formatter: formatter,
+
+		onInit:function() {
+			const nomeModeloi18n = "i18n"
+			this._i18n = this.getOwnerComponent().getModel(nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
 				oRouter.getRoute(Const.RotaCadastro).attachPatternMatched(this._aoCoincidirRota, this);
 				oRouter.getRoute(Const.RotaEditar).attachPatternMatched(this._aoCoincidirRotaEditar, this);
@@ -43,6 +46,19 @@ sap.ui.define([
 			this.getView().setModel(new JSONModel(aluno), "alunos");
 		},
 
+		_processarEvento: function(action){
+			const tipoDaPromise = "catch",
+					tipoBuscado = "function";
+			try {
+					var promise = action();
+					if(promise && typeof(promise[tipoDaPromise]) == tipoBuscado){
+							promise.catch(error => MessageBox.error(error.message));
+					}
+			} catch (error) {
+					MessageBox.error(error.message);
+			}
+		},
+
 		_aoCoincidirRota : function()
 		{
 			const tituloTelaCadastro = "Cadastro"
@@ -56,6 +72,7 @@ sap.ui.define([
 		_aoCoincidirRotaEditar : function(aluno)
 		{
 			const tituloTelaAtualizar = "Atualizar Aluno"
+
 			this._setarModeloAluno();
 			let Id = aluno.getParameter("arguments").id
 			this.byId(inputForm).setTitle(tituloTelaAtualizar);
@@ -78,7 +95,7 @@ sap.ui.define([
 		{
             fetch(`${Const.Url}/${id}`)
                .then(response => {
-				if(response.status >= 400 && response.status <= 599)
+				if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
 				{
 					let oRouter = this.getOwnerComponent().getRouter();
 					oRouter.navTo(Const.RotaNotfound, {}, true);
@@ -95,43 +112,46 @@ sap.ui.define([
 		},
 
 		aoClicarEmSalvar : async function(){
+			this._processarEvento(() => {
 			let aluno = this._modeloAlunos().getData();
 			aluno.cpf = this._RetirarCatacterCpf(aluno.cpf)
-            if (aluno.id) {
-				if(this._validarCampos())
-				{
-					this._EditarAluno()
+            if (this._validarCampos()){
+					if(aluno.id)
+					{
+						this._EditarAluno()
+					}
+					else
+					{
+						this._salvarAluno(aluno)
+					}
 				}
-            }
-            else {
-                if(this._validarCampos())
-				{
-					this._salvarAluno(aluno)
-				}
-            }
-
+			 })
 		},
 
 		_validarCampos: function()
 		{
-			Validacao.criarModeloI18n(_i18n)
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
 			let sexo = this.getView().byId(inputSexo)
 			let dataValor = this.getView().byId(inputData)
 			let dataButton = this.getView().byId(buttonDataId)
+
+			Validacao.criarModeloI18n(this._i18n)
 			let NomeValidado = Validacao.validarNome(nome)
 			let CpfValidado  = Validacao.validarCpf(cpf)
 			let AlturaValidado  = Validacao.validarAltura(altura)
 			let SexoValidado  = Validacao.validarSexo(sexo)
 			let DataValidado  = Validacao.validarData(dataValor, dataButton)
+
 			return NomeValidado  && AlturaValidado  && SexoValidado  && CpfValidado  && DataValidado
 		},
 
 		aoClicarEmCancelar: function () {
-			const CaixaDeDialogocancelar="CaixaDeDialogocancelar"
-			MensagemTela.mensagemDeConfirmacao(_i18n.getText(CaixaDeDialogocancelar),this._navegarParaLista.bind(this))
+			this._processarEvento(() =>{
+				const CaixaDeDialogocancelar="CaixaDeDialogocancelar"
+				MensagemTela.mensagemDeConfirmacao(this._i18n.getText(CaixaDeDialogocancelar),this._navegarParaLista.bind(this))
+			})			
 		},
 
         aoClicarEmVoltar: function () {
@@ -148,6 +168,7 @@ sap.ui.define([
 			let altura = this.byId(inputAltura)
 			let cpf = this.byId(inputCpf)
 			let data = this.byId(inputData)
+			
 			nome.setValue(stringVazia)
 			altura.setValue(stringVazia)
 			cpf.setValue(stringVazia)
@@ -167,7 +188,7 @@ sap.ui.define([
 				body: JSON.stringify(aluno)
 			  }).then(response => {
 				BusyIndicator.hide()
-				if (response.status >= 400 && response.status <= 599 ){
+				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500 ){
 					return response.text();
 
 				}
@@ -178,18 +199,19 @@ sap.ui.define([
                     if (response == `O cpf ${cpf} ja existe`) {
                         this.byId(inputCpf).setValueState(ValueStateErro);
                         this.byId(inputCpf).setValueStateText(cpfExiste);
-						MensagemTela.erro(_i18n.getText(CaixaDeDialogoCadastroErro))						
+						MensagemTela.erro(this._i18n.getText(CaixaDeDialogoCadastroErro))						
                     }
 					else
 					{
-						MensagemTela.sucesso(_i18n.getText(CaixaDeDialogoCadastroAprovado),this._navegarParaLista.bind(this))
+						MensagemTela.sucesso(this._i18n.getText(CaixaDeDialogoCadastroAprovado),this._navegarParaLista.bind(this))
 					}
 			})
 		},
 
 		_EditarAluno : function (){
+			debugger
 			const CaixaDeDialogoAtualizarErro = "CaixaDeDialogoAtualizarErro"
-			const CaixaDeDialogoAtualizarAprovado = "CaixaDeDialogoCadastroAprovado"
+			const CaixaDeDialogoAtualizarAprovado = "CaixaDeDialogoAtualizarAprovado"
 			let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
 			 fetch(`${Const.Url}/${aluno.id}`,{
@@ -200,12 +222,12 @@ sap.ui.define([
 				body: JSON.stringify(aluno)
 			  }).then(response => {
 				BusyIndicator.hide()
-				if (response.status >=400 && response.status <=599 ){
-					MensagemTela.erro(_i18n.getText(CaixaDeDialogoAtualizarErro))						
+				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500 ){
+					MensagemTela.erro(this._i18n.getText(CaixaDeDialogoAtualizarErro))						
 				}
 				else
 				{
-					MensagemTela.sucesso(_i18n.getText(CaixaDeDialogoAtualizarAprovado),this._navegarParaLista.bind(this))
+					MensagemTela.sucesso(this._i18n.getText(CaixaDeDialogoAtualizarAprovado),this._navegarParaLista.bind(this))
 				}
 			})
 		},
@@ -244,7 +266,7 @@ sap.ui.define([
 		_Atualizar : function (id){
             fetch(`${Const.Url}/${id}`)
                .then(response => {
-					if(response.status >=400 && response.status <=599)
+					if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
 					{
 						let oRouter = this.getOwnerComponent().getRouter();
 						oRouter.navTo(Const.RotaNotfound, {}, true);
@@ -263,7 +285,7 @@ sap.ui.define([
 			this.getView()
 			  .byId(inputData)
 			  .openBy(oEvent.getSource().getDomRef());
-		  },
+		}
 	});
 
 });

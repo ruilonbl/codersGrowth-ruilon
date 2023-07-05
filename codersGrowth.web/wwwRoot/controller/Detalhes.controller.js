@@ -7,15 +7,16 @@ sap.ui.define([
 	"../services/MensagemTela"
 ], function(Controller,JSONModel,formatter,BusyIndicator,Const,MensagemTela) {
 	"use strict"; 
-	let _i18n = null
-	const _nomeModeloi18n = "i18n"
 	const rotaNotfound = "notFound"
 	const caminhoControler = "sap.ui.demo.academia.controller.Detalhes"
 	return Controller.extend(caminhoControler, {
         formatter: formatter,
+        _i18n: null,
 
         onInit: function () {
-			_i18n = this.getOwnerComponent().getModel(_nomeModeloi18n).getResourceBundle()
+            
+            const nomeModeloi18n = "i18n"
+			this._i18n = this.getOwnerComponent().getModel(nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute(Const.RotaDetalhes).attachPatternMatched(this._aoCoincidirRota, this);
 		},
@@ -41,18 +42,18 @@ sap.ui.define([
 
         aoClicarEmEditar: function(){
 			const caminhoEditar="editar"
-            let alunos = this._modeloAlunos().getData();
+            let id = this._modeloAlunos().getData().id;
             var oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo(caminhoEditar, {
-                id: alunos.id
+                id: id
             });
         },
 
         aoClicarEmExcluir : function(evento)
         {
 			const CaixaDeDialogoExcluir = "CaixaDeDialogoExcluir"
-			let alunos = this._modeloAlunos().getData();
-			MensagemTela.mensagemDeConfirmacao(_i18n.getText(CaixaDeDialogoExcluir), this._removerAluno.bind(this), [alunos.id])
+			let id = this._modeloAlunos().getData().id;
+			MensagemTela.mensagemDeConfirmacao(this._i18n.getText(CaixaDeDialogoExcluir), this._removerAluno.bind(this), [id])
         },
 
         _navegarParaLista: function(){
@@ -74,12 +75,12 @@ sap.ui.define([
 				body: JSON.stringify(aluno)
 			  }).then(response => {
 				BusyIndicator.hide()
-				if (response.status >=400 && response.status <=599 ){				
-					MensagemTela.erro(_i18n.getText(CaixaDeDialogoExcluirErro))
+				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500){				
+					MensagemTela.erro(this._i18n.getText(CaixaDeDialogoExcluirErro))
 				}
 				else
 				{
-					MensagemTela.sucesso(_i18n.getText(CaixaDeDialogoExcluirAprovado),this._navegarParaLista.bind(this))
+					MensagemTela.sucesso(this._i18n.getText(CaixaDeDialogoExcluirAprovado),this._navegarParaLista.bind(this))
 					
 				}
 			})
@@ -89,7 +90,7 @@ sap.ui.define([
             let tela = this.getView();
             fetch(`${Const.Url}/${id}`)
                .then(response => {
-					if(response.status >= 400 && response.status <= 599)
+					if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
 					{
 						let oRouter = this.getOwnerComponent().getRouter();
             			oRouter.navTo(rotaNotfound, {}, true);
