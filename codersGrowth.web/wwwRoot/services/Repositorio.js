@@ -1,7 +1,5 @@
 sap.ui.define([
-   "../const/Const",
-   "../services/MensagemTela"
-], function (Const,MensagemTela) {
+], function () {
   "use strict";
   return {
     _Url: 'https://localhost:7020/api/',
@@ -9,17 +7,14 @@ sap.ui.define([
 
     _mandarRequisicao: async function (urlDoMetodo, opcoesDoMetodo) {
       var urlInteira = this._Url + urlDoMetodo;
-      debugger
       return fetch(urlInteira, opcoesDoMetodo)
       .then ((resposta) => {
-        debugger
         if(opcoesDoMetodo.method =="DELETE")
         {
             return resposta.status
         }
         return resposta.json()
-      })
-
+      });
     },
 
     _get: function (_Url) {
@@ -72,38 +67,6 @@ sap.ui.define([
 
     deletarAluno: function (id) {
       return this._delete("alunos/"+id);
-    },
-
-    errosDofetch: function(method,erroTexto)
-    {
-      debugger
-        const CaixaDeDialogoCadastroErro = "CaixaDeDialogoCadastroErro"
-        const CaixaDeDialogoExcluirErro = "CaixaDeDialogoExcluirErro"
-        const CaixaDeDialogoAtualizarErro = "CaixaDeDialogoAtualizarErro"
-        const IDinvalido = "ID não existente"
-        if(erroTexto==IDinvalido)
-          {
-            return false
-          }
-        if(method=="GET")
-        {
-          MensagemTela.erro(this._i18n.getText(CaixaDeDialogoCadastroErro))
-          return false
-        }
-        else
-        {
-          if(method=="DELETE")
-          {
-            MensagemTela.erro(this._i18n.getText(CaixaDeDialogoExcluirErro))
-            return false
-          }
-          else
-          {
-            MensagemTela.erro(this._i18n.getText(CaixaDeDialogoAtualizarErro))
-            return false
-          }
-          
-        }
     },
 
     criarModeloI18n: function (i18nModel) {

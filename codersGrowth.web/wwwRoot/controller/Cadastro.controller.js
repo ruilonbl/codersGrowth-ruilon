@@ -181,7 +181,6 @@ sap.ui.define([
 		},
 
 		_salvarAluno : function (aluno){
-			debugger
 			const CaixaDeDialogoCadastroErro = "CaixaDeDialogoCadastroErro"
 			const CaixaDeDialogoCadastroAprovado = "CaixaDeDialogoCadastroAprovado"
 			const cpfExiste = "CPF já existe"

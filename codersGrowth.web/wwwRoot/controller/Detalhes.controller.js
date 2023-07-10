@@ -15,7 +15,6 @@ sap.ui.define([
         _i18n: null,
 
         onInit: function () {
-            
             const nomeModeloi18n = "i18n"
 			this._i18n = this.getOwnerComponent().getModel(nomeModeloi18n).getResourceBundle()
 			var oRouter = this.getOwnerComponent().getRouter();
@@ -24,7 +23,7 @@ sap.ui.define([
 
         _aoCoincidirRota: function (oEvent) {
             let Id = oEvent.getParameter("arguments").id
-            this._detalhes(Id);
+            this._obterAluno(Id);
 		},
 
         _modeloAlunos: function(modelo){
@@ -89,15 +88,14 @@ sap.ui.define([
 			})
         },
 
-        _detalhes : function (id){
+        _obterAluno : function (id){
             const IDinvalido = "ID não existente"
             BusyIndicator.show()
             Repositorio.pegarAlunoPeloId(id)
 			.then(dados =>{
-                BusyIndicator.hide()
-                debugger
+                BusyIndicator.hide();
                 console.log(dados.erro)
-                if(dados.erro ==IDinvalido)
+                if(dados.erro == IDinvalido)
                 {
                     let oRouter = this.getOwnerComponent().getRouter();
                         oRouter.navTo(Const.RotaNotfound, {}, true);
