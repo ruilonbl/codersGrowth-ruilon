@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "HICVwOypqMnk/qG64B8GN5asNCCOdGndR8TKaIoHySBvQ82mgiWR/h2pjWsoBbLBCnVwu6IMvvkl9Db1zqIRiA==",
+  "dgSpecHash": "aRHHu0YcSaJrzEZS2EfrqIX355kpsExpnzB2P0Cmf3+fEWxRpZSeFcQT40nQhGY7tWYE1V96WT+90rLGYrBL1g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\codersGrowth.web.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\codersGrowth.web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

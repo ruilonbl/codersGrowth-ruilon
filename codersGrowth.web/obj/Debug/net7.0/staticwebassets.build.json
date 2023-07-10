@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9KkOeyWnWYotM9XTzQCSfH6bSUmvIefsxqpNRxpx7HY=",
+  "Hash": "LkiKZmNWtwId4zVlrk9qA+qREOOiU08kD3uLolNSbQ0=",
   "Source": "codersGrowth.web",
   "BasePath": "_content/codersGrowth.web",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "codersGrowth.web\\wwwroot",
       "Source": "codersGrowth.web",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\Component.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\Component.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "Component.js",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Component.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\const\\Const.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\const\\Const.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "const/Const.js",
       "AssetKind": "All",
@@ -51,12 +51,12 @@
       "OriginalItemSpec": "wwwroot\\const\\Const.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\Academia.controller.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\controller\\academia.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "controller/Academia.controller.js",
+      "RelativePath": "controller/academia.controller.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,13 +65,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\controller\\Academia.controller.js"
+      "OriginalItemSpec": "wwwroot\\controller\\academia.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\App.controller.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\controller\\App.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "controller/App.controller.js",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\controller\\App.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\Cadastro.controller.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\controller\\Cadastro.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "controller/Cadastro.controller.js",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\controller\\Cadastro.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\Detalhes.controller.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\controller\\Detalhes.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "controller/Detalhes.controller.js",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\controller\\Detalhes.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\controller\\NotFound.controller.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\controller\\NotFound.controller.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "controller/NotFound.controller.js",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\controller\\NotFound.controller.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\i18n\\i18n.properties",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\i18n\\i18n.properties",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "i18n/i18n.properties",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\i18n\\i18n.properties"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\index.html",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\manifest.json",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\manifest.json",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "manifest.json",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\manifest.json"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\model\\formatter.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\model\\formatter.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "model/formatter.js",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\model\\formatter.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\services\\MensagemTela.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\services\\MensagemTela.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "services/MensagemTela.js",
       "AssetKind": "All",
@@ -221,10 +221,27 @@
       "OriginalItemSpec": "wwwroot\\services\\MensagemTela.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\services\\Validacao.js",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\services\\Repositorio.js",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
+      "BasePath": "_content/codersGrowth.web",
+      "RelativePath": "services/Repositorio.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\services\\Repositorio.js"
+    },
+    {
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\services\\Validacao.js",
+      "SourceId": "codersGrowth.web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "services/Validacao.js",
       "AssetKind": "All",
@@ -238,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\services\\Validacao.js"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\Academia.view.xml",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\view\\Academia.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "view/Academia.view.xml",
       "AssetKind": "All",
@@ -255,12 +272,12 @@
       "OriginalItemSpec": "wwwroot\\view\\Academia.view.xml"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\App.view.xml",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\view\\app.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
-      "RelativePath": "view/App.view.xml",
+      "RelativePath": "view/app.view.xml",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -269,13 +286,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\view\\App.view.xml"
+      "OriginalItemSpec": "wwwroot\\view\\app.view.xml"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\Cadastro.view.xml",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\view\\Cadastro.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "view/Cadastro.view.xml",
       "AssetKind": "All",
@@ -289,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\view\\Cadastro.view.xml"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\Detalhes.view.xml",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\view\\Detalhes.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "view/Detalhes.view.xml",
       "AssetKind": "All",
@@ -306,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\view\\Detalhes.view.xml"
     },
     {
-      "Identity": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\view\\NotFound.view.xml",
+      "Identity": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\view\\NotFound.view.xml",
       "SourceId": "codersGrowth.web",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\wwwroot\\",
       "BasePath": "_content/codersGrowth.web",
       "RelativePath": "view/NotFound.view.xml",
       "AssetKind": "All",

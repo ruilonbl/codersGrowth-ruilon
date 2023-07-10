@@ -1,12 +1,17 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "../const/Const"
- ], function (Controller, JSONModel,Const) {
+    "../const/Const",
+    "../services/Repositorio"
+ ], function (Controller, JSONModel,Const,Repositorio) {
     "use strict";
     const caminhoControler = "sap.ui.demo.academia.controller.Academia"
+
     return Controller.extend(caminhoControler,{
+      _i18n: null,
       onInit:function() {
+         const nomeModeloi18n = "i18n"
+			this._i18n = this.getOwnerComponent().getModel(nomeModeloi18n).getResourceBundle()
          var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute(Const.RotaDeLista).attachPatternMatched(this._aoCoincidirRota, this);     
       },
@@ -22,16 +27,13 @@ sap.ui.define([
 
       _aoCoincidirRota : function()
       {
-         fetch(Const.Url)
-            .then(function(response){
-               return response.json();
-            })
-            .then(data =>{
-               this._modeloAlunos(new JSONModel(data))
-            })
-            .catch(function (error){
-               console.error(error);
-            }); 
+         Repositorio.criarModeloI18n(this._i18n)
+         const valorPadraoGet = ""
+         Repositorio.pegarAlunos(valorPadraoGet)
+         .then(dados =>{
+            debugger
+            this._modeloAlunos(new JSONModel(dados))
+         } )
       },
 
       aoClicarEmCadastro : function(){
@@ -41,18 +43,10 @@ sap.ui.define([
          })
       },
 
-      aoFiltrar : function (oEvent) {
-			var sQuery = oEvent.getParameter("query");
-         fetch(`${Const.Url}?nome=${sQuery}`)
-            .then(function(response){
-               return response.json();
-            })
-            .then(data =>{
-               this._modeloAlunos(new JSONModel(data))
-            })
-            .catch(function (error){
-               console.error(error);
-            }); 			
+      aoFiltrar : function (evento) {
+			var filtro = evento.getParameter("query");
+         Repositorio.pegarAlunos(filtro)
+         .then(dados => this._modeloAlunos(new JSONModel(dados)))
 		},
 
       aoClicarNaLinha: function (evento) {

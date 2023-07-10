@@ -10117,11 +10117,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\codersGrowth.web.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\codersGrowth.web.csproj",
       "projectName": "codersGrowth.web",
-      "projectPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\codersGrowth.web.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\codersGrowth.web.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.web\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10138,11 +10138,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj"
+            "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.Dominio\\codersGrowth.Dominio.csproj"
             },
-            "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj": {
-              "projectPath": "C:\\Users\\Usuario\\source\\repos\\coders\\treinamento_estagio\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj"
+            "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Desktop\\codersGrowth-ruilon\\codersGrowth.Infra.Data\\codersGrowth.Infra.Data.csproj"
             }
           }
         }

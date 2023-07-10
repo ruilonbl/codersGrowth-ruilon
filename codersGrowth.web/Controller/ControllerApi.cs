@@ -47,7 +47,7 @@ namespace codersGrowth.web.Controller
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { erro = ex.Message });
             }
         }
 
@@ -66,7 +66,7 @@ namespace codersGrowth.web.Controller
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { erro = ex.Message });
             }  
         }
 

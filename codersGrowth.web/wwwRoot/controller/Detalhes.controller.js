@@ -4,10 +4,11 @@ sap.ui.define([
     "../model/formatter",
     "sap/ui/core/BusyIndicator",
     "../const/Const",
-	"../services/MensagemTela"
-], function(Controller,JSONModel,formatter,BusyIndicator,Const,MensagemTela) {
+	"../services/MensagemTela",
+    "../services/Repositorio"
+], function(Controller,JSONModel,formatter,BusyIndicator,Const,MensagemTela,Repositorio) {
 	"use strict"; 
-	const rotaNotfound = "notFound"
+	
 	const caminhoControler = "sap.ui.demo.academia.controller.Detalhes"
 	return Controller.extend(caminhoControler, {
         formatter: formatter,
@@ -72,18 +73,12 @@ sap.ui.define([
         _removerAluno: function()
         {
 			const CaixaDeDialogoExcluirErro = "CaixaDeDialogoExcluirErro"
-			const CaixaDeDialogoExcluirAprovado = "CaixaDeDialogoExcluirAprovado"
-            let aluno = this._modeloAlunos().getData();
-			BusyIndicator.show()
-			 fetch(`${Const.Url}/${aluno.id}`,{
-				method: 'DELETE',
-				headers: {
-				  "Content-Type": "application/json"
-				},
-				body: JSON.stringify(aluno)
-			  }).then(response => {
-				BusyIndicator.hide()
-				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500){				
+            const CaixaDeDialogoExcluirAprovado = "CaixaDeDialogoExcluirAprovado"
+            let id = this._modeloAlunos().getData().id;
+            debugger
+			Repositorio.deletarAluno(id)
+			.then(dados => {
+				if (dados.status >= Const.ErrodDeFetch400 && dados.status <= Const.ErrodDeFetch500){				
 					MensagemTela.erro(this._i18n.getText(CaixaDeDialogoExcluirErro))
 				}
 				else
@@ -95,22 +90,23 @@ sap.ui.define([
         },
 
         _detalhes : function (id){
-            let tela = this.getView();
-            fetch(`${Const.Url}/${id}`)
-               .then(response => {
-					if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
-					{
-						let oRouter = this.getOwnerComponent().getRouter();
-            			oRouter.navTo(rotaNotfound, {}, true);
-					}
-                  return response.json();
-               })
-               .then(function (data){
-                  tela.setModel(new JSONModel(data),"alunos")
-               })
-               .catch(function (error){
-                  console.error(error);
-               });	
+            const IDinvalido = "ID não existente"
+            BusyIndicator.show()
+            Repositorio.pegarAlunoPeloId(id)
+			.then(dados =>{
+                BusyIndicator.hide()
+                debugger
+                console.log(dados.erro)
+                if(dados.erro ==IDinvalido)
+                {
+                    let oRouter = this.getOwnerComponent().getRouter();
+                        oRouter.navTo(Const.RotaNotfound, {}, true);
+                }
+                else
+                {
+                    this._modeloAlunos(new JSONModel(dados))
+                }
+            })
         },
 
         _processarEvento: function(action){

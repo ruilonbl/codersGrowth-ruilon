@@ -8,8 +8,8 @@ sap.ui.define([
         RotaDeLista: "ListaDeAlunos",
         RotaNotfound: "notFound",
         Url: 'https://localhost:7020/api/alunos',
-        ErrodDeFetch400: "400",
-        ErrodDeFetch500: "500"
+        ErroDeFetch400: "400",
+        ErroDeFetch599: "599"
       }
 
   });

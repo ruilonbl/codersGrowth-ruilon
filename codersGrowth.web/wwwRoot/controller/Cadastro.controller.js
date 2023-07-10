@@ -7,8 +7,9 @@ sap.ui.define([
 	"sap/ui/core/library",
 	"../model/formatter",
     "../const/Const",
-	"../services/MensagemTela"
-], function (Controller,JSONModel,Validacao,BusyIndicator,coreLibrary,formatter,Const,MensagemTela) {
+	"../services/MensagemTela",
+	"../services/Repositorio"
+], function (Controller,JSONModel,Validacao,BusyIndicator,coreLibrary,formatter,Const,MensagemTela,Repositorio) {
 	"use strict";
 
 	const ValueStateErro = coreLibrary.ValueState.Error;
@@ -47,6 +48,7 @@ sap.ui.define([
 		},
 
 		_processarEvento: function(action){
+			debugger
 			const tipoDaPromise = "catch",
 					tipoBuscado = "function";
 			try {
@@ -55,7 +57,7 @@ sap.ui.define([
 							promise.catch(error => MessageBox.error(error.message));
 					}
 			} catch (error) {
-					MessageBox.error(error.message);
+				MensagemTela.erro(this._i18n.getText("Erro"));
 			}
 		},
 
@@ -93,26 +95,27 @@ sap.ui.define([
 
 		_PreencherTela : function(id)
 		{
-            fetch(`${Const.Url}/${id}`)
-               .then(response => {
-				if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
-				{
-					let oRouter = this.getOwnerComponent().getRouter();
-					oRouter.navTo(Const.RotaNotfound, {}, true);
-				}
-				return response.json();
-				})
-               .then(data =>{
-				  data.cpf = formatter.formataCPF(data.cpf)
-				  this._modeloAlunos(new JSONModel(data))
-               })
-               .catch(function (error){
-                  console.error(error);
-               });
+            const IDinvalido = "ID não existente"
+            Repositorio.pegarAlunoPeloId(id)
+			.then(dados =>{
+                debugger
+                console.log(dados.erro)
+                if(dados.erro ==IDinvalido)
+                {
+                    let oRouter = this.getOwnerComponent().getRouter();
+                        oRouter.navTo(Const.RotaNotfound, {}, true);
+                }
+                else
+                {
+                    this._modeloAlunos(new JSONModel(dados))
+                }
+			})
 		},
 
 		aoClicarEmSalvar : async function(){
+			debugger
 			this._processarEvento(() => {
+				debugger
 			let aluno = this._modeloAlunos().getData();
 			aluno.cpf = formatter.RetirarCatacterCpf(aluno.cpf)
             if (this._validarCampos()){
@@ -122,6 +125,7 @@ sap.ui.define([
 					}
 					else
 					{
+						debugger
 						this._salvarAluno(aluno)
 					}
 				}
@@ -130,6 +134,7 @@ sap.ui.define([
 
 		_validarCampos: function()
 		{
+			debugger
 			let nome = this.getView().byId(inputNome )
 			let cpf = this.getView().byId(inputCpf)
 			let altura = this.getView().byId(inputAltura)
@@ -176,27 +181,17 @@ sap.ui.define([
 		},
 
 		_salvarAluno : function (aluno){
+			debugger
 			const CaixaDeDialogoCadastroErro = "CaixaDeDialogoCadastroErro"
 			const CaixaDeDialogoCadastroAprovado = "CaixaDeDialogoCadastroAprovado"
 			const cpfExiste = "CPF já existe"
 			BusyIndicator.show()
-			 fetch(`${Const.Url}/`,{
-				method: "POST",
-				headers: {
-				  "Content-Type": "application/json"
-				},
-				body: JSON.stringify(aluno)
-			  }).then(response => {
+			Repositorio.criarAluno(aluno)
+         	.then(dados =>{
 				BusyIndicator.hide()
-				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500 ){
-					return response.text();
-
-				}
-				response.json()
-			}).then(response => {
-					let cpf = this.getView().byId(inputCpf).getValue()
+				let cpf = this.getView().byId(inputCpf).getValue()
 					cpf = formatter.RetirarCatacterCpf(cpf)
-                    if (response == `O cpf ${cpf} ja existe`) {
+                    if ((dados.erro == `O cpf ${cpf} ja existe`)) {
                         this.byId(inputCpf).setValueState(ValueStateErro);
                         this.byId(inputCpf).setValueStateText(cpfExiste);
 						MensagemTela.erro(this._i18n.getText(CaixaDeDialogoCadastroErro))						
@@ -205,7 +200,7 @@ sap.ui.define([
 					{
 						MensagemTela.sucesso(this._i18n.getText(CaixaDeDialogoCadastroAprovado),this._navegarParaLista.bind(this))
 					}
-			})
+			 })
 		},
 
 		_EditarAluno : function (){
@@ -214,15 +209,10 @@ sap.ui.define([
 			const CaixaDeDialogoAtualizarAprovado = "CaixaDeDialogoAtualizarAprovado"
 			let aluno = this._modeloAlunos().getData();
 			BusyIndicator.show()
-			 fetch(`${Const.Url}/${aluno.id}`,{
-				method: 'PUT',
-				headers: {
-				  "Content-Type": "application/json"
-				},
-				body: JSON.stringify(aluno)
-			  }).then(response => {
+			Repositorio.editarAluno(aluno.id,aluno)
+         	.then(dados =>{
 				BusyIndicator.hide()
-				if (response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500 ){
+				if (dados.status >= Const.ErrodDeFetch400 && dados.status <= Const.ErrodDeFetch599) {
 					MensagemTela.erro(this._i18n.getText(CaixaDeDialogoAtualizarErro))						
 				}
 				else
@@ -257,24 +247,6 @@ sap.ui.define([
 			let data = this.getView().byId(inputData)
 			formatter.formatarData(data)
 		},
-
-		_Atualizar : function (id){
-            fetch(`${Const.Url}/${id}`)
-               .then(response => {
-					if(response.status >= Const.ErrodDeFetch400 && response.status <= Const.ErrodDeFetch500)
-					{
-						let oRouter = this.getOwnerComponent().getRouter();
-						oRouter.navTo(Const.RotaNotfound, {}, true);
-					}
-					return response.json();
-					})
-					.then(data =>{
-						this._modeloAlunos(new JSONModel(data))
-					})
-					.catch(function (error){
-						console.error(error);
-                });
-        },
 
 		abrirDatePicker: function (oEvent) {
 			this.getView()
