@@ -17,12 +17,12 @@ sap.ui.define([
       });
     },
 
-    _get: function (_Url) {
-      return this._mandarRequisicao(_Url, { method: "GET" });
+    _get: function (Url) {
+      return this._mandarRequisicao(Url, { method: "GET" });
     },
 
-    _post: function (_Url, aluno) {
-      return this._mandarRequisicao(_Url, {
+    _post: function (Url, aluno) {
+      return this._mandarRequisicao(Url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,8 +31,8 @@ sap.ui.define([
       });
     },
 
-    _put: function (_Url, aluno) {
-      return this._mandarRequisicao(_Url, {
+    _put: function (Url, aluno) {
+      return this._mandarRequisicao(Url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -41,8 +41,8 @@ sap.ui.define([
       });
     },
 
-    _delete: function (_Url) {
-      return this._mandarRequisicao(_Url, { method: "DELETE" });
+    _delete: function (Url) {
+      return this._mandarRequisicao(Url, { method: "DELETE" });
     },
 
     pegarAlunos: function (alunoFiltro) {
