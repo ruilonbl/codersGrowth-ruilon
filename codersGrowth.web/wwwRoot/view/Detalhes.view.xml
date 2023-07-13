@@ -1,0 +1,69 @@
+<mvc:View
+	controllerName="sap.ui.demo.academia.controller.Detalhes" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	height="100%"
+	xmlns:core="sap.ui.core">
+        <Page title="{i18n>TituloDetalhes}" showNavButton="true" navButtonPress="aoClicarEmVoltar">
+		<headerContent>
+				<Button text="{i18n>BotaoEditar}" icon="sap-icon://edit" press="aoClicarEmEditar"/>
+				<Button text="{i18n>BotaoExcluir}" icon="sap-icon://delete" press="aoClicarEmExcluir" />
+		</headerContent>
+			<VBox class="sapUiSmallMargin">
+				<f:Form editable="false">
+					<f:title>
+						<core:Title text="{alunos>/nome}" />
+					</f:title>
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanXL="3"
+							labelSpanL="3"
+							labelSpanM="3"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="4"
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0"
+							columnsXL="1"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false" />
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="{i18n>LabelAltura}">
+									<f:fields>
+										<Text text="{alunos>/altura}" id="nameText"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>LabelSexo}">
+									<f:fields>
+										<Text text="{alunos>/sexo}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>LabelCpf}">
+									<f:fields>
+										<Text text="{path: 'alunos>/cpf',
+													formatter: '.formatter.formataCPF'}" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="{i18n>LabelData}">
+									<f:fields>
+										<Text text="{
+											path: 'alunos>/dat',
+											type: 'sap.ui.model.type.Date',
+											formatOptions: {style : 'full', 
+											source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}" />
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+			</VBox>
+        </Page>
+</mvc:View>

@@ -1,0 +1,8 @@
+<mvc:View
+   controllerName="sap.ui.demo.academia.controller.NotFound" 
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns="sap.m">
+    <Page showNavButton="true" navButtonPress="aoClicarEmVoltar">
+        <MessagePage title="{i18n>Erro}" text="{i18n>PaginaNaoEncontrada}"/>
+    </Page>
+</mvc:View>
