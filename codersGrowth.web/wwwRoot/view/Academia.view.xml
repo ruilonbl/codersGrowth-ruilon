@@ -1,0 +1,32 @@
+<mvc:View
+   controllerName="sap.ui.demo.academia.controller.Academia" 
+   xmlns:mvc="sap.ui.core.mvc"
+   xmlns="sap.m">
+   <Page title="{i18n>TituloAcademia}">
+  		 <headerContent>
+				<Button text="{i18n>BotaoDeCadastro}" icon="sap-icon://doctor" press="aoClicarEmCadastro"/>
+		</headerContent>
+		<List id="lista" items="{path: 'alunos>/'}">
+		<headerToolbar>
+				<Toolbar>	 
+						<ToolbarSpacer/>
+						<SearchField width="50%" search="aoFiltrar"/>
+				</Toolbar>
+		</headerToolbar>
+			<CustomListItem class="sapUiSmallMargin" type="Navigation" press="aoClicarNaLinha">
+				<HBox>
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >
+						<Link text="{alunos>nome}"/>
+						<Text text="{alunos>sexo}"/>
+						<Label text="{
+						path: 'alunos>dat',
+						type: 'sap.ui.model.type.Date',
+						formatOptions: {style : 'full', 
+						source: {pattern: 'yyyy-MM-ddTHH:mm:ss.mmm'}}}"/>
+					</VBox>
+				</HBox>
+			</CustomListItem>
+		</List>
+	</Page>
+
+</mvc:View>

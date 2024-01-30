@@ -1,0 +1,83 @@
+<mvc:View
+	height="100%"
+	controllerName="sap.ui.demo.academia.controller.Cadastro"
+	xmlns:mvc="sap.ui.core.mvc"
+    xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Page id="inputForm" title="CADASTRO" showNavButton="true" navButtonPress="aoClicarEmVoltar" >
+	<headerContent>
+		<Button text="Salvar" icon="sap-icon://accept" press="aoClicarEmSalvar"/>
+		<Button text="Cancelar" icon="sap-icon://sys-cancel" press="aoClicarEmCancelar"/>
+	</headerContent>
+	<VBox class="sapUiSmallMargin">
+		<f:SimpleForm id="inputFormes"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanXL="4"
+			labelSpanL="3"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="4"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="2"
+			columnsL="1"
+			columnsM="1"
+			singleContainerFullSize="false" >
+			<f:content>
+				<Label text="Nome" />
+				<Input id="inputNome" value="{alunos>/nome}"/>
+				<Label text="CPF/Altura" />
+				<Input id = "inputCpf" value="{alunos>/cpf}"  maxLength="14"  liveChange="aoInserirValorCpf">
+				</Input>
+					<Input id ="inputAltura" value="{alunos>/altura}" maxLength="3" liveChange="aoInserirValorAltura">
+						<layoutData>
+							<l:GridData span="XL2 L1 M3 S4" />
+						</layoutData>
+				</Input>
+				<Label text="Sexo" />
+				<Select id="inputSexo" selectedKey="{alunos>/sexo}">
+					<items>
+						<core:Item text="Você se identifica com" key=""/>
+						<core:Item text="Feminino" key="Feminino"/>
+						<core:Item text="Masculino" key="Masculino"/>
+					</items>
+				</Select>
+				<Label text="Data de nascimento" />
+				<Button
+							width="100%"
+							id="buttonDataId"
+							ariaHasPopup="Dialog"
+							tooltip="Clique para selecionar a data"
+							icon="sap-icon://appointment-2"
+							text="{path: 'alunos>/dat', formatter: '.formatter.formatarData'}"
+							press=".abrirDatePicker"/>
+					<DatePicker
+						id="inputData"
+						change="aoMudarValorData"
+						valueState="None"
+						hideInput="true"
+						valueStateText=""
+						value="{alunos>/dat}" 
+						placeholder="Dia/Mês/Ano" 
+						valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" 
+						displayFormat="dd/MM/yyyy" 
+						/>
+				<!-- <DatePicker 
+					id="inputData" 
+					value="{alunos>/dat}" 
+					placeholder="Dia/Mês/Ano" 
+					valueFormat="yyyy-MM-ddTHH:mm:ss.mmm'" 
+					displayFormat="dd/MM/yyyy"
+					liveChange = "aoMudarValorData"
+					width="40%"
+				/> -->
+			</f:content>
+		</f:SimpleForm>
+		</VBox>
+        </Page>
+</mvc:View>

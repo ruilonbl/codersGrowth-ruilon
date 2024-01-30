@@ -10,6 +10,6 @@ namespace trabalho01.crud
         void Deletar(int id);
         Pessoas ObiterNaListaPorId(int id);
         bool VerificaSeExisteCpfNoBanco(string cpf);
-        BindingList<Pessoas> ObterTodos();
+        BindingList<Pessoas> ObterTodos(string nome = null);
     }
 }
